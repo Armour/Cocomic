@@ -1,0 +1,7 @@
+.idea/
+.vscode/
+node_modules/
+frontend/dist/
+*.swp
+*.log
+.DS_Store

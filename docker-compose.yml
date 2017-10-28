@@ -1,0 +1,22 @@
+version: '2.1'
+
+services:
+  web:
+    image: cguo/cocomic
+    build:
+      context: .
+    restart: always
+    ports:
+      - "3003:3003"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:9.5
+    restart: always
+    volumes:
+      - ./backend/postgres-init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_DB=docker
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
