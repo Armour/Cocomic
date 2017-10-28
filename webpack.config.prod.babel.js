@@ -45,10 +45,9 @@ let config = {
       {
         test: /\.jsx?$/,
         use: [
-          {
-            loader: 'babel-loader',
-          },
+          { loader: 'babel-loader' },
         ],
+        exclude: /node_modules/,
       },
       // Use ExtractTextPlugin and list of loaders to load css files
       {
