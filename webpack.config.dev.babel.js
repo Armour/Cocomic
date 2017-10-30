@@ -123,7 +123,7 @@ export default {
     }),
     // Generate html file to dist folder
     new HtmlWebpackPlugin({
-      title: 'Boilerplate',
+      title: 'Cocomic',
       template: 'frontend/template/index.ejs',
     }),
     // Add dll reference files to html

@@ -6,6 +6,8 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import helmet from 'helmet';
+import session from 'express-session';
+import connectRedis from 'connect-redis';
 
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
@@ -13,9 +15,9 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config.dev.babel';
 
 import config from './config.json';
+import apiRtr from './routes/api';
 
-import api from './routes/api';
-
+const RedisStore = connectRedis(session);
 const isProduction = process.env.NODE_ENV === 'production';
 const port = process.env.PORT || config.http_port;
 const app = express();
@@ -36,12 +38,28 @@ if (isProduction) {
 
 app.use(compression());
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({
+  limit: '20mb',
+}));
+app.use(bodyParser.urlencoded({
+  limit: '20mb',
+  extended: true,
+}));
 app.use(cookieParser());
+app.use(session({
+  store: new RedisStore({
+    host: config.redis_hostname,
+    port: config.redis_port,
+  }),
+  name: 'fRy_t0-haCk)me<br0B',
+  secret: 'mIceqvv8EgECGOVKIPlR83UGGxMOARaYJKxQK6kWwwx3pv06G0n9ZPLMNqIOwX9rS69YCXDHDmV4O2JAWHEWGYI8pZ2M60VocBc92ILjOM1Gp3S42EHNmQ65c4W7ryj9',
+  resave: false,
+  saveUninitialized: false,
+}));
+app.disable('x-powered-by');
 
 // Api router
-app.use('/api', api);
+app.use('/api', apiRtr);
 
 if (!isProduction) {
   let listend = false;
