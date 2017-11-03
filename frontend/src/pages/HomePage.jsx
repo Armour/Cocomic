@@ -3,6 +3,7 @@ import React from 'react';
 import { Carousel } from 'components/Carousel';
 import { FAB } from 'components/FAB';
 import { Pushpin } from 'components/Pushpin';
+import { Intro } from 'components/Intro';
 
 export class HomePage extends React.Component {
   componentDidMount() {
@@ -20,6 +21,7 @@ export class HomePage extends React.Component {
   render() {
     return (
       <div>
+        <Intro className="intro-panel"></Intro>
         <div className="pushpin-block">
           <h1>Home</h1>
           <div className="container">

@@ -1,0 +1,18 @@
+div.intro-panel {
+  height: 250px;
+  width: 100%;
+  background-color: $primary-color;
+  background-image: url(../image/table_cloth.png);
+  background-position: 0 -60px;
+  padding-top: 20px;
+}
+
+h1.intro-title {
+  color: white;
+  margin-bottom: 0;
+}
+
+h6 {
+  color: white;
+  text-align: center;
+}
