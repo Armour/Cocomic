@@ -1,4 +1,12 @@
 // Header background color
 nav {
   background-color: $primary-color;
+  background-image: url(../image/table_cloth.png);
+  height: 60px;
+}
+
+.active-link {
+  height: 60px;
+  color: white !important;
+  border-bottom: 2px solid white;
 }
