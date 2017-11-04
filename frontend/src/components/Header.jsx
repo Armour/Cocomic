@@ -9,7 +9,11 @@ export class Header extends React.Component {
       <nav>
         <div className="nav-wrapper">
           <div className="container">
-            <span className="brand-logo"><NavLink exact to="/">Logo</NavLink></span>
+            <div className="brand-logo">
+              <NavLink exact to="/">
+                <img className="logo" src={require('../image/logo.png')} />
+              </NavLink>
+            </div>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li key="home"><NavLink activeClassName="active-link" exact to="/">Home</NavLink></li>
               <li key="popular"><NavLink activeClassName="active-link" to="/popular">Popular</NavLink></li>
