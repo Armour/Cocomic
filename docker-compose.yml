@@ -20,6 +20,8 @@ services:
       - POSTGRES_DB=docker
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
+    ports:
+      - "5432:5432"
     restart: always
 
   redis:
