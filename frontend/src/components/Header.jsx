@@ -3,6 +3,10 @@ import { NavLink } from 'react-router-dom';
 
 
 export class Header extends React.Component {
+  componentDidMount() {
+    $('.button-collapse').sideNav();
+  }
+
   render() {
     return (
       <nav>
@@ -13,6 +17,9 @@ export class Header extends React.Component {
                 <img className="logo" src={require('../image/logo.png')} alt="logo" />
               </NavLink>
             </div>
+            <a href="#" data-activates="slide-out" className="button-collapse">
+              <i className="material-icons">menu</i>
+            </a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li key="home"><NavLink activeClassName="active-link" exact to="/">Home</NavLink></li>
               <li key="popular"><NavLink activeClassName="active-link" to="/popular">Popular</NavLink></li>
