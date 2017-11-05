@@ -21,7 +21,7 @@ export class HomePage extends React.Component {
   render() {
     return (
       <div>
-        <Intro className="intro-panel"></Intro>
+        <Intro className="intro-panel" />
         <div className="pushpin-block">
           <h1>Home</h1>
           <div className="container">

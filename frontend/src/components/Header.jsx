@@ -1,5 +1,4 @@
 import React from 'react';
-import { a } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 
@@ -11,7 +10,7 @@ export class Header extends React.Component {
           <div className="container">
             <div className="brand-logo">
               <NavLink exact to="/">
-                <img className="logo" src={require('../image/logo.png')} />
+                <img className="logo" src={require('../image/logo.png')} alt="logo" />
               </NavLink>
             </div>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
