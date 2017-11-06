@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { Carousel } from 'components/Carousel';
 import { FAB } from 'components/FAB';
-import { Pushpin } from 'components/Pushpin';
 import { Intro } from 'components/Intro';
+import { ComicCard } from 'components/ComicCard';
 
 export class HomePage extends React.Component {
   componentDidMount() {
@@ -22,15 +21,7 @@ export class HomePage extends React.Component {
     return (
       <div>
         <Intro className="intro-panel" />
-        <div className="pushpin-block">
-          <h1>Home</h1>
-          <div className="container">
-            <Carousel />
-          </div>
-        </div>
-        <Pushpin color="orange" />
-        <Pushpin color="red" />
-        <Pushpin color="green" />
+        <ComicCard /> <ComicCard />
         <FAB />
       </div>
     );

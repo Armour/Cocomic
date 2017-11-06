@@ -31,7 +31,7 @@ export class RegisterPage extends React.Component {
             </div>
             <div className="row">
               <div className="col s12">
-                <a class="waves-effect waves-light btn">Create</a>
+                <a className="waves-effect waves-light btn">Create</a>
               </div>
             </div>
           </div>

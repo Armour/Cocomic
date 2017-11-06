@@ -25,7 +25,7 @@ export class LoginPage extends React.Component {
             </div>
             <div className="row">
               <div className="col s12">
-                <a class="waves-effect waves-light btn">Login</a>
+                <a className="waves-effect waves-light btn">Login</a>
               </div>
             </div>
           </div>
