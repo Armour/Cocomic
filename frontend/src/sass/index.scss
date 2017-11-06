@@ -2,6 +2,7 @@
 
 // materialize
 @import "materialize";
+@import "materialize-override";
 
 // Common
 @import "common";
@@ -16,6 +17,7 @@
 @import "components/navlink";
 @import "components/todoApp";
 @import "components/apiLoader";
+@import "components/namecard";
 
 // Pages
 @import "pages/parallaxPage";

@@ -1,0 +1,8 @@
+/* label underline focus color */
+.input-field input:focus {
+  border-bottom: 1px solid #2196f3 !important;
+}
+/* label focus color */
+.input-field input:focus + label {
+  color: #2196f3 !important;
+}
