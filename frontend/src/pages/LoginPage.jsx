@@ -3,7 +3,7 @@ import React from 'react';
 export class LoginPage extends React.Component {
   render() {
     return (
-      <div className="register-wrapper">
+      <div className="login-wrapper">
         <div className="card">
           <div className="card-content">
             <span className="card-title">Login </span>
