@@ -1,6 +1,10 @@
 .name-card-wrapper {
   padding-top: 30px;
   padding-bottom: 30px;
+
+  /* centering user card */
+  width: 600px;
+  margin: 0 auto;
 }
 
 #user_card_title {
@@ -9,7 +13,7 @@
 }
 
 #user_card_btn {
-  background-color: #2196f3;
+  background-color: $primary-color;
   display: block;
   height: 50px;
   padding-top: 10px;

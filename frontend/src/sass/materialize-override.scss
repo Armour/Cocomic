@@ -1,9 +1,11 @@
+@import "common";
+
 /* label underline focus color */
 .input-field input:focus {
-  border-bottom: 1px solid #2196f3 !important;
+  border-bottom: 1px solid $primary-color !important;
 }
 
 /* label focus color */
 .input-field input:focus + label {
-  color: #2196f3 !important;
+  color: $primary-color !important;
 }
