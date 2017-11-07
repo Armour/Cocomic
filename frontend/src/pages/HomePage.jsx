@@ -21,7 +21,7 @@ export class HomePage extends React.Component {
     return (
       <div>
         <Intro className="intro-panel" />
-        <ComicCard /> <ComicCard />
+        <ComicCard img_url="sample-1" title="2333" description="test" />
         <FAB />
       </div>
     );
