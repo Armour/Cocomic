@@ -1,15 +1,13 @@
 import React from 'react';
 
-import { TOAST_DISPLAY_DURATION, TOOLTIP_DELAY_TIME } from 'constants/timers';
-
 const tooltipConfig = {
-  delay: TOOLTIP_DELAY_TIME,
+  delay: 300,
   position: 'top',
   tooltip: 'Click Me! >. <',
 };
 
 const displayToast = () => {
-  Materialize.toast('I am a toast!', TOAST_DISPLAY_DURATION); // eslint-disable-line no-undef
+  Materialize.toast('I am a toast!', 3000); // eslint-disable-line no-undef
 };
 
 export class Carousel extends React.Component {

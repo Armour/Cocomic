@@ -1,4 +1,4 @@
-import { RECEIVE_ERROR, RECEIVE_RESPONSE, START_REQUEST } from 'constants/actionTypes';
+import { RECEIVE_ERROR, RECEIVE_RESPONSE, START_REQUEST } from 'constants/example';
 
 export const startRequest = url => ({
   type: START_REQUEST,

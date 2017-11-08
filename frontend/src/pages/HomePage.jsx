@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { FAB } from 'components/FAB';
 import { Intro } from 'components/Intro';
 import { ComicCard } from 'components/ComicCard';
 
@@ -22,7 +21,6 @@ export class HomePage extends React.Component {
       <div>
         <Intro className="intro-panel" />
         <ComicCard img_url="sample-1" title="2333" description="test" />
-        <FAB />
       </div>
     );
   }
