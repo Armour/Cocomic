@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
-
-import { apiData } from 'reducers/apiData';
+import { fetchingData } from 'reducers/fetchingData';
+import { books } from 'reducers/books';
 
 export default combineReducers({
-  apiData,
+  books,
+  fetchingData,
 });

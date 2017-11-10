@@ -1,19 +1,19 @@
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
-import { fetchApiDataIfNeeded } from 'actions';
-import { ApiLoader } from 'components/ApiLoader';
+// import { fetchApiDataIfNeeded } from 'actions';
+// import { ApiLoader } from 'components/ApiLoader';
 
-const mapStateToProps = state => ({
-  apiData: state.apiData,
-});
+// const mapStateToProps = state => ({
+//   apiData: state.apiData,
+// });
 
-const mapDispatchToProps = dispatch => ({
-  fetchData: (url) => {
-    dispatch(fetchApiDataIfNeeded(url));
-  },
-});
+// const mapDispatchToProps = dispatch => ({
+//   fetchData: (url) => {
+//     dispatch(fetchApiDataIfNeeded(url));
+//   },
+// });
 
-export const AsyncApi = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ApiLoader);
+// export const AsyncApi = connect(
+//   mapStateToProps,
+//   mapDispatchToProps,
+// )(ApiLoader);

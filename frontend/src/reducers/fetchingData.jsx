@@ -1,28 +1,24 @@
-import Immutable from 'immutable';
-
 import { RECEIVE_ERROR, RECEIVE_RESPONSE, START_REQUEST } from 'constants';
 
-const initialState = Immutable.Map({});
+// store fetching urls and received error
+const initialState = {};
 
-export const apiData = (state = initialState, action) => {
+export const fetchingData = (state = initialState, action) => {
   switch (action.type) {
   case START_REQUEST:
     return state.set(action.url, {
-      content: 'loading...',
       isFetching: true,
-      hasError: false,
+      error: null,
     });
   case RECEIVE_RESPONSE:
     return state.set(action.url, {
-      content: action.res,
       isFetching: false,
-      hasError: false,
+      error: null,
     });
   case RECEIVE_ERROR:
     return state.set(action.url, {
-      content: action.error,
       isFetching: false,
-      hasError: true,
+      error: action.error,
     });
   default:
     return state;
