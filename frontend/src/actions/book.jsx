@@ -1,4 +1,4 @@
-import { fetchDataIfNeeded } from 'actions/api';
+import { fetchDataIfNeeded } from 'actions/fetchApi';
 import { RECEIVE_BOOK } from 'constants';
 
 /*

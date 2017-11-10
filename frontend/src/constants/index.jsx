@@ -1,1 +1,1 @@
-export * from 'constants/example';
+export * from 'constants/fetchApi';
