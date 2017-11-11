@@ -1,4 +1,5 @@
 import { RECEIVE_ERROR, RECEIVE_RESPONSE, START_REQUEST } from 'constants/fetchApi';
+import { isFetching } from 'reducers/fetchingData'
 
 const startRequest = url => ({
   type: START_REQUEST,
@@ -25,26 +26,19 @@ const fetchData = (url, receiveData, receiveError) =>
       if (res.ok) {
         res.json().then((data) => {
           dispatch(receiveData(data));
+          dispatch(receiveResponse(url));
         });
       } else {
         dispatch(receiveError(url, `${res.status} ${res.statusText}`));
       }
     } catch (e) {
       dispatch(receiveError(url, e.message));
-    } finally {
-      dispatch(receiveResponse(url));
     }
   };
-
-const isFetching = (url, state) => {
-  if (!state.fetchingData.has(url)) return false;
-  return state.fetchingData.url.isFetching;
-};
 
 /*
 fetchDataIfNeeded prevents duplicate fetch request to same url at the same time
 */
-
 export const fetchDataIfNeeded = (url, receiveData, receiveError = defaultReceiveError) =>
   (dispatch, getState) => {
     const state = getState();

@@ -1,16 +1,16 @@
 import { fetchDataIfNeeded } from 'actions/fetchApi';
-import { RECEIVE_BOOK } from 'constants';
+import { RECEIVE_BOOK } from 'constants/book';
 
 /*
 data:{
   books:{
     bookId:{
-      bookId:number, name:string, coverUrl:string, description:string, rootId:number, likeNum:number
+      name:string, coverUrl:string, description:string, rootId:number, likeNum:number
     }
   },
   nodes:{
     nodeId:{
-      nodeId:number, bookId:number, userId:number, createDate:date, parentId:number, likeNum:number, images:[string]
+      bookId:number, userId:number, createDate:date, parentId:number, likeNum:number, images:[string]
     }
   }
 }
