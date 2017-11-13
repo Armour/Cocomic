@@ -1,5 +1,5 @@
 import { RECEIVE_ERROR, RECEIVE_RESPONSE, START_REQUEST } from 'constants/fetchApi';
-import { isFetching } from 'reducers/fetchingData'
+import { isFetching } from 'reducers/fetchingData';
 
 const startRequest = url => ({
   type: START_REQUEST,

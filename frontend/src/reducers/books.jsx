@@ -1,4 +1,4 @@
-import { Map, List, fromJS } from 'immutable'
+import { Map, List, fromJS } from 'immutable';
 
 import { RECEIVE_BOOK } from 'constants/book';
 
@@ -16,8 +16,6 @@ state.books:{
 */
 
 const initialState = Map();
-const bookInitialState = Map({nodes: Map()});
-const nodeInitialState = Map({childrenIds: List()});
 
 export const books = (state = initialState, action) => {
   switch (action.type) {

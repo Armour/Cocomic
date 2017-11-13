@@ -1,4 +1,4 @@
-import { Map, getIn } from 'immutable'
+import { Map, getIn } from 'immutable';
 
 import { RECEIVE_ERROR, RECEIVE_RESPONSE, START_REQUEST } from 'constants/fetchApi';
 
