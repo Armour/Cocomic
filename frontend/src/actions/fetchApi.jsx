@@ -21,7 +21,7 @@ const fetchData = (url, receiveData, receiveError) =>
   async (dispatch) => {
     dispatch(startRequest(url));
     try {
-      const req = new Request(`/${url}`, { method: 'POST' });
+      const req = new Request(`${url}`, { method: 'POST' });
       const res = await fetch(req);
       if (res.ok) {
         res.json().then((data) => {
