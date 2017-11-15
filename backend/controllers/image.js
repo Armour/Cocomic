@@ -15,14 +15,14 @@ export const uploadImages = (req, res) => {
     const buf = Buffer.from(data, 'base64');
 
     mkdirp.sync(pathFolder, (err) => {
-      console.error('Make Directory ERROR (image.upload_images) : %s', err.message);
+      console.error('Make Directory ERROR (image.upload_images) : %s', err.message); // eslint-disable-line no-console
     });
 
     sharp(buf)
       .clone()
       .jpeg()
       .toFile(`${pathFolder}/${pathMd5.slice(4)}-ori`, (err) => {
-        console.error('Write Image ERROR (image.upload_images) : %s (ori)', err.message);
+        console.error('Write Image ERROR (image.upload_images) : %s (ori)', err.message); // eslint-disable-line no-console
       });
 
     sharp(buf)
@@ -32,7 +32,7 @@ export const uploadImages = (req, res) => {
       .withoutEnlargement()
       .jpeg()
       .toFile(`${pathFolder}/${pathMd5.slice(4)}-sml`, (err) => {
-        console.error('Write Image ERROR (image.upload_images) : %s (sml)', err.message);
+        console.error('Write Image ERROR (image.upload_images) : %s (sml)', err.message); // eslint-disable-line no-console
       });
 
     retHash.push(pathMd5);
@@ -55,7 +55,7 @@ export const getImages = (req, res) => {
     try {
       data = fs.readFileSync(`${pathFolder}/${pathMd5.slice(4)}-ori`, 'utf8');
     } catch (err) {
-      console.error('Read Image ERROR (image.getImages) : %s/%s-ori', pathFolder, pathMd5.slice(4));
+      console.error('Read Image ERROR (image.getImages) : %s/%s-ori', pathFolder, pathMd5.slice(4)); // eslint-disable-line no-console
     }
     retImages.push(data);
   }
