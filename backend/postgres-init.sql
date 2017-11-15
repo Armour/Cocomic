@@ -16,6 +16,8 @@ CREATE TABLE node (
     create_date timestamp NOT NULL default current_timestamp
 );
 
+CREATE INDEX book_parent_idx ON node (book_id, parent_id);
+
 CREATE TABLE userinfo (
     id serial primary key,
     username text NOT NULL,
