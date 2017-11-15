@@ -3,16 +3,16 @@ import { RECEIVE_BOOK } from 'constants/book';
 
 /*
 data:{
-  books:{
-    bookId:{
-      name:string, coverUrl:string, description:string, rootId:number, likeNum:number
+  books:[
+    {
+      id:number, name:string, coverUrl:string, description:string, rootId:number, likeNum:number
     }
-  },
-  nodes:{
-    nodeId:{
-      bookId:number, userId:number, createDate:date, parentId:number, likeNum:number, images:[string]
+  ],
+  nodes:[
+    {
+      id:number, bookId:number, userId:number, createDate:date, parentId:number, likeNum:number, images:[string]
     }
-  }
+  ]
 }
 */
 

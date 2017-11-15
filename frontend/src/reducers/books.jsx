@@ -18,16 +18,23 @@ state.books:{
 const initialState = Map();
 
 export const books = (state = initialState, action) => {
+  let newState = state;
   switch (action.type) {
   case RECEIVE_BOOK:
-    action.data.books.forEach((value, bookId) => {
-      state.mergeIn([bookId], fromJS(value));
-    });
-    action.data.nodes.forEach((value, nodeId) => {
-      state.mergeIn([value.bookId, 'nodes', nodeId], fromJS(value));
-      state.updateIn([value.bookId, 'nodes', value.parentId, 'childrenIds'], (list = List()) => list.push(nodeId));
-    });
-    return state;
+    if (action.data.books) {
+      action.data.books.forEach((value) => {
+        newState = newState.mergeIn([value.id], fromJS(value));
+      });
+    }
+    if (action.data.nodes) {
+      action.data.nodes.forEach((value, nodeId) => {
+        newState = newState.mergeIn([value.bookId, 'nodes', nodeId], fromJS(value));
+        if (value.parentId) {
+          newState = newState.updateIn([value.bookId, 'nodes', value.parentId, 'childrenIds'], (list = List()) => list.push(nodeId));
+        }
+      });
+    }
+    return newState;
   default:
     return state;
   }
