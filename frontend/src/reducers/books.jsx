@@ -27,10 +27,10 @@ export const books = (state = initialState, action) => {
       });
     }
     if (action.data.nodes) {
-      action.data.nodes.forEach((value, nodeId) => {
-        newState = newState.mergeIn([value.bookId, 'nodes', nodeId], fromJS(value));
+      action.data.nodes.forEach((value) => {
+        newState = newState.mergeIn([value.bookId, 'nodes', value.id], fromJS(value));
         if (value.parentId) {
-          newState = newState.updateIn([value.bookId, 'nodes', value.parentId, 'childrenIds'], (list = List()) => list.push(nodeId));
+          newState = newState.updateIn([value.bookId, 'nodes', value.parentId, 'childrenIds'], (list = List()) => list.push(value.id));
         }
       });
     }
