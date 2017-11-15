@@ -59,7 +59,7 @@ app.use(session({
 app.disable('x-powered-by');
 
 // Api router
-app.use('/', indexRtr);
+app.use('', indexRtr);
 
 if (!isProduction) {
   let listend = false;
