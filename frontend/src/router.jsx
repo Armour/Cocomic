@@ -9,6 +9,7 @@ import { HomePage } from 'pages/HomePage';
 import { NotFoundPage } from 'pages/NotFoundPage';
 import { RegisterPage } from 'pages/RegisterPage';
 import { LoginPage } from 'pages/LoginPage';
+import { BookPage } from 'pages/BookPage';
 
 export const router = (
   <div>
@@ -18,6 +19,7 @@ export const router = (
       <Route exact path="/" component={HomePage} />
       <Route path="/register" component={RegisterPage} />
       <Route path="/login" component={LoginPage} />
+      <Route path="/book/:bookId/:chapterId" component={BookPage} />
       <Route component={NotFoundPage} />
     </Switch>
     <Footer />
