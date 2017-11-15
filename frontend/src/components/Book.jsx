@@ -9,11 +9,12 @@ export class Book extends React.Component {
   }
 
   render() {
+    const chapters = ['123', 'abc', 'ABC'].map(key =>
+      <Chapter key={key} chapterID={key} />,
+    );
     return (
       <div>
-        <Chapter />
-        <Chapter />
-        <Chapter />
+        {chapters}
       </div>
     );
   }

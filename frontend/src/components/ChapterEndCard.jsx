@@ -14,7 +14,9 @@ export class ChapterEndCard extends React.Component {
               <a className="btn-floating halfway-fab waves-effect waves-light chapter-end-btn"><i className="material-icons">create</i></a>
             </div>
             <div className="card-content">
-              <Carousel />
+              <p className="chapter-end-text"> End of Chapter </p>
+              <p className="select-branch-text"> Continue reading or select a different branch </p>
+              <Carousel chapterID={this.props.chapterID} />
             </div>
           </div>
         </div>
@@ -25,4 +27,5 @@ export class ChapterEndCard extends React.Component {
 
 ChapterEndCard.propTypes = {
   img_url: PropTypes.string.isRequired,
+  chapterID: PropTypes.string.isRequired,
 };
