@@ -23,7 +23,8 @@
     "no-confusing-arrow": 0,
     "no-mixed-operators": ["error", { "allowSamePrecedence": true }],
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
-    "react/prefer-stateless-function": 0
+    "react/prefer-stateless-function": 0,
+    "react/forbid-prop-types":0
   },
   "settings": {
     "import/resolver": {
