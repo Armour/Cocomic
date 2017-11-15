@@ -15,8 +15,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config.dev.babel';
 
 import config from './config.json';
-import apiRtr from './routes/api';
-import userRtr from './routes/user';
+import indexRtr from './routes/index';
 
 const RedisStore = connectRedis(session);
 const isProduction = process.env.NODE_ENV === 'production';
@@ -60,8 +59,7 @@ app.use(session({
 app.disable('x-powered-by');
 
 // Api router
-app.use('/api', apiRtr);
-app.use('/user', userRtr);
+app.use('/', indexRtr);
 
 if (!isProduction) {
   let listend = false;
