@@ -1,6 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { PictureCard } from 'components/PictureCard';
+import { ChapterEndCard } from 'components/ChapterEndCard';
 
 export class Chapter extends React.Component {
   render() {
@@ -10,6 +11,7 @@ export class Chapter extends React.Component {
         <PictureCard img_url="sample-1" />
         <PictureCard img_url="sample-1" />
         <PictureCard img_url="sample-1" />
+        <ChapterEndCard img_url="sample-1" />
       </div>
     );
   }
