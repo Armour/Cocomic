@@ -11,7 +11,7 @@ const sampleData = {
       likeNum: 2,
     },
   ],
-  nodes: [
+  chapters: [
     {
       id: 1,
       bookId: 1,
@@ -39,9 +39,9 @@ export const getBook = async (req, res) => {
     const { books } = await db.query('SELECT * FROM book WHERE id=($1)', [bookId]);
     if (books.length === 0) Error();
     const book = books[0];
-    const nodeQuery = 'SELECT * FROM node WHERE id=($1) OR book_id=($2) AND parent_id=($3)';
-    const { nodes } = await db.query(nodeQuery, [book.rootId, bookId, book.rootId]);
-    res.json({ books: [book], nodes });
+    const chapterQuery = 'SELECT * FROM chapter WHERE id=($1) OR book_id=($2) AND parent_id=($3)';
+    const { chapters } = await db.query(chapterQuery, [book.rootId, bookId, book.rootId]);
+    res.json({ books: [book], chapters });
   } catch (e) {
     res.status(404).send('data not found');
   }

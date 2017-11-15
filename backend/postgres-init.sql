@@ -3,10 +3,10 @@ CREATE TABLE book (
     title text NOT NULL,
     cover_image text,
     description text,
-    root_node_id integer NOT NULL
+    root_chapter_id integer NOT NULL
 );
 
-CREATE TABLE node (
+CREATE TABLE chapter (
     id serial primary key,
     user_id integer NOT NULL,
     book_id integer NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE node (
     create_date timestamp NOT NULL default current_timestamp
 );
 
-CREATE INDEX book_parent_idx ON node (book_id, parent_id);
+CREATE INDEX book_parent_idx ON chapter (book_id, parent_id);
 
 CREATE TABLE userinfo (
     id serial primary key,

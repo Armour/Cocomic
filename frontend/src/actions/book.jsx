@@ -8,7 +8,7 @@ data:{
       id:number, name:string, coverUrl:string, description:string, rootId:number, likeNum:number
     }
   ],
-  nodes:[
+  chapters:[
     {
       id:number, bookId:number, userId:number, createDate:date, parentId:number, likeNum:number, images:[string]
     }
