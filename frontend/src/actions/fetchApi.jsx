@@ -11,7 +11,7 @@ const receiveResponse = url => ({
   url,
 });
 
-export const defaultReceiveError = (url, error) => ({
+export const defaultReceiveError = (url, res, error) => ({
   type: RECEIVE_ERROR,
   url,
   error,
@@ -26,13 +26,14 @@ const fetchData = (url, receiveData, receiveError) =>
       if (res.ok) {
         res.json().then((data) => {
           dispatch(receiveData(data));
-          dispatch(receiveResponse(url));
         });
       } else {
-        dispatch(receiveError(url, `${res.status} ${res.statusText}`));
+        dispatch(receiveError(url, res, `${res.status} ${res.statusText}`));
       }
     } catch (e) {
-      dispatch(receiveError(url, e.message));
+      dispatch(receiveError(url, null, e.message));
+    } finally {
+      dispatch(receiveResponse(url));
     }
   };
 
