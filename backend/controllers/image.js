@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import md5 from 'md5';
 import mkdirp from 'mkdirp';
-import sharp from 'sharp';
+import jimp from 'jimp';
 
 export const uploadImages = (req, res) => {
   const retHash = [];
@@ -18,22 +18,20 @@ export const uploadImages = (req, res) => {
       console.error('Make Directory ERROR (image.upload_images) : %s', err.message); // eslint-disable-line no-console
     });
 
-    sharp(buf)
-      .clone()
-      .jpeg()
-      .toFile(`${pathFolder}/${pathMd5.slice(4)}-ori`, (err) => {
-        console.error('Write Image ERROR (image.upload_images) : %s (ori)', err.message); // eslint-disable-line no-console
-      });
+    jimp.read(buf, (err, image) => {
+      image.quality(60)
+        .write(`${pathFolder}/${pathMd5.slice(4)}-ori.jpg`, (error) => {
+          console.error('Write Image ERROR (image.upload_images) : %s (ori)', error.message); // eslint-disable-line no-console
+        });
+    })
 
-    sharp(buf)
-      .clone()
-      .resize(120, 120)
-      .min()
-      .withoutEnlargement()
-      .jpeg()
-      .toFile(`${pathFolder}/${pathMd5.slice(4)}-sml`, (err) => {
-        console.error('Write Image ERROR (image.upload_images) : %s (sml)', err.message); // eslint-disable-line no-console
-      });
+    jimp.read(buf, (err, image) => {
+      image.resize(120, 120)
+        .quality(60)
+        .write(`${pathFolder}/${pathMd5.slice(4)}-sml.jpg`, (error) => {
+          console.error('Write Image ERROR (image.upload_images) : %s (sml)', error.message); // eslint-disable-line no-console
+        });
+    })
 
     retHash.push(pathMd5);
   }
@@ -53,9 +51,9 @@ export const getImages = (req, res) => {
     const pathFolder = path.resolve('../uploads', pathMd5.slice(0, 2), pathMd5.slice(2, 4));
     let data;
     try {
-      data = fs.readFileSync(`${pathFolder}/${pathMd5.slice(4)}-ori`, 'utf8');
+      data = fs.readFileSync(`${pathFolder}/${pathMd5.slice(4)}-ori.jpg`, 'utf8');
     } catch (err) {
-      console.error('Read Image ERROR (image.getImages) : %s/%s-ori', pathFolder, pathMd5.slice(4)); // eslint-disable-line no-console
+      console.error('Read Image ERROR (image.getImages) : %s/%s-ori.jpg', pathFolder, pathMd5.slice(4)); // eslint-disable-line no-console
     }
     retImages.push(data);
   }
