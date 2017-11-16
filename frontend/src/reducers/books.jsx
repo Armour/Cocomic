@@ -5,10 +5,10 @@ import { RECEIVE_BOOK } from 'constants/book';
 /*
 state.books:{
   bookId:{
-    name:string, coverUrl:string, description:string, rootId:number, likeNum:number
+    name:string, coverImage:string, description:string, rootId:number, likeSum:number
     chapters:{
       chapterId:{
-        bookId:number, userId:number, createDate:date, parentId:number, likeNum:number, images:[string], childrenIds:[number]
+        bookId:number, userId:number, createDate:date, parentId:number, likeSum:number, images:[string], childrenIds:[number]
       }
     }
   }

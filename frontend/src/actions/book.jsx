@@ -5,12 +5,12 @@ import { RECEIVE_BOOK } from 'constants/book';
 data:{
   books:[
     {
-      id:number, name:string, coverUrl:string, description:string, rootId:number, likeNum:number
+      id:number, title:string, coverImage:string, description:string, rootChapterId:number, likeSum:number
     }
   ],
   chapters:[
     {
-      id:number, bookId:number, userId:number, createDate:date, parentId:number, likeNum:number, images:[string]
+      id:number, bookId:number, userId:number, createDate:date, parentId:number, likeSum:number, images:[string]
     }
   ]
 }
