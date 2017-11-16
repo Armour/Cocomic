@@ -23,7 +23,7 @@ export const uploadImages = (req, res) => {
         .write(`${pathFolder}/${pathMd5.slice(4)}-ori.jpg`, (error) => {
           console.error('Write Image ERROR (image.upload_images) : %s (ori)', error.message); // eslint-disable-line no-console
         });
-    })
+    });
 
     jimp.read(buf, (err, image) => {
       image.resize(120, 120)
@@ -31,7 +31,7 @@ export const uploadImages = (req, res) => {
         .write(`${pathFolder}/${pathMd5.slice(4)}-sml.jpg`, (error) => {
           console.error('Write Image ERROR (image.upload_images) : %s (sml)', error.message); // eslint-disable-line no-console
         });
-    })
+    });
 
     retHash.push(pathMd5);
   }
