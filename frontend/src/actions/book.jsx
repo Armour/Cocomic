@@ -24,13 +24,13 @@ const receiveBook = data => ({
 export const fetchBookIfNeeded = bookId =>
   (dispatch) => {
     const url = `/book/${bookId}`;
-    dispatch(fetchDataIfNeeded(url, METHOD_GET, receiveBook));
+    dispatch(fetchDataIfNeeded(url, METHOD_GET, {}, receiveBook));
   };
 
 export const fetchChapterIfNeeded = (bookId, chapterId) =>
   (dispatch) => {
     const url = `/book/${bookId}/${chapterId}`;
     if (chapterId > 0) {
-      dispatch(fetchDataIfNeeded(url, METHOD_GET, receiveBook));
+      dispatch(fetchDataIfNeeded(url, METHOD_GET, {}, receiveBook));
     }
   };

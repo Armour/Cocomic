@@ -27,8 +27,8 @@ CREATE TABLE userinfo (
     password text NOT NULL,
     create_date timestamp NOT NULL default current_timestamp
 );
-
-INSERT INTO userinfo(username, password) VALUES('Kingston', 'docker');
+ALTER TABLE userinfo ADD COLUMN email text NOT NULL UNIQUE;
+INSERT INTO userinfo(username, email, password) VALUES('Kingston', 'k@k.com', 'docker');
 INSERT INTO book(title, cover_image, description, root_chapter_id)
     VALUES('Conan Escalar Montañas', 'sample-1', 'Conan escalar montañas todos los sábados.', 1);
 

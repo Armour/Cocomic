@@ -23,16 +23,23 @@ export const defaultReceiveError = (url, res, error) => ({
   error,
 });
 
-const fetchData = (url, method, receiveData, receiveError) =>
+const fetchData = (url, method, postData, receiveData, receiveError) =>
   async (dispatch) => {
     dispatch(startRequest(url, method));
     try {
-      const req = new Request(`/fetch${url}`, { method });
+      let req;
+      if (method.toUpperCase() === 'POST') {
+        req = new Request(`/fetch${url}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(postData) });
+      } else {
+        req = new Request(`/fetch${url}`, { method });
+      }
       const res = await fetch(req);
       if (res.ok) {
         res.json().then((data) => {
           dispatch(receiveData(data));
         });
+      } else if (typeof res.error !== 'undefined') {
+        dispatch(receiveError(url, `${res.status} ${res.statusText} ${res.error}`));
       } else {
         dispatch(receiveError(url, res, `${res.status} ${res.statusText}`));
       }
@@ -46,11 +53,12 @@ const fetchData = (url, method, receiveData, receiveError) =>
 /*
 fetchDataIfNeeded prevents duplicate fetch request to same url at the same time
 */
-export const fetchDataIfNeeded = (url, method, receiveData, receiveError = defaultReceiveError) =>
+export const fetchDataIfNeeded = (url, method, postData, receiveData, receiveError = defaultReceiveError) =>
   (dispatch, getState) => {
     const state = getState();
     if (!isFetching(url, state)) {
-      return dispatch(fetchData(url, method, receiveData, receiveError));
+      return dispatch(fetchData(url, method, postData, receiveData, receiveError));
     }
     return null;
   };
+
