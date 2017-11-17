@@ -10,8 +10,6 @@ export class Book extends React.Component {
   }
 
   render() {
-    // console.log(this.props.chapters);
-
     const chapters = this.props.chapters.map(key =>
       <Chapter key={key.get('id')} chapterID={key.get('id')} pictures={key.get('images')} />,
     );

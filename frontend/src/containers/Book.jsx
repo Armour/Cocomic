@@ -7,7 +7,6 @@ import { Book } from 'components/Book';
 const mapStateToProps = (state, ownProps) => {
   const book = getBook(state, parseInt(ownProps.bookId, 10));
 
-  console.log(book);
   if (book === undefined) {
     return {};
   }
