@@ -1,4 +1,4 @@
-import { fetchDataIfNeeded } from 'actions/fetchApi';
+import { METHOD_GET, fetchDataIfNeeded } from 'actions/fetchApi';
 import { RECEIVE_BOOK } from 'constants/book';
 
 /*
@@ -24,11 +24,11 @@ const receiveBook = data => ({
 export const fetchBookIfNeeded = bookId =>
   (dispatch) => {
     const url = `/book/${bookId}`;
-    dispatch(fetchDataIfNeeded(url, receiveBook));
+    dispatch(fetchDataIfNeeded(url, METHOD_GET, receiveBook));
   };
 
 export const fetchChapterIfNeeded = chapterId =>
   (dispatch) => {
     const url = `/chapter/${chapterId}`;
-    dispatch(fetchDataIfNeeded(url, receiveBook));
+    dispatch(fetchDataIfNeeded(url, METHOD_GET, receiveBook));
   };

@@ -1,6 +1,11 @@
 import { RECEIVE_ERROR, RECEIVE_RESPONSE, START_REQUEST } from 'constants/fetchApi';
 import { isFetching } from 'reducers/fetchingData';
 
+export const METHOD_GET = 'GET';
+export const METHOD_POST = 'POST';
+export const METHOD_PUT = 'PUT';
+export const METHOD_DELETE = 'DELETE';
+
 const startRequest = url => ({
   type: START_REQUEST,
   url,
@@ -17,11 +22,11 @@ export const defaultReceiveError = (url, res, error) => ({
   error,
 });
 
-const fetchData = (url, receiveData, receiveError) =>
+const fetchData = (url, method, receiveData, receiveError) =>
   async (dispatch) => {
     dispatch(startRequest(url));
     try {
-      const req = new Request(`${url}`, { method: 'POST' });
+      const req = new Request(`${url}`, { method });
       const res = await fetch(req);
       if (res.ok) {
         res.json().then((data) => {
@@ -40,11 +45,11 @@ const fetchData = (url, receiveData, receiveError) =>
 /*
 fetchDataIfNeeded prevents duplicate fetch request to same url at the same time
 */
-export const fetchDataIfNeeded = (url, receiveData, receiveError = defaultReceiveError) =>
+export const fetchDataIfNeeded = (url, method, receiveData, receiveError = defaultReceiveError) =>
   (dispatch, getState) => {
     const state = getState();
     if (!isFetching(url, state)) {
-      return dispatch(fetchData(url, receiveData, receiveError));
+      return dispatch(fetchData(url, receiveData, receiveError, method));
     }
     return null;
   };
