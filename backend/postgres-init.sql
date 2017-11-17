@@ -14,6 +14,7 @@ CREATE TABLE chapter (
     description text,
     parent_id integer,
     like_sum integer NOT NULL default 0,
+    depth integer NOT NULL default 0,
     images text[],
     create_date timestamp NOT NULL default current_timestamp
 );
@@ -31,8 +32,8 @@ INSERT INTO userinfo(username, password) VALUES('Kingston', 'docker');
 INSERT INTO book(title, cover_image, description, root_chapter_id)
     VALUES('Conan Escalar Montañas', 'sample-1', 'Conan escalar montañas todos los sábados.', 1);
 
-INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
-    VALUES(1, 1, 'Conan Prepara el Equipaje', 'Conan hace la maleta y reserve un habitación individual', 23, '{"sample-1", "sample-1"}');
+INSERT INTO chapter(user_id, book_id, title, description, like_sum, depth, images)
+    VALUES(1, 1, 'Conan Prepara el Equipaje', 'Conan hace la maleta y reserve un habitación individual', 23, 1, '{"sample-1", "sample-1"}');
 
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 1, 'Conan Va a las Montañas', 'Conan compra un pasaje de avión y llega al aeropuerte', 1, 23, '{"sample-1", "sample-1"}');
+INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, depth, images)
+    VALUES(1, 1, 'Conan Va a las Montañas', 'Conan compra un pasaje de avión y llega al aeropuerte', 1, 23, 2, '{"sample-1", "sample-1"}');
