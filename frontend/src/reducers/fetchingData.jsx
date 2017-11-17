@@ -1,6 +1,6 @@
 import { Map, getIn } from 'immutable';
 
-import { RECEIVE_ERROR, RECEIVE_RESPONSE, START_REQUEST } from 'constants/fetchApi';
+import { RECEIVE_RESPONSE, START_REQUEST } from 'constants/fetchApi';
 
 // store fetching urls and received error
 const initialState = Map();
@@ -8,17 +8,9 @@ const initialState = Map();
 export const fetchingData = (state = initialState, action) => {
   switch (action.type) {
   case START_REQUEST:
-    return state.set(action.url, {
-      isFetching: true,
-      error: null,
-    });
+    return state.set(action.url, true);
   case RECEIVE_RESPONSE:
     return state.delete(action.url);
-  case RECEIVE_ERROR:
-    return state.set(action.url, {
-      isFetching: false,
-      error: action.error,
-    });
   default:
     return state;
   }

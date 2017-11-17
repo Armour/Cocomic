@@ -10,6 +10,7 @@ import { NotFoundPage } from 'pages/NotFoundPage';
 import { RegisterPage } from 'pages/RegisterPage';
 import { LoginPage } from 'pages/LoginPage';
 import { BookPage } from 'pages/BookPage';
+import { FilePage } from 'pages/uploadPage';
 
 export const router = (
   <div>
@@ -20,6 +21,7 @@ export const router = (
       <Route path="/register" component={RegisterPage} />
       <Route path="/login" component={LoginPage} />
       <Route path="/book/:bookId/:chapterId" component={BookPage} />
+      <Route path="/upload" component={FilePage} />
       <Route component={NotFoundPage} />
     </Switch>
     <Footer />
