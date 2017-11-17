@@ -8,7 +8,7 @@ const initialState = Map();
 export const fetchingData = (state = initialState, action) => {
   switch (action.type) {
   case START_REQUEST:
-    return state.set(action.url, true);
+    return state.set(action.url, action.method);
   case RECEIVE_RESPONSE:
     return state.delete(action.url);
   default:

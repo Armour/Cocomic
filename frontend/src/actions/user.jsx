@@ -23,5 +23,5 @@ const receiveRegister = data => ({
 
 export const createUser = data =>
   (dispatch) => {
-    dispatch(fetchDataIfNeeded('/user/register', data, receiveRegister));
+    dispatch(fetchDataIfNeeded('/user/register', 'POST', data, receiveRegister));
   };
