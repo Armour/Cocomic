@@ -1,4 +1,4 @@
-import { Map, List, fromJS } from 'immutable';
+import { Map, List, fromJS, getIn } from 'immutable';
 
 import { RECEIVE_BOOK } from 'constants/book';
 
@@ -41,7 +41,4 @@ export const books = (state = initialState, action) => {
 };
 
 export const getBook = (state, bookId) => state.books.get(bookId);
-export const getchapter = (state, bookId, chapterId) => {
-  if (!state.books.has(bookId)) return undefined;
-  return state.books.get(bookId).chapters.get(chapterId);
-};
+export const getChapter = (state, bookId, chapterId) => getIn(state, ['books', bookId, 'chapters', chapterId]);
