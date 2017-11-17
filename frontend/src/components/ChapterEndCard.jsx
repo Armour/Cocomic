@@ -16,7 +16,7 @@ export class ChapterEndCard extends React.Component {
             <div className="card-content">
               <p className="chapter-end-text"> End of Chapter </p>
               <p className="select-branch-text"> Continue reading or select a different branch </p>
-              <Carousel chapterID={this.props.chapterID} />
+              <Carousel chapterId={this.props.chapterId} />
             </div>
           </div>
         </div>
@@ -27,5 +27,5 @@ export class ChapterEndCard extends React.Component {
 
 ChapterEndCard.propTypes = {
   img_url: PropTypes.string.isRequired,
-  chapterID: PropTypes.string.isRequired,
+  chapterId: PropTypes.number.isRequired,
 };

@@ -5,18 +5,21 @@ import { ChapterEndCard } from 'components/ChapterEndCard';
 
 export class Chapter extends React.Component {
   render() {
+    const pictureCards = this.props.pictures.skipLast(1).map(key =>
+      <PictureCard img_url={key} />,
+    );
     return (
       <div>
-        <h1 id="chapter-title"> Chapter : Chapter Name </h1>
-        <PictureCard img_url="sample-1" />
-        <PictureCard img_url="sample-1" />
-        <PictureCard img_url="sample-1" />
-        <ChapterEndCard chapterID={this.props.chapterID} img_url="sample-1" />
+        <h1 id="chapter-title"> {this.props.title} </h1>
+        {pictureCards}
+        <ChapterEndCard chapterId={this.props.chapterId} img_url={this.props.pictures.last()} />
       </div>
     );
   }
 }
 
 Chapter.propTypes = {
-  chapterID: PropTypes.string.isRequired,
+  chapterId: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  pictures: PropTypes.object.isRequired,
 };
