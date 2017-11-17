@@ -22,3 +22,4 @@ CREATE TABLE userinfo (
     password text NOT NULL,
     create_date timestamp NOT NULL default current_timestamp
 );
+ALTER TABLE userinfo ADD COLUMN email text NOT NULL UNIQUE;
