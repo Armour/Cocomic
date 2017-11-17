@@ -30,8 +30,8 @@ const mapDispatchToProps = dispatch => ({
   fetchBookIfNeeded: (bookId) => {
     dispatch(fetchBookIfNeeded(bookId));
   },
-  fetchChapterIfNeeded: (chapterId) => {
-    dispatch(fetchChapterIfNeeded(chapterId));
+  fetchChapterIfNeeded: (bookId, chapterId) => {
+    dispatch(fetchChapterIfNeeded(bookId, chapterId));
   },
 });
 

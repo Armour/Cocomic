@@ -9,7 +9,7 @@ export class Book extends React.Component {
   constructor(props) {
     super(props);
     this.props.fetchBookIfNeeded(this.props.bookId);
-    this.props.fetchChapterIfNeeded(this.props.currentChapterId);
+    this.props.fetchChapterIfNeeded(this.props.bookId, this.props.currentChapterId);
   }
 
   render() {
