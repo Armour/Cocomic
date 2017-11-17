@@ -58,8 +58,8 @@ app.use(session({
 }));
 app.disable('x-powered-by');
 
-// Api router
-app.use('', indexRtr);
+// index router
+app.use('/fetch', indexRtr);
 
 if (!isProduction) {
   let listend = false;

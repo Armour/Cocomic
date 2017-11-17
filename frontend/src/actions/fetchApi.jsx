@@ -27,7 +27,7 @@ const fetchData = (url, method, receiveData, receiveError) =>
   async (dispatch) => {
     dispatch(startRequest(url, method));
     try {
-      const req = new Request(`${url}`, { method });
+      const req = new Request(`/fetch${url}`, { method });
       const res = await fetch(req);
       if (res.ok) {
         res.json().then((data) => {
