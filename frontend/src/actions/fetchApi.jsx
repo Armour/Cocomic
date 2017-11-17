@@ -6,9 +6,10 @@ export const METHOD_POST = 'POST';
 export const METHOD_PUT = 'PUT';
 export const METHOD_DELETE = 'DELETE';
 
-const startRequest = url => ({
+const startRequest = (url, method) => ({
   type: START_REQUEST,
   url,
+  method,
 });
 
 const receiveResponse = url => ({
@@ -24,7 +25,7 @@ export const defaultReceiveError = (url, res, error) => ({
 
 const fetchData = (url, method, receiveData, receiveError) =>
   async (dispatch) => {
-    dispatch(startRequest(url));
+    dispatch(startRequest(url, method));
     try {
       const req = new Request(`${url}`, { method });
       const res = await fetch(req);
@@ -49,7 +50,7 @@ export const fetchDataIfNeeded = (url, method, receiveData, receiveError = defau
   (dispatch, getState) => {
     const state = getState();
     if (!isFetching(url, state)) {
-      return dispatch(fetchData(url, receiveData, receiveError, method));
+      return dispatch(fetchData(url, method, receiveData, receiveError));
     }
     return null;
   };

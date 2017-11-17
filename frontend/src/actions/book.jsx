@@ -29,7 +29,7 @@ export const fetchBookIfNeeded = bookId =>
 
 export const fetchChapterIfNeeded = chapterId =>
   (dispatch) => {
-    const url = `/chapter/${chapterId}`;
+    const url = `/book/chapter/${chapterId}`;
     if (chapterId > 0) {
       dispatch(fetchDataIfNeeded(url, METHOD_GET, receiveBook));
     }
