@@ -35,4 +35,4 @@ INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
     VALUES(1, 1, 'Conan Prepara el Equipaje', 'Conan hace la maleta y reserve un habitación individual', 23, '{"sample-1", "sample-1"}');
 
 INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 1, 'Conan Prepara el Equipaje', 'Conan hace la maleta y reserve un habitación individual', 1, 23, '{"sample-1", "sample-1"}');
+    VALUES(1, 1, 'Conan Va a las Montañas', 'Conan compra un pasaje de avión y llega al aeropuerte', 1, 23, '{"sample-1", "sample-1"}');

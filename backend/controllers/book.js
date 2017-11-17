@@ -45,7 +45,7 @@ export const getBook = async (req, res) => {
     const book = books[0];
     const chapterQuery = `
     SELECT id, user_id as "userId", book_id as "bookId", parent_id as "parentId",
-    like_sum as "likeSum", images, create_date as "createDate"
+    like_sum as "likeSum", images, create_date as "createDate", title, description
     FROM chapter WHERE id=($1) OR book_id=($2) AND parent_id=($3)
     `;
     const { rows: chapters } = await db.query(chapterQuery, [book.rootChapterId, bookId, book.rootChapterId]);
