@@ -5,7 +5,7 @@ import { getBook } from 'reducers/books';
 import { Book } from 'components/Book';
 
 const mapStateToProps = (state, ownProps) => {
-  const book = getBook(state, parseInt(ownProps.bookId, 10));
+  const book = getBook(state, ownProps.bookId);
 
   if (book === undefined) {
     return {};

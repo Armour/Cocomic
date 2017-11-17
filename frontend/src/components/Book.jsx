@@ -22,7 +22,7 @@ export class Book extends React.Component {
 }
 
 Book.propTypes = {
-  bookId: PropTypes.string.isRequired,
+  bookId: PropTypes.number.isRequired,
   fetchBookIfNeeded: PropTypes.func.isRequired,
   // title: PropTypes.string,
   // description: PropTypes.string,

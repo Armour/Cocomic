@@ -10,6 +10,8 @@ CREATE TABLE chapter (
     id serial primary key,
     user_id integer NOT NULL,
     book_id integer NOT NULL,
+    title text NOT NULL,
+    description text,
     parent_id integer,
     like_sum integer NOT NULL default 0,
     images text[],
@@ -24,3 +26,13 @@ CREATE TABLE userinfo (
     password text NOT NULL,
     create_date timestamp NOT NULL default current_timestamp
 );
+
+INSERT INTO userinfo(username, password) VALUES('Kingston', 'docker');
+INSERT INTO book(title, cover_image, description, root_chapter_id)
+    VALUES('Conan Escalar Montañas', 'sample-1', 'Conan escalar montañas todos los sábados.', 1);
+
+INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
+    VALUES(1, 1, 'Conan Prepara el Equipaje', 'Conan hace la maleta y reserve un habitación individual', 23, '{"sample-1", "sample-1"}');
+
+INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
+    VALUES(1, 1, 'Conan Prepara el Equipaje', 'Conan hace la maleta y reserve un habitación individual', 1, 23, '{"sample-1", "sample-1"}');
