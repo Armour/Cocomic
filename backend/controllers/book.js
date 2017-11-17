@@ -19,7 +19,7 @@ import db from '../db';
 //       createDate: 123456,
 //       parentId: null,
 //       likeNum: 10,
-//       images: ['abc', 'aaa'],
+//       images: ['sample-1', 'sample-1'],
 //     },
 //     {
 //       id: 2,
@@ -28,7 +28,7 @@ import db from '../db';
 //       createDate: 123457,
 //       parentId: 1,
 //       likeNum: 0,
-//       images: ['b', 'bb'],
+//       images: ['sample-1', 'sample-1'],
 //     },
 //   ],
 // };
