@@ -1,5 +1,5 @@
 {
-  "pgsql_hostname": "postgres",
+  "pgsql_hostname": "localhost",
   "pgsql_username": "docker",
   "pgsql_password": "docker",
   "pgsql_database": "docker",

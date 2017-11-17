@@ -1,13 +1,13 @@
 import React from 'react';
 import { Intro } from 'components/Intro';
-import { UserCard } from 'components/UserCard';
+import { User } from 'containers/User';
 
 export class LoginPage extends React.Component {
   render() {
     return (
       <div>
         <Intro className="intro-panel" />
-        <UserCard isRegister={false} />
+        <User isRegister={false} />
       </div>
     );
   }

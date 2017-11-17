@@ -24,11 +24,11 @@ const receiveBook = data => ({
 export const fetchBookIfNeeded = bookId =>
   (dispatch) => {
     const url = `/book/${bookId}`;
-    dispatch(fetchDataIfNeeded(url, receiveBook));
+    dispatch(fetchDataIfNeeded(url, {}, receiveBook));
   };
 
 export const fetchChapterIfNeeded = chapterId =>
   (dispatch) => {
     const url = `/chapter/${chapterId}`;
-    dispatch(fetchDataIfNeeded(url, receiveBook));
+    dispatch(fetchDataIfNeeded(url, {}, receiveBook));
   };
