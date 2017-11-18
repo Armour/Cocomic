@@ -1,7 +1,6 @@
 import db from '../db';
 
 export const register = async (req, res) => {
-  console.log(JSON.stringify(req.body));
   if (typeof req.body.username === 'undefined' || typeof req.body.username !== 'string') {
     return res.status(500).json({ error: 'username undefined or wrong type' });
   }
@@ -28,7 +27,6 @@ export const register = async (req, res) => {
       user_id: rows[0].id,
     });
   } catch (e) {
-    console.log(e.toString());
     return res.status(500).json({ error: 'user insertion error' });
   }
 };

@@ -9,7 +9,6 @@ export class Header extends React.Component {
 
   render() {
     let header;
-    console.log(JSON.stringify(this.props));
     if (this.props.isLoggedIn === false) {
       header = (
         <ul id="nav-mobile" className="right hide-on-med-and-down">
