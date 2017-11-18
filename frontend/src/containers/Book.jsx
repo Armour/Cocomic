@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { fetchBookIfNeeded, fetchChapterIfNeeded } from 'actions/book';
+import { fetchBookIfNeeded, fetchChapterIfNeeded, likeChapter } from 'actions/book';
 import { getBook, getChapter } from 'reducers/books';
 import { Book } from 'components/Book';
 
@@ -33,6 +33,9 @@ const mapDispatchToProps = dispatch => ({
   },
   fetchChapterIfNeeded: (bookId, chapterId) => {
     dispatch(fetchChapterIfNeeded(bookId, chapterId));
+  },
+  likeChapter: (bookId, chapterId) => {
+    dispatch(likeChapter(bookId, chapterId));
   },
 });
 

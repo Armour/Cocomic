@@ -29,17 +29,3 @@ CREATE TABLE userinfo (
     email text NOT NULL UNIQUE,
     create_date timestamp NOT NULL default current_timestamp
 );
-
--- CREATE FUNCTION book_like_update()
---   RETURNS TRIGGER AS $$
--- BEGIN
---     UPDATE book
---     SET like_sum = like_sum + NEW.like_sum - OLD.like_sum
---     WHERE id = NEW.book_id;
-
---     RETURN NULL;
--- END
--- $$ LANGUAGE plpgsql;
-
--- CREATE TRIGGER update_like_sum AFTER UPDATE OF like_sum ON chapter
--- FOR EACH ROW EXECUTE PROCEDURE book_like_update();

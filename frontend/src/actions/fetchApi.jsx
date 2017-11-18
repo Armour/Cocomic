@@ -37,6 +37,9 @@ const fetchData = (url, method, postData, receiveData, receiveError) =>
       if (res.ok) {
         res.json().then((data) => {
           dispatch(receiveData(data));
+        }).catch(() => {
+          // no content
+          dispatch(receiveData());
         });
       } else if (typeof res.error !== 'undefined') {
         dispatch(receiveError(url, `${res.status} ${res.statusText} ${res.error}`));

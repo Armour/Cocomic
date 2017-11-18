@@ -18,16 +18,20 @@ export const getChapter = async (req, res) => {
 
 export const updateLike = async (req, res) => {
   try {
-    const { chapterId } = req.params;
-    const query = `
+    const { bookId, chapterId } = req.params;
+    const queryChapter = `
     UPDATE chapter
     SET like_sum = like_sum + 1
     WHERE id=($1)
     `;
-    // const { result } = await db.query(query, [chapterId]);
-    // console.error(result);
-    await db.query(query, [chapterId]);
-    res.status(204);
+    const queryBook = `
+    UPDATE book
+    SET like_sum = like_sum + 1
+    WHERE id=($1)
+    `;
+    await db.query(queryChapter, [chapterId]);
+    await db.query(queryBook, [bookId]);
+    res.status(204).end();
   } catch (e) {
     res.status(404).send('data not found');
   }

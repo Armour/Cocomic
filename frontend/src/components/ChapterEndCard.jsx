@@ -10,7 +10,11 @@ export class ChapterEndCard extends React.Component {
           <div className="card">
             <div className="card-image">
               <img src={require(`../image/${this.props.img_url}.jpg`)} alt="comic-cover" />
-              <a className="btn-floating halfway-fab waves-effect waves-light chapter-end-btn chapter-end-like-btn"><i className="material-icons">thumb_up</i></a>
+              <a
+                className="btn-floating halfway-fab waves-effect waves-light chapter-end-btn chapter-end-like-btn"
+                onClick={this.props.likeChapter}
+              ><i className="material-icons">thumb_up</i>
+              </a>
               <a className="btn-floating halfway-fab waves-effect waves-light chapter-end-btn"><i className="material-icons">create</i></a>
             </div>
             <div className="card-content">
@@ -28,4 +32,5 @@ export class ChapterEndCard extends React.Component {
 ChapterEndCard.propTypes = {
   img_url: PropTypes.string.isRequired,
   chapterId: PropTypes.number.isRequired,
+  likeChapter: PropTypes.func.isRequired,
 };

@@ -14,7 +14,13 @@ export class Book extends React.Component {
 
   render() {
     const chapters = this.props.chapters.map(key =>
-      <Chapter key={key.get('id')} chapterId={key.get('id')} title={key.get('title')} pictures={key.get('images')} />,
+      (<Chapter
+        key={key.get('id')}
+        chapterId={key.get('id')}
+        title={key.get('title')}
+        pictures={key.get('images')}
+        likeChapter={() => this.props.likeChapter(this.props.bookId, key.get('id'))}
+      />),
     );
     return (
       <div>
@@ -33,6 +39,7 @@ Book.propTypes = {
   chapterDepth: PropTypes.number,
   fetchBookIfNeeded: PropTypes.func.isRequired,
   fetchChapterIfNeeded: PropTypes.func.isRequired,
+  likeChapter: PropTypes.func.isRequired,
   title: PropTypes.string,
   description: PropTypes.string,
   coverUrl: PropTypes.string,

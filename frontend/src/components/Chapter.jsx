@@ -12,7 +12,7 @@ export class Chapter extends React.Component {
       <div>
         <h1 id="chapter-title"> {this.props.title} </h1>
         {pictureCards}
-        <ChapterEndCard chapterId={this.props.chapterId} img_url={this.props.pictures.last()} />
+        <ChapterEndCard chapterId={this.props.chapterId} img_url={this.props.pictures.last()} likeChapter={this.props.likeChapter} />
       </div>
     );
   }
@@ -22,4 +22,5 @@ Chapter.propTypes = {
   chapterId: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   pictures: PropTypes.object.isRequired,
+  likeChapter: PropTypes.func.isRequired,
 };
