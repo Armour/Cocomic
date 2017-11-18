@@ -14,7 +14,6 @@ export const register = async (req, res) => {
     const { rows } = await db.query('INSERT INTO userinfo(username, email, password, create_date) VALUES($1, $2, $3, to_timestamp($4/1000.0)) RETURNING *',
       [req.body.username, req.body.email, req.body.password, Date.now()]);
     if (typeof req.session === 'undefined') {
-      console.log('session is undefined');
       return res.status(500).json({ error: 'session undefined' });
     }
     req.session.uid = rows[0].id;

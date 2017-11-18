@@ -13,7 +13,6 @@ const mapDispatchToProps = dispatch => ({
   createUser: (data) => {
     dispatch(createUser(data));
   },
-  isRegister: true,
 });
 
 export const User = connect(
