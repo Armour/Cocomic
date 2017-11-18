@@ -28,8 +28,8 @@ const fetchData = (url, method, postData, receiveData, receiveError) =>
     dispatch(startRequest(url, method));
     try {
       let req;
-      if (method.toUpperCase() === 'POST') {
-        req = new Request(`/fetch${url}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(postData) });
+      if (method.toUpperCase() === METHOD_POST) {
+        req = new Request(`/fetch${url}`, { method: METHOD_POST, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(postData) });
       } else {
         req = new Request(`/fetch${url}`, { method });
       }

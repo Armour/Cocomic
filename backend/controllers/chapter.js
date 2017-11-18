@@ -9,8 +9,9 @@ export const getChapter = async (req, res) => {
     FROM chapter WHERE id=($1) OR book_id=($2) AND parent_id=($3)
     `;
     const { rows: chapters } = await db.query(chapterQuery, [chapterId, bookId, chapterId]);
+    if (chapters === undefined || chapters.length === 0) Error();
     res.json({ chapters });
   } catch (e) {
-    res.status(404).send('data not found');
+    res.status(204).json({ error: 'data not found' });
   }
 };
