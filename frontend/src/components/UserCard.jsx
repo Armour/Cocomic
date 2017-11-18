@@ -23,32 +23,41 @@ export class UserCard extends React.Component {
   constructor(props) {
     super(props);
     // this.state = { url: 'api' };
-    this.onClick = this.onClick.bind(this);
+    this.onClickRegister = this.register.bind(this);
+    this.onClickLogin = this.login.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
-  onClick(e) {
+  async register(e) {
     e.preventDefault();
     this.props.createUser({
       email: $('#email').val(),
       password: $('#password').val(),
-      username: $('#user_name').val().length === 0 ? '' : $('#user_name').val(),
+      username: $('#user_name').val(),
+    });
+  }
+
+  login(e) {
+    e.preventDefault();
+    this.proprs.login({
+      email: $('#email').val(),
+      password: $('#password').val(),
     });
   }
 
   handleKeyDown(e) {
     e.preventDefault();
     if (e.keyCode === 13) {
-      this.onClick(e);
+      this.onClickRegister(e);
     }
   }
 
   render() {
     let submitBtn;
     if (this.props.isRegister) {
-      submitBtn = <button id="create_account_btn" className="waves-effect waves-light btn user-card-btn" onClick={this.onClick} onKeyDown={this.handleKeyDown}>Create Account</button>;
+      submitBtn = <button id="create_account_btn" className="waves-effect waves-light btn user-card-btn" onClick={this.onClickRegister} onKeyDown={this.handleKeyDown}>Create Account</button>;
     } else {
-      submitBtn = <button id="login_btn" className="waves-effect waves-light btn user-card-btn" onClick={this.onClick} onKeyDown={this.handleKeyDown}>Login</button>;
+      submitBtn = <button id="login_btn" className="waves-effect waves-light btn user-card-btn" onClick={this.onClickLogin} onKeyDown={this.handleKeyDown}>Login</button>;
     }
     return (
       <div className="name-card-wrapper">
