@@ -29,9 +29,9 @@ const fetchData = (url, method, postData, receiveData, receiveError) =>
     try {
       let req;
       if (method.toUpperCase() === 'POST') {
-        req = new Request(`${url}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(postData) });
+        req = new Request(`/fetch${url}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(postData) });
       } else {
-        req = new Request(`${url}`, { method });
+        req = new Request(`/fetch${url}`, { method });
       }
       const res = await fetch(req);
       if (res.ok) {

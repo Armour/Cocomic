@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { fetchBookIfNeeded, fetchChapterIfNeeded } from 'actions/book';
-import { getBook } from 'reducers/books';
+import { getBook, getChapter } from 'reducers/books';
 import { Book } from 'components/Book';
 
 const mapStateToProps = (state, ownProps) => {
@@ -13,7 +13,8 @@ const mapStateToProps = (state, ownProps) => {
 
   let chapterDepth = 0;
   if (ownProps.currentChapterId > 0) {
-    chapterDepth = book.get('chapters').get(ownProps.currentChapterId).get('depth');
+    const chapter = getChapter(state, ownProps.bookId, ownProps.chapterId);
+    chapterDepth = chapter === undefined ? 0 : chapter.get('depth');
   }
 
   return {
@@ -30,8 +31,8 @@ const mapDispatchToProps = dispatch => ({
   fetchBookIfNeeded: (bookId) => {
     dispatch(fetchBookIfNeeded(bookId));
   },
-  fetchChapterIfNeeded: (chapterId) => {
-    dispatch(fetchChapterIfNeeded(chapterId));
+  fetchChapterIfNeeded: (bookId, chapterId) => {
+    dispatch(fetchChapterIfNeeded(bookId, chapterId));
   },
 });
 
