@@ -1,6 +1,14 @@
 # Checkpoint
 
 
+## How to run
+
+* install `docker` and `docker-compose` and run `docker-compose up --build`
+* or locally run `gulp` (but this doesn't include database setup)
+* go to `http://localhost:3003` to see the page
+* we will make it vagrant later
+
+
 ## Chong Guo
 * Setup the project structure (boilerplate)
 * Setup eslint, babel, webpack, gulp and docker
