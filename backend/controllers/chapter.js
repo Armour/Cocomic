@@ -9,6 +9,7 @@ export const getChapter = async (req, res) => {
     FROM chapter WHERE id=($1) OR book_id=($2) AND parent_id=($3)
     `;
     const { rows: chapters } = await db.query(query, [chapterId, bookId, chapterId]);
+    if (chapters === undefined || chapters.length === 0) Error();
     res.json({ chapters });
   } catch (e) {
     res.status(404).send('data not found');
@@ -23,8 +24,9 @@ export const updateLike = async (req, res) => {
     SET like_sum = like_sum + 1
     WHERE id=($1)
     `;
-    const { result } = await db.query(query, [chapterId]);
-    console.error(result);
+    // const { result } = await db.query(query, [chapterId]);
+    // console.error(result);
+    await db.query(query, [chapterId]);
     res.status(204);
   } catch (e) {
     res.status(404).send('data not found');

@@ -17,3 +17,11 @@ export const register = (state = initialState, action) => {
     return state;
   }
 };
+
+export const getIsLoggedIn = state => state.register.get('isLoggedIn');
+export const getUsername = (state) => {
+  if (state.register.get('isLoggedIn')) {
+    return state.register.get('username');
+  }
+  return '1';
+};
