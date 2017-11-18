@@ -21,6 +21,7 @@
     "no-console": "warn",
     "no-case-declarations": "off",
     "no-confusing-arrow": "off",
+    "no-loop-func" : "off",
     "no-mixed-operators": ["error", { "allowSamePrecedence": true }],
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "react/prefer-stateless-function": "off",
