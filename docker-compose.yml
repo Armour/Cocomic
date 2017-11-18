@@ -15,7 +15,8 @@ services:
   postgres:
     image: postgres:9.5-alpine
     volumes:
-      - ./backend/postgres-init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./backend/sql/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./backend/sql/data.sql:/docker-entrypoint-initdb.d/2-data.sql
     environment:
       - POSTGRES_DB=docker
       - POSTGRES_USER=docker

@@ -6,7 +6,7 @@ import { ChapterEndCard } from 'components/ChapterEndCard';
 export class Chapter extends React.Component {
   render() {
     const pictureCards = this.props.pictures.skipLast(1).map(key =>
-      <PictureCard img_url={key} />,
+      <PictureCard key={key} img_url={key} />,
     );
     return (
       <div>

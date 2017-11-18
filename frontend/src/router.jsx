@@ -3,7 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 
 import { Footer } from 'components/Footer';
 import { Sidenav } from 'components/Sidenav';
-import { Header } from 'components/Header';
+
+import Header from 'containers/Header';
 
 import { HomePage } from 'pages/HomePage';
 import { NotFoundPage } from 'pages/NotFoundPage';
