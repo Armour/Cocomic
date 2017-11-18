@@ -11,6 +11,6 @@ export const getBook = async (req, res) => {
     if (books === undefined || books.length === 0) Error();
     res.json({ books });
   } catch (e) {
-    res.status(204).json({ error: 'data not found' });
+    res.status(404).send('data not found');
   }
 };
