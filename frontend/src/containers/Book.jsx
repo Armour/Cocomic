@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { fetchBookIfNeeded, fetchChapterIfNeeded, likeChapter } from 'actions/book';
+import { fetchBookIfNeeded, likeChapter } from 'actions/book';
 import { getBook, getChapter } from 'reducers/books';
 import { Book } from 'components/Book';
 
@@ -30,9 +30,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => ({
   fetchBookIfNeeded: (bookId) => {
     dispatch(fetchBookIfNeeded(bookId));
-  },
-  fetchChapterIfNeeded: (bookId, chapterId) => {
-    dispatch(fetchChapterIfNeeded(bookId, chapterId));
   },
   likeChapter: (bookId, chapterId) => {
     dispatch(likeChapter(bookId, chapterId));

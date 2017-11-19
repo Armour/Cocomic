@@ -9,7 +9,6 @@ export class Book extends React.Component {
   constructor(props) {
     super(props);
     this.props.fetchBookIfNeeded(this.props.bookId);
-    this.props.fetchChapterIfNeeded(this.props.bookId, this.props.currentChapterId);
   }
 
   render() {
@@ -35,10 +34,9 @@ export class Book extends React.Component {
 
 Book.propTypes = {
   bookId: PropTypes.number.isRequired,
-  currentChapterId: PropTypes.number,
+  // currentChapterId: PropTypes.number,
   chapterDepth: PropTypes.number,
   fetchBookIfNeeded: PropTypes.func.isRequired,
-  fetchChapterIfNeeded: PropTypes.func.isRequired,
   likeChapter: PropTypes.func.isRequired,
   title: PropTypes.string,
   description: PropTypes.string,
@@ -48,7 +46,7 @@ Book.propTypes = {
 };
 
 Book.defaultProps = {
-  currentChapterId: 0,
+  // currentChapterId: 0,
   chapterDepth: 0,
   title: '',
   description: '',
