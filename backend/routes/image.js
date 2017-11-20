@@ -4,7 +4,6 @@ import { getImages, uploadImages } from '../controllers/image';
 
 const router = express.Router();
 
-/* API */
 router.post('/uploadImages', uploadImages);
 router.post('/getImages', getImages);
 

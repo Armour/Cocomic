@@ -9,28 +9,30 @@
     "airbnb"
   ],
   "rules": {
-    "function-paren-newline": 0,
-    "global-require": 0,
-    "import/prefer-default-export": 0,
-    "import/no-dynamic-require": 0,
+    "function-paren-newline": "off",
+    "global-require": "off",
+    "import/prefer-default-export": "off",
+    "import/no-dynamic-require": "off",
     "indent": ["error", 2],
-    "linebreak-style": 0,
-    "jsx-a11y/anchor-is-valid": 0,
-    "jsx-a11y/label-has-for": 0,
-    "max-len": 0,
-    "no-console": 1,
-    "no-case-declarations": 0,
-    "no-confusing-arrow": 0,
+    "linebreak-style": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/label-has-for": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "max-len": "off",
+    "no-console": "warn",
+    "no-case-declarations": "off",
+    "no-confusing-arrow": "off",
+    "no-loop-func" : "off",
     "no-mixed-operators": ["error", { "allowSamePrecedence": true }],
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
-    "react/prefer-stateless-function": 0,
-    "react/forbid-prop-types":0
+    "react/prefer-stateless-function": "off",
+    "react/forbid-prop-types": "off"
   },
   "settings": {
     "import/resolver": {
       "node" : {
-        "extensions" : [".js", ".jsx"],
-        "moduleDirectory" : ["node_modules", "frontend/src"]
+        "paths": ["frontend/src"]
       }
     }
   }

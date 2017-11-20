@@ -1,15 +1,21 @@
 import db from '../db';
 
-export const getChapter = async (req, res) => {
+export const updateLike = async (req, res) => {
   try {
     const { bookId, chapterId } = req.params;
-    const chapterQuery = `
-    SELECT id, title, user_id as "userId", book_id as "bookId", parent_id as "parentId",
-    like_sum as "likeSum", images, create_date as "createDate", title, description, depth
-    FROM chapter WHERE id=($1) OR book_id=($2) AND parent_id=($3)
+    const queryChapter = `
+    UPDATE chapter
+    SET like_sum = like_sum + 1
+    WHERE id=($1)
     `;
-    const { rows: chapters } = await db.query(chapterQuery, [chapterId, bookId, chapterId]);
-    res.json({ chapters });
+    const queryBook = `
+    UPDATE book
+    SET like_sum = like_sum + 1
+    WHERE id=($1)
+    `;
+    await db.query(queryChapter, [chapterId]);
+    await db.query(queryBook, [bookId]);
+    res.status(204).end();
   } catch (e) {
     res.status(404).send('data not found');
   }

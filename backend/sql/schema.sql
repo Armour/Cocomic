@@ -26,11 +26,6 @@ CREATE TABLE userinfo (
     id serial primary key,
     username text NOT NULL,
     password text NOT NULL,
+    email text NOT NULL UNIQUE,
     create_date timestamp NOT NULL default current_timestamp
 );
-
--- CREATE TRIGGER check_update
---     BEFORE UPDATE ON accounts
---     FOR EACH ROW
---     WHEN (OLD.balance IS DISTINCT FROM NEW.balance)
---     EXECUTE PROCEDURE check_account_update();

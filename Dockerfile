@@ -2,7 +2,7 @@ FROM node
 
 WORKDIR ~
 
-ENV NODE_ENV=production
+ENV NODE_ENV=development
 
 COPY . .
 

@@ -29,7 +29,9 @@ export const books = (state = initialState, action) => {
     if (action.data.chapters) {
       action.data.chapters.forEach((value) => {
         newState = newState.mergeIn([value.bookId, 'chapters', value.id], fromJS(value));
-        if (value.parentId) {
+      });
+      action.data.chapters.forEach((value) => {
+        if (value.parentId !== undefined && value.parentId !== null) {
           newState = newState.updateIn([value.bookId, 'chapters', value.parentId, 'childrenIds'], (list = List()) => list.push(value.id));
         }
       });
