@@ -10,8 +10,6 @@ import { isProduction } from 'utils';
 
 import 'image/favicon.ico';
 import 'materialize-css';
-import 'prismjs';
-import 'prismjs/themes/prism.css';
 import 'sass/index.scss';
 
 // Set the store, history and routers

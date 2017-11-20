@@ -33,7 +33,6 @@ const immutableVendors = [
 const miscVendors = [
   'hammerjs',
   'lodash',
-  'prismjs',
   'regenerator-runtime',
 ];
 

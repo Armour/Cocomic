@@ -5,6 +5,8 @@ services:
     image: cguo/cocomic
     build:
       context: .
+      args:
+        NODE_ENV: ${NODE_ENV-development}
     ports:
       - "3003:3003"
     depends_on:

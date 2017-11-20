@@ -8,6 +8,7 @@ import compression from 'compression';
 import helmet from 'helmet';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
+import 'colors';
 
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
@@ -28,16 +29,19 @@ const startListenOnPort = () => {
     if (error) {
       console.log(`\n${error}`); // eslint-disable-line no-console
     }
-    console.log(`\nExpress: Listening on port ${port}, open up http://localhost:${port}/ in your broswer!\n`); // eslint-disable-line no-console
+    console.log(`\nExpress: Listening on port ${port}, open up http://localhost:${port}/ in your broswer!\n`.green); // eslint-disable-line no-console
   });
 };
 
 if (isProduction) {
   app.use(helmet());
+  app.disable('x-powered-by');
+  app.use(logger('combined'));
+} else {
+  app.use(logger('dev'));
 }
 
 app.use(compression());
-app.use(logger('dev'));
 app.use(bodyParser.json({
   limit: '20mb',
 }));
@@ -56,7 +60,6 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
-app.disable('x-powered-by');
 
 // index router
 app.use('/fetch', indexRtr);
@@ -76,11 +79,12 @@ if (!isProduction) {
   const distPath = path.resolve(__dirname, '../frontend/dist/dev');
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
-  app.get('*', (req, res) => {
+  app.get('*', (_, res) => {
     res.write(middleware.fileSystem.readFileSync(`${distPath}/index.html`));
     res.end();
   });
-  middleware.waitUntilValid(() => {
+  // Start listening on port when webpack has finished compiling
+  compiler.plugin('done', () => {
     if (!listend) {
       startListenOnPort();
       listend = true;
@@ -91,7 +95,7 @@ if (!isProduction) {
   const distPath = path.resolve(__dirname, '../frontend/dist/prod');
   app.use(express.static(distPath));
   app.use(favicon(`${distPath}/favicon.ico`));
-  app.get('*', (req, res) => {
+  app.get('*', (_, res) => {
     res.sendFile(`${distPath}/index.html`);
   });
   startListenOnPort();
