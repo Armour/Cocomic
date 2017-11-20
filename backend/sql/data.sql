@@ -6,4 +6,10 @@ INSERT INTO chapter(user_id, book_id, title, description, like_sum, depth, image
     VALUES(1, 1, 'Conan Prepara el Equipaje', 'Conan hace la maleta y reserve un habitación individual', 23, 1, '{"sample-1", "sample-1"}');
 
 INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, depth, images)
-    VALUES(1, 1, 'Conan Va a las Montañas', 'Conan compra un pasaje de avión y llega al aeropuerte', 1, 23, 2, '{"sample-1", "sample-1"}');
+    VALUES(1, 1, 'Conan Va a las Montañas', 'Conan compra un pasaje de avión y llega al aeropuerte', 1, 17, 2, '{"sample-1", "sample-1"}');
+
+INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, depth, images)
+    VALUES(1, 1, 'Conan acampa', 'Conan duerme en la tienda de campaña', 2, 5, 3, '{"sample-1", "sample-1"}');
+
+INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, depth, images)
+    VALUES(1, 1, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 3, 15, 4, '{"sample-1", "sample-1"}');
