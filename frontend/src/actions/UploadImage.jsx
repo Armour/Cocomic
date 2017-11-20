@@ -1,4 +1,4 @@
-import { RECEIVE_IMAGE, UPLOAD_IMAGE, REMOVE_IMAGE } from 'constants/UploadImage';
+import { RECEIVE_IMAGE, UPLOAD_IMAGE, REMOVE_IMAGE } from 'constants/uploadImage';
 import { METHOD_POST, fetchDataIfNeeded } from 'actions/fetchApi';
 
 const newImage = data => ({
@@ -28,6 +28,6 @@ export const imageRemove = imgId =>
 
 export const imageUpload = data =>
   (dispatch) => {
-    dispatch(fetchDataIfNeeded('/images/uploadImages', METHOD_POST, data, uploadImage));
+    dispatch(fetchDataIfNeeded('/image/uploadImages', METHOD_POST, data, uploadImage));
   };
 

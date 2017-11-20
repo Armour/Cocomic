@@ -10,9 +10,9 @@ export const uploadImages = (req, res) => {
     const { images = [] } = req.body;
 
     for (let i = 0; i < images.length; i += 1) {
-      const data = images[i].img.replace(/^data:image\/\w+;base64,/, '').replace(/\s/g, '+');
-      const pathMd5 = md5(images[i].img);
-      const pathFolder = path.resolve('../uploads', pathMd5.slice(0, 2), pathMd5.slice(2, 4));
+      const data = images[i].imageURL.replace(/^data:image\/\w+;base64,/, '').replace(/\s/g, '+');
+      const pathMd5 = md5(data);
+      const pathFolder = path.resolve(__dirname, '../uploads', pathMd5.slice(0, 2), pathMd5.slice(2, 4));
       const buf = Buffer.from(data, 'base64');
 
       mkdirp.sync(pathFolder, (err) => { throw err; });
@@ -20,14 +20,14 @@ export const uploadImages = (req, res) => {
       jimp.read(buf, (err, image) => {
         if (err) throw err;
         image.quality(60)
-          .write(`${pathFolder}/${pathMd5.slice(4)}-ori.jpg`, (error) => { throw error; });
+          .write(`${pathFolder}/${pathMd5.slice(4)}-ori.jpg`, (error) => { if (error) throw error; });
       });
 
       jimp.read(buf, (err, image) => {
         if (err) throw err;
         image.resize(120, 120)
           .quality(60)
-          .write(`${pathFolder}/${pathMd5.slice(4)}-sml.jpg`, (error) => { throw error; });
+          .write(`${pathFolder}/${pathMd5.slice(4)}-sml.jpg`, (error) => { if (error) throw error; });
       });
 
       retHash.push(pathMd5);
@@ -52,7 +52,7 @@ export const getImages = (req, res) => {
 
     for (let i = 0; i < images.length; i += 1) {
       const pathMd5 = images[i];
-      const pathFolder = path.resolve('../uploads', pathMd5.slice(0, 2), pathMd5.slice(2, 4));
+      const pathFolder = path.resolve(__dirname, '../uploads', pathMd5.slice(0, 2), pathMd5.slice(2, 4));
       const data = fs.readFileSync(`${pathFolder}/${pathMd5.slice(4)}-ori.jpg`, 'utf8');
       retImages.push(data);
     }

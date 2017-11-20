@@ -1,5 +1,5 @@
 import { Map, fromJS } from 'immutable';
-import { RECEIVE_IMAGE, UPLOAD_IMAGE, REMOVE_IMAGE } from 'constants/UploadImage';
+import { RECEIVE_IMAGE, UPLOAD_IMAGE, REMOVE_IMAGE } from 'constants/uploadImage';
 
 
 const initialState = Map();
