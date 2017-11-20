@@ -27,7 +27,8 @@ export class Header extends React.Component {
           <li key="popular"><NavLink activeClassName="active-link" to="/popular">Popular</NavLink></li>
           <li key="new"><NavLink activeClassName="active-link" to="/new">New</NavLink></li>
           <li key="about"><NavLink activeClassName="active-link" to="/about">About us</NavLink></li>
-          <li key="username">{this.props.username}</li>
+          <li key="username"> Hello {this.props.username} </li>
+          <li key="logout"><NavLink activeClassName="active-link" to="/logout">Log out</NavLink></li>
         </ul>
       );
     }
