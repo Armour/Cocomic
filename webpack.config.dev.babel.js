@@ -33,10 +33,9 @@ export default {
     path: path.resolve(__dirname, 'frontend/dist/dev'),
     // filename: specifies the name of output file on disk (required)
     filename: '[name].[hash:10].js',
-    // publicPath: specifies the public URL of the output resource directory
-    // port number should be the same as backend/config.json http_port
+    // publicPath: specifies the server-relative URL of the output resource directory
     // https://webpack.js.org/configuration/output/#output-publicpath
-    publicPath: 'http://localhost:3003/',
+    publicPath: '/',
   },
 
   // Determine how the different types of modules within a project will be treated
@@ -111,15 +110,12 @@ export default {
     // Generate html file to dist folder
     new HtmlWebpackPlugin({
       title: 'Cocomic',
-      template: 'frontend/template/index.ejs',
+      template: path.resolve(__dirname, 'frontend/template/index.ejs'),
     }),
     // Add dll reference files to html
-    new AddAssetHtmlPlugin([
-      { filepath: 'frontend/dist/dll/react_dll.js', includeSourcemap: false },
-      { filepath: 'frontend/dist/dll/immutable_dll.js', includeSourcemap: false },
-      { filepath: 'frontend/dist/dll/materialize_dll.js', includeSourcemap: false },
-      { filepath: 'frontend/dist/dll/misc_dll.js', includeSourcemap: false },
-    ]),
+    new AddAssetHtmlPlugin({
+      filepath: path.resolve(__dirname, 'frontend/dist/dll/*_dll.js'), includeSourcemap: false,
+    }),
   ],
 
   // Change how modules are resolved

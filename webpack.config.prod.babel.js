@@ -34,6 +34,9 @@ let config = {
     path: path.resolve(__dirname, 'frontend/dist/prod'),
     // filename: specifies the name of output file on disk (required)
     filename: '[name].[chunkhash:10].js',
+    // publicPath: specifies the server-relative URL of the output resource directory
+    // https://webpack.js.org/configuration/output/#output-publicpath
+    publicPath: '/',
   },
 
   // Determine how the different types of modules within a project will be treated
@@ -125,15 +128,12 @@ let config = {
     // Generate html file to dist folder
     new HtmlWebpackPlugin({
       title: 'Cocomic',
-      template: 'frontend/template/index.ejs',
+      template: path.resolve(__dirname, 'frontend/template/index.ejs'),
     }),
     // Add dll reference files to html
-    new AddAssetHtmlPlugin([
-      { filepath: 'frontend/dist/dll/react_dll.js', includeSourcemap: false },
-      { filepath: 'frontend/dist/dll/immutable_dll.js', includeSourcemap: false },
-      { filepath: 'frontend/dist/dll/materialize_dll.js', includeSourcemap: false },
-      { filepath: 'frontend/dist/dll/misc_dll.js', includeSourcemap: false },
-    ]),
+    new AddAssetHtmlPlugin({
+      filepath: path.resolve(__dirname, 'frontend/dist/dll/*_dll.js'), includeSourcemap: false,
+    }),
     // Extract css part from javascript bundle into a file
     new ExtractTextPlugin('[name].[contenthash:10].css'),
   ],
