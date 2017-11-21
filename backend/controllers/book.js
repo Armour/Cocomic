@@ -18,6 +18,6 @@ export const getBook = async (req, res) => {
     const { rows: chapters } = await db.query(chapterQuery, [bookId]);
     res.json({ books, chapters });
   } catch (e) {
-    res.status(404).send('data not found');
+    res.status(404).json({ message: 'book not found' });
   }
 };

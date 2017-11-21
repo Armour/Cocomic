@@ -8,12 +8,12 @@ const initialState = Map();
 export const fetchingData = (state = initialState, action) => {
   switch (action.type) {
   case START_REQUEST:
-    return state.set(action.url, action.method);
+    return state.set(`${action.method} ${action.url}`, true);
   case RECEIVE_RESPONSE:
-    return state.delete(action.url);
+    return state.delete(`${action.method} ${action.url}`);
   default:
     return state;
   }
 };
 
-export const isFetching = (url, state) => getIn(state, ['fetchingData', url, isFetching]) === true;
+export const isFetching = (url, method, state) => getIn(state, ['fetchingData', `${method} ${url}`]) === true;

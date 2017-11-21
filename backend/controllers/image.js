@@ -35,13 +35,9 @@ export const uploadImages = (req, res) => {
 
     return res.json({
       images: retHash,
-      error: null,
     });
   } catch (e) {
-    return res.json({
-      images: [],
-      error: e.message,
-    });
+    return res.status(500).json({ message: e.message });
   }
 };
 
@@ -59,12 +55,8 @@ export const getImages = (req, res) => {
 
     return res.json({
       images: retImages,
-      error: null,
     });
   } catch (e) {
-    return res.json({
-      images: [],
-      error: e.message,
-    });
+    return res.status(500).json({ message: e.message });
   }
 };

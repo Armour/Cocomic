@@ -17,6 +17,6 @@ export const updateLike = async (req, res) => {
     await db.query(queryBook, [bookId]);
     res.status(204).end();
   } catch (e) {
-    res.status(404).send('data not found');
+    res.status(404).json({ message: 'chapter not found' });
   }
 };
