@@ -12,7 +12,7 @@ export class Book extends React.Component {
   }
 
   render() {
-    const chapters = this.props.chapters.map(key =>
+    const chapters = this.props.chapters.valueSeq().toArray().map(key =>
       (<Chapter
         key={key.get('id')}
         chapterId={key.get('id')}
