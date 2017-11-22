@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
-import ScrollableAnchor, { configureAnchors } from 'react-scrollable-anchor';
+import Scroll from 'react-scroll';
 
 import { Chapter } from 'components/Chapter';
 import { BookCoverCard } from 'components/BookCoverCard';
-
-configureAnchors({ offset: 10, scrollDuration: 200 });
 
 export class Book extends React.Component {
   constructor(props) {
@@ -15,13 +13,16 @@ export class Book extends React.Component {
   }
 
   render() {
-    const chapters = this.props.chapters.valueSeq().toArray().map((value, key) =>
+    const chapters = this.props.chapters.valueSeq().toArray().map(value =>
       (
-        <ScrollableAnchor key={value.get('id')} id={`chapter-${value.get('id')}`}>
+        <Scroll.Element key={value.get('id')} id={value.get('id').toString()}>
           <div>
-            {key === 0 &&
+            {value.get('parentId') === null &&
               <BookCoverCard img_url={this.props.coverUrl} title={this.props.title} description={this.props.description} />
             }
+            <Scroll.Link activeClass="active" to={value.get('id').toString()} spy smooth hashSpy hidden>
+            Test 1
+            </Scroll.Link>
             <Chapter
               chapterId={value.get('id')}
               title={value.get('title')}
@@ -29,7 +30,7 @@ export class Book extends React.Component {
               likeChapter={() => this.props.likeChapter(this.props.bookId, value.get('id'))}
             />
           </div>
-        </ScrollableAnchor>
+        </Scroll.Element>
       ),
     );
     return (
