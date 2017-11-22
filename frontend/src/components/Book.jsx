@@ -43,7 +43,6 @@ export class Book extends React.Component {
 Book.propTypes = {
   bookId: PropTypes.number.isRequired,
   // currentChapterId: PropTypes.number,
-  // chapterDepth: PropTypes.number,
   fetchBookIfNeeded: PropTypes.func.isRequired,
   likeChapter: PropTypes.func.isRequired,
   title: PropTypes.string,
@@ -55,7 +54,6 @@ Book.propTypes = {
 
 Book.defaultProps = {
   // currentChapterId: 0,
-  // chapterDepth: 0,
   title: '',
   description: '',
   coverUrl: '',

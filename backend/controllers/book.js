@@ -12,7 +12,7 @@ export const getBook = async (req, res) => {
 
     const chapterQuery = `
     SELECT id, title, user_id as "userId", book_id as "bookId", parent_id as "parentId",
-    like_sum as "likeSum", images, create_date as "createDate", title, description, depth
+    like_sum as "likeSum", images, create_date as "createDate", title, description
     FROM chapter WHERE book_id=($1)
     `;
     const { rows: chapters } = await db.query(chapterQuery, [bookId]);
