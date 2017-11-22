@@ -7,7 +7,9 @@ export class LoginPage extends React.Component {
     return (
       <div>
         <Intro className="intro-panel" />
-        <User isRegister={false} />
+        <div className="main-wrap">
+          <User isRegister={false} />
+        </div>
       </div>
     );
   }

@@ -6,7 +6,7 @@ import Book from 'containers/Book';
 export class BookPage extends React.Component {
   render() {
     return (
-      <div>
+      <div className="main-wrap">
         <Book bookId={parseInt(this.props.match.params.bookId, 10)} currentChapterId={parseInt(this.props.match.params.chapterId, 10)} />
       </div>
     );
