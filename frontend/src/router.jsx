@@ -7,6 +7,7 @@ import { Sidenav } from 'components/Sidenav';
 import Header from 'containers/Header';
 
 import { HomePage } from 'pages/HomePage';
+import { PopularPage } from 'pages/PopularPage';
 import { NotFoundPage } from 'pages/NotFoundPage';
 import { RegisterPage } from 'pages/RegisterPage';
 import { LoginPage } from 'pages/LoginPage';
@@ -23,6 +24,7 @@ export const router = (
       <Route path="/login" component={LoginPage} />
       <Route path="/book/:bookId" component={BookPage} />
       <Route path="/upload" component={FilePage} />
+      <Route path="/popular" component={PopularPage} />
       <Route component={NotFoundPage} />
     </Switch>
     <Footer />
