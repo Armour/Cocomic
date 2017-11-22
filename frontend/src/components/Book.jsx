@@ -34,7 +34,7 @@ export class Book extends React.Component {
       ),
     );
     return (
-      <div>
+      <div className="book-wrap">
         {chapters}
       </div>
     );

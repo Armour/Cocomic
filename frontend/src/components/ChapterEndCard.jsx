@@ -5,7 +5,7 @@ import { Carousel } from 'components/Carousel';
 export class ChapterEndCard extends React.Component {
   render() {
     return (
-      <div className="row">
+      <div className="row book-row">
         <div className="col s12 l6 offset-l3">
           <div className="card">
             <div className="card-image">
