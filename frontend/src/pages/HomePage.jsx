@@ -4,6 +4,9 @@ import { Intro } from 'components/Intro';
 import { ComicCard } from 'components/ComicCard';
 
 export class HomePage extends React.Component {
+  componentDidMount() {
+    $('#the-header').removeClass('navbar-fixed');
+  }
   render() {
     return (
       <div>

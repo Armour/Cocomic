@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import Book from 'containers/Book';
 
 export class BookPage extends React.Component {
+  componentDidMount() {
+    $('#the-header').addClass('navbar-fixed');
+  }
   render() {
     return (
       <div className="main-wrap">
