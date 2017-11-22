@@ -7,7 +7,7 @@ export class BookPage extends React.Component {
   render() {
     return (
       <div>
-        <Book bookId={parseInt(this.props.match.params.bookId, 10)} currentChapterId={parseInt(this.props.match.params.chapterId, 10)} />
+        <Book bookId={parseInt(this.props.match.params.bookId, 10)} currentChapterId={parseInt(this.props.location.hash, 10)} />
       </div>
     );
   }
@@ -15,4 +15,5 @@ export class BookPage extends React.Component {
 
 BookPage.propTypes = {
   match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 };

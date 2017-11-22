@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { fetchBookIfNeeded, likeChapter } from 'actions/book';
-import { getBook, getChapter } from 'reducers/books';
+import { getBook } from 'reducers/books';
 import { Book } from 'components/Book';
 
 const mapStateToProps = (state, ownProps) => {
@@ -11,11 +11,11 @@ const mapStateToProps = (state, ownProps) => {
     return {};
   }
 
-  let chapterDepth = 0;
-  if (ownProps.currentChapterId > 0) {
-    const chapter = getChapter(state, ownProps.bookId, ownProps.chapterId);
-    chapterDepth = chapter === undefined ? 0 : chapter.get('depth');
-  }
+  // let chapterDepth = 0;
+  // if (ownProps.currentChapterId > 0) {
+  //   const chapter = getChapter(state, ownProps.bookId, ownProps.chapterId);
+  //   chapterDepth = chapter === undefined ? 0 : chapter.get('depth');
+  // }
 
   return {
     title: book.get('title'),
@@ -23,7 +23,7 @@ const mapStateToProps = (state, ownProps) => {
     coverUrl: book.get('coverImage'),
     likeNum: book.get('likeNum'),
     chapters: book.get('chapters'),
-    chapterDepth,
+    // chapterDepth,
   };
 };
 

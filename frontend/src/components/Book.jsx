@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
+import ScrollableAnchor, { configureAnchors } from 'react-scrollable-anchor';
 
 import { Chapter } from 'components/Chapter';
 import { BookCoverCard } from 'components/BookCoverCard';
+
+configureAnchors({ offset: 10, scrollDuration: 200 });
 
 export class Book extends React.Component {
   constructor(props) {
@@ -12,20 +15,25 @@ export class Book extends React.Component {
   }
 
   render() {
-    const chapters = this.props.chapters.valueSeq().toArray().map(key =>
-      (<Chapter
-        key={key.get('id')}
-        chapterId={key.get('id')}
-        title={key.get('title')}
-        pictures={key.get('images')}
-        likeChapter={() => this.props.likeChapter(this.props.bookId, key.get('id'))}
-      />),
+    const chapters = this.props.chapters.valueSeq().toArray().map((value, key) =>
+      (
+        <ScrollableAnchor key={value.get('id')} id={`chapter-${value.get('id')}`}>
+          <div>
+            {key === 0 &&
+              <BookCoverCard img_url={this.props.coverUrl} title={this.props.title} description={this.props.description} />
+            }
+            <Chapter
+              chapterId={value.get('id')}
+              title={value.get('title')}
+              pictures={value.get('images')}
+              likeChapter={() => this.props.likeChapter(this.props.bookId, value.get('id'))}
+            />
+          </div>
+        </ScrollableAnchor>
+      ),
     );
     return (
       <div>
-        {this.props.chapterDepth < 2 && (this.props.title !== '') &&
-          <BookCoverCard img_url={this.props.coverUrl} title={this.props.title} description={this.props.description} />
-        }
         {chapters}
       </div>
     );
@@ -35,7 +43,7 @@ export class Book extends React.Component {
 Book.propTypes = {
   bookId: PropTypes.number.isRequired,
   // currentChapterId: PropTypes.number,
-  chapterDepth: PropTypes.number,
+  // chapterDepth: PropTypes.number,
   fetchBookIfNeeded: PropTypes.func.isRequired,
   likeChapter: PropTypes.func.isRequired,
   title: PropTypes.string,
@@ -47,7 +55,7 @@ Book.propTypes = {
 
 Book.defaultProps = {
   // currentChapterId: 0,
-  chapterDepth: 0,
+  // chapterDepth: 0,
   title: '',
   description: '',
   coverUrl: '',

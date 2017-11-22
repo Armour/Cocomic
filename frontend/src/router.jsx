@@ -21,7 +21,7 @@ export const router = (
       <Route exact path="/" component={HomePage} />
       <Route path="/register" component={RegisterPage} />
       <Route path="/login" component={LoginPage} />
-      <Route path="/book/:bookId/:chapterId" component={BookPage} />
+      <Route path="/book/:bookId" component={BookPage} />
       <Route path="/upload" component={FilePage} />
       <Route component={NotFoundPage} />
     </Switch>
