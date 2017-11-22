@@ -4,7 +4,7 @@ import UploadImage from 'containers/UploadImage';
 export class FilePage extends React.Component {
   render() {
     return (
-      <div>
+      <div className="main-wrap">
         <UploadImage />
       </div>
     );

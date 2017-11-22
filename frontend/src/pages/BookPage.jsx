@@ -6,8 +6,8 @@ import Book from 'containers/Book';
 export class BookPage extends React.Component {
   render() {
     return (
-      <div>
-        <Book bookId={parseInt(this.props.match.params.bookId, 10)} currentChapterId={parseInt(this.props.location.hash, 10)} />
+      <div className="main-wrap">
+        <Book bookId={parseInt(this.props.match.params.bookId, 10)} currentChapterId={parseInt(this.props.location.hash, 10, 10)} />
       </div>
     );
   }

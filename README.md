@@ -23,7 +23,8 @@ Placeholder here
 * [x] [react-hot-loader 3](https://github.com/gaearon/react-hot-loader) - hot module reload!
 * [x] [react-router 4](https://github.com/ReactTraining/react-router) - routing
 * [x] [react-redux](https://github.com/reactjs/react-redux) - the official react bindings for [redux](https://github.com/reactjs/redux) (a predictable state container for js apps)
-* [x] [connected-react-router](https://github.com/supasate/connected-react-router) - a redux binding for react-router 4
+* [x] [connected-react-router](https://github.com/supasate/connected-react-router) - a redux binding for react-router 4, currently a replacement for [react-router-redux v5](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux)
+* [x] [immutable.js](https://github.com/facebook/immutable-js/) - persistent Immutable data structures for react redux state management
 * [x] [editorconfig](http://editorconfig.org/) - maintain consistent coding styles between different editors and IDEs
 * [x] [eslint](http://eslint.org/) - lint javascript files (.js, .jsx)
 * [x] [stylelint](https://stylelint.io/) - lint style files (.css, .scss)

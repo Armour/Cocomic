@@ -52,7 +52,7 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(session({
   store: new RedisStore({
-    host: config.redis_hostname,
+    host: isProduction ? config.redis_hostname_prod : config.redis_hostname_dev,
     port: config.redis_port,
   }),
   name: 'fRy_t0-haCk)me<br0B',
