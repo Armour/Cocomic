@@ -26,7 +26,6 @@ export const configureStore = (initialState, history) => {
     );
   }
 
-  // Store
   const store = createStore(connectRouter(history)(reducers), initialState, enhancer);
 
   // Enable Webpack hot module replacement for reducers

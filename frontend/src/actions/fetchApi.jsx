@@ -30,9 +30,19 @@ const fetchData = (url, method, postData, receiveData, receiveError) =>
     try {
       let req;
       if (method.toUpperCase() === METHOD_POST) {
-        req = new Request(`/fetch${url}`, { method: METHOD_POST, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(postData) });
+        req = new Request(`/fetch${url}`, {
+          method: METHOD_POST,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(postData),
+          credentials: 'same-origin',
+        });
       } else {
-        req = new Request(`/fetch${url}`, { method });
+        req = new Request(`/fetch${url}`, {
+          method,
+          credentials: 'same-origin',
+        });
       }
       const res = await fetch(req);
       if (res.ok) {

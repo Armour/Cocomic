@@ -1,5 +1,7 @@
-import { RECEIVE_REGISTER } from 'constants/user';
+import { RECEIVE_REGISTER, RECEIVE_LOGOUT, RECEIVE_CUREENT_USER, RECEIVE_LOGIN } from 'constants/user';
 import { fetchDataIfNeeded } from 'actions/fetchApi';
+import history from '../history';
+
 /*
 data : {
   receiveRegister: {
@@ -16,12 +18,39 @@ const receiveRegister = data => ({
   data,
 });
 
-// const login = data => ({
-//   type: "LOGIN",
-//   data,
-// });
+const receiveLogout = data => ({
+  type: RECEIVE_LOGOUT,
+  data,
+});
+
+const receiveCurrentUser = data => ({
+  type: RECEIVE_CUREENT_USER,
+  data,
+});
+
+const receiveLogin = data => ({
+  type: RECEIVE_LOGIN,
+  data,
+});
 
 export const createUser = data =>
   (dispatch) => {
     dispatch(fetchDataIfNeeded('/user/register', 'POST', data, receiveRegister));
+    history.push('/login');
+  };
+
+export const logout = () =>
+  (dispatch) => {
+    dispatch(fetchDataIfNeeded('/user/logout', 'GET', {}, receiveLogout));
+  };
+
+export const getUser = () =>
+  (dispatch) => {
+    dispatch(fetchDataIfNeeded('/user', 'GET', {}, receiveCurrentUser));
+  };
+
+export const login = data =>
+  (dispatch) => {
+    dispatch(fetchDataIfNeeded('/user/login', 'POST', data, receiveLogin));
+    history.push('/');
   };
