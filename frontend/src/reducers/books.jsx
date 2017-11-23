@@ -1,6 +1,6 @@
 import { Map, List, fromJS, getIn } from 'immutable';
 
-import { RECEIVE_BOOK, RECEIVE_POPULAR_BOOKS } from 'constants/book';
+import { RECEIVE_BOOK } from 'constants/book';
 
 /*
 state.books:{
@@ -34,13 +34,6 @@ export const books = (state = initialState, action) => {
         if (value.parentId !== 0 && value.parentId !== null) {
           newState = newState.updateIn([value.bookId, 'chapters', value.parentId, 'childrenIds'], (list = List()) => list.push(value.id));
         }
-      });
-    }
-    return newState;
-  case RECEIVE_POPULAR_BOOKS:
-    if (action.data.books) {
-      action.data.books.forEach((value) => {
-        newState = newState.mergeIn([value.id], fromJS(value));
       });
     }
     return newState;
