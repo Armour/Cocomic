@@ -31,7 +31,7 @@ export const books = (state = initialState, action) => {
         newState = newState.mergeIn([value.bookId, 'chapters', value.id], fromJS(value));
       });
       action.data.chapters.forEach((value) => {
-        if (value.parentId !== undefined && value.parentId !== null) {
+        if (value.parentId !== 0 && value.parentId !== null) {
           newState = newState.updateIn([value.bookId, 'chapters', value.parentId, 'childrenIds'], (list = List()) => list.push(value.id));
         }
       });
