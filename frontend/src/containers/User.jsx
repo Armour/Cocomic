@@ -1,17 +1,20 @@
 import { connect } from 'react-redux';
 import { UserCard } from 'components/UserCard';
-import { createUser } from 'actions/user';
+import { createUser, login } from 'actions/user';
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     state,
-    isRegister: ownProps.isRegister,
+    isLoggedIn: state.register.get('isLoggedIn'),
   };
 }
 
 const mapDispatchToProps = dispatch => ({
   createUser: (data) => {
     dispatch(createUser(data));
+  },
+  login: (data) => {
+    dispatch(login(data));
   },
 });
 

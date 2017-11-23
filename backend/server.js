@@ -57,7 +57,11 @@ app.use(session({
   }),
   name: 'fRy_t0-haCk)me<br0B',
   secret: 'mIceqvv8EgECGOVKIPlR83UGGxMOARaYJKxQK6kWwwx3pv06G0n9ZPLMNqIOwX9rS69YCXDHDmV4O2JAWHEWGYI8pZ2M60VocBc92ILjOM1Gp3S42EHNmQ65c4W7ryj9',
-  resave: false,
+  resave: true,
+  cookie: {
+    httpOnly: false,
+    secure: false,
+  },
   saveUninitialized: false,
 }));
 

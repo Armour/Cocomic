@@ -1,10 +1,21 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export class Header extends React.Component {
-  componentDidMount() {
+  async componentDidMount() {
     $('.button-collapse').sideNav();
+    this.onClickLogout = this.logout.bind(this);
+    this.props.getUser();
+  }
+
+  async componentDidUpdate() {
+    this.props.getUser();
+  }
+
+  async logout(e) {
+    e.preventDefault();
+    this.props.logout();
   }
 
   render() {
@@ -30,7 +41,7 @@ export class Header extends React.Component {
           <li key="new"><NavLink activeClassName="active-link" to="/new">New</NavLink></li>
           <li key="about"><NavLink activeClassName="active-link" to="/about">About us</NavLink></li>
           <li key="username"> Hello {this.props.username} </li>
-          <li key="logout"><NavLink activeClassName="active-link" to="/logout">Log out</NavLink></li>
+          <li key="logout"><Link to="/user/logout" onClick={this.onClickLogout}>Log out</Link></li>
         </ul>
       );
     }
@@ -56,6 +67,8 @@ export class Header extends React.Component {
 Header.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   username: PropTypes.string,
+  logout: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired,
 };
 Header.defaultProps = {
   username: '',
