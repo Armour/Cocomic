@@ -1,24 +1,24 @@
 INSERT INTO userinfo(username, email, password) VALUES('Kingston', 'k@k.com', 'docker');
-INSERT INTO book(title, cover_image, description, root_chapter_id)
-    VALUES('Conan Escalar Montañas', 'sample-1', 'Conan escalar montañas todos los sábados.', 1);
+INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
+    VALUES(1, 'Conan Escalar Montañas', 'sample-1', 'Conan escalar montañas todos los sábados.', 1);
 
-INSERT INTO book(title, cover_image, description, root_chapter_id)
-    VALUES('Conan Escalar Montañas', 'conan_cover_1', 'Conan escalar montañas todos los sábados.', 5);
+INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
+    VALUES(1, 'Conan Escalar Montañas', 'conan_cover_1', 'Conan escalar montañas todos los sábados.', 5);
 
-INSERT INTO book(title, cover_image, description, root_chapter_id)
-    VALUES('Conan Escalar Montañas', 'conan_cover_2', 'Conan escalar montañas todos los sábados.', 7);
+INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
+    VALUES(1, 'Conan Escalar Montañas', 'conan_cover_2', 'Conan escalar montañas todos los sábados.', 7);
 
-INSERT INTO book(title, cover_image, description, root_chapter_id)
-    VALUES('Conan Escalar Montañas', 'conan_cover_3', 'Conan escalar montañas todos los sábados.', 9);
+INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
+    VALUES(1, 'Conan Escalar Montañas', 'conan_cover_3', 'Conan escalar montañas todos los sábados.', 9);
 
-INSERT INTO book(title, cover_image, description, root_chapter_id)
-    VALUES('Conan Escalar Montañas', 'conan_cover_4', 'Conan escalar montañas todos los sábados.', 11);
+INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
+    VALUES(1, 'Conan Escalar Montañas', 'conan_cover_4', 'Conan escalar montañas todos los sábados.', 11);
 
-INSERT INTO book(title, cover_image, description, root_chapter_id)
-    VALUES('Conan Escalar Montañas', 'conan_cover_5', 'Conan escalar montañas todos los sábados.', 13);
+INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
+    VALUES(1, 'Conan Escalar Montañas', 'conan_cover_5', 'Conan escalar montañas todos los sábados.', 13);
 
-INSERT INTO book(title, cover_image, description, root_chapter_id)
-    VALUES('Conan Escalar Montañas', 'conan_cover_6', 'Conan escalar montañas todos los sábados.', 15);
+INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
+    VALUES(1, 'Conan Escalar Montañas', 'conan_cover_6', 'Conan escalar montañas todos los sábados.', 15);
 
 INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
     VALUES(1, 1, 'Conan Prepara el Equipaje', 'Conan hace la maleta y reserve un habitación individual', 23, '{"sample-1", "sample-1"}');

@@ -1,5 +1,6 @@
 CREATE TABLE book (
     id serial primary key,
+    user_id integer NOT NULL,
     title text NOT NULL,
     cover_image text,
     description text,
