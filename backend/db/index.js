@@ -17,4 +17,5 @@ const pool = new Pool({
 // Initializes a connection pool
 export default {
   query: (text, params) => pool.query(text, params),
+  pool,
 };

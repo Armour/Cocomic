@@ -42,5 +42,5 @@ export const books = (state = initialState, action) => {
   }
 };
 
-export const getBook = (state, bookId) => state.books.get(bookId);
+export const getBook = (state, bookId) => getIn(state, ['books', bookId]);
 export const getChapter = (state, bookId, chapterId) => getIn(state, ['books', bookId, 'chapters', chapterId]);

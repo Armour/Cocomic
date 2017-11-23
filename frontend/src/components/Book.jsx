@@ -12,15 +12,19 @@ export class Book extends React.Component {
   }
 
   render() {
-    const chapters = this.props.chapters.valueSeq().toArray().map(key =>
-      (<Chapter
-        key={key.get('id')}
-        chapterId={key.get('id')}
-        title={key.get('title')}
-        pictures={key.get('images')}
-        likeChapter={() => this.props.likeChapter(this.props.bookId, key.get('id'))}
-      />),
-    );
+    let chapters = [];
+    const chapersArray = this.props.chapters.valueSeq().toArray();
+    if (chapersArray.length === 0) {
+      chapters = chapersArray.map(key =>
+        (<Chapter
+          key={key.get('id')}
+          chapterId={key.get('id')}
+          title={key.get('title')}
+          pictures={key.get('images')}
+          likeChapter={() => this.props.likeChapter(this.props.bookId, key.get('id'))}
+        />),
+      );
+    }
     return (
       <div>
         {this.props.chapterDepth < 2 && (this.props.title !== '') &&

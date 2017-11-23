@@ -1,4 +1,5 @@
 import db from '../db';
+import { uploadImages } from './image';
 
 export const getBook = async (req, res) => {
   try {
@@ -17,6 +18,81 @@ export const getBook = async (req, res) => {
     `;
     const { rows: chapters } = await db.query(chapterQuery, [bookId]);
     res.json({ books, chapters });
+  } catch (e) {
+    res.status(404).json({ message: 'book not found' });
+  }
+};
+
+export const addBook = async (req, res) => {
+  // note: we don't try/catch this because if connecting throws an exception
+  // we don't need to dispose of the client (it will be undefined)
+  const client = await db.pool.connect();
+  try {
+    const {
+      bookTitle,
+      coverImage,
+      description,
+      chapters,
+    } = req.body;
+    const { uid: userId } = req.session;
+    const chapterImagesList = [];
+    for (let i = 0; i < chapters.length(); i += 1) {
+      chapterImagesList.push(uploadImages(chapters[i].images));
+    }
+
+    await client.query('BEGIN');
+    // Insert book
+    const bookQuery = `
+    INSERT INTO book(title, cover_image, description)
+    VALUES ($1, $2, $3) RETURNING id
+    `;
+    const bookQueryValues = [bookTitle, coverImage, description];
+    const { id: bookId } = await client.query(bookQuery, bookQueryValues);
+    // Insert chapter
+    const chapterIds = [0];
+    const chapterQuery = `
+    INSERT INTO chapter(user_id, book_id, title, description, parent_id, images)
+    VALUES ($1, $2, $3, $4, $5, $6) RETURNING id
+    `;
+    for (let i = 0; i < chapters.length(); i += 1) {
+      const chapterQueryValues = [userId, bookId, chapters[i].title, chapters[i].description, chapterIds.slice(-1), chapterImagesList[i]];
+      const { id: chapterId } = await client.query(chapterQuery, chapterQueryValues); // eslint-disable-line no-await-in-loop
+      chapterIds.push(chapterId);
+    }
+    // Update book root_chapter_id info
+    const updateQuery = `
+    UPDATE book
+    SET root_chapter_id = $1
+    WHERE id=($2)`;
+    const updateQueryValues = [chapterIds[1], bookId];
+    await client.query(updateQuery, updateQueryValues);
+    await client.query('COMMIT');
+  } catch (e) {
+    await client.query('ROLLBACK');
+    res.status(500).json({ message: e.message });
+  } finally {
+    client.release();
+  }
+};
+
+export const addChapter = async (req, res) => {
+  try {
+    const {
+      title,
+      description,
+      parentId,
+      bookId,
+      images,
+    } = req.body;
+    const { uid: userId } = req.session;
+    const chapterImages = uploadImages(images);
+    const chapterQuery = `
+    INSERT INTO chapter(user_id, book_id, title, description, parent_id, images)
+    VALUES ($1, $2, $3, $4, $5, $6) RETURNING id
+    `;
+    const chapterQueryValues = [userId, bookId, title, description, parentId, chapterImages];
+    const { id: chapterId } = await db.query(chapterQuery, chapterQueryValues);
+    res.json({ chapterId });
   } catch (e) {
     res.status(404).json({ message: 'book not found' });
   }

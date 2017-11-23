@@ -4,7 +4,7 @@ CREATE TABLE book (
     cover_image text,
     description text,
     like_sum integer NOT NULL default 0,
-    root_chapter_id integer NOT NULL
+    root_chapter_id integer default 0
 );
 
 CREATE TABLE chapter (
@@ -13,7 +13,7 @@ CREATE TABLE chapter (
     book_id integer NOT NULL,
     title text NOT NULL,
     description text,
-    parent_id integer,
+    parent_id integer default 0,
     like_sum integer NOT NULL default 0,
     depth integer NOT NULL default 0,
     images text[],
