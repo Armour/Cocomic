@@ -6,6 +6,10 @@ h1 {
   text-align: center;
 }
 
+h1.page-title {
+  text-align: left !important;
+}
+
 // Images
 img {
   &.re-zero,

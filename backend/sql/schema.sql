@@ -15,7 +15,6 @@ CREATE TABLE chapter (
     description text,
     parent_id integer default 0,
     like_sum integer NOT NULL default 0,
-    depth integer NOT NULL default 0,
     images text[],
     create_date timestamp NOT NULL default current_timestamp
 );

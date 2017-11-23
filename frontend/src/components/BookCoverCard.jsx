@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export class BookCoverCard extends React.Component {
   render() {
     return (
-      <div className="row">
+      <div className="row book-row book-card-wrap">
         <div className="col s12 m6 offset-m3">
           <div className="card">
             <div className="card-image">

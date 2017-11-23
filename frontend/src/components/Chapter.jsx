@@ -9,8 +9,8 @@ export class Chapter extends React.Component {
       <PictureCard key={key} img_url={key} />,
     );
     return (
-      <div>
-        <h1 id="chapter-title"> {this.props.title} </h1>
+      <div className="chapter-wrap">
+        <h1 className="chapter-title"> {this.props.title} </h1>
         {pictureCards}
         <ChapterEndCard chapterId={this.props.chapterId} img_url={this.props.pictures.last()} likeChapter={this.props.likeChapter} />
       </div>

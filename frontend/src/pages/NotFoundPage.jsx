@@ -1,6 +1,9 @@
 import React from 'react';
 
 export class NotFoundPage extends React.Component {
+  componentDidMount() {
+    $('#the-header').addClass('navbar-fixed');
+  }
   render() {
     return (
       <div className="main-wrap">
