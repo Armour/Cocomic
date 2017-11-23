@@ -13,7 +13,8 @@ export class Book extends React.Component {
   }
 
   render() {
-    const chapters = this.props.chapters.valueSeq().toArray().map(value =>
+    const chaptersData = this.props.chapters.valueSeq().toArray().filter(value => value.get('id') !== undefined);
+    const chaptersComp = chaptersData.map(value =>
       (
         <Scroll.Element key={value.get('id')} id={value.get('id').toString()}>
           <div>
@@ -35,7 +36,7 @@ export class Book extends React.Component {
     );
     return (
       <div className="book-wrap">
-        {chapters}
+        {chaptersComp}
       </div>
     );
   }
