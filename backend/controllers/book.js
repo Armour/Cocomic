@@ -23,6 +23,26 @@ export const getBook = async (req, res) => {
   }
 };
 
+const getBooks = async (req, res, query) => {
+  try {
+    const { offset, amount } = req.params;
+    const { rows: books } = await db.query(query, [amount, offset]);
+    if (books === undefined || books.length === 0) Error();
+
+    res.json({ books });
+  } catch (e) {
+    res.status(404).json({ message: 'book not found' });
+  }
+};
+
+export const getPopularBooks = async (req, res) => {
+  const query = `
+  SELECT id, title, cover_image as "coverImage", description, like_sum, user_id
+  FROM book ORDER BY like_sum LIMIT $1 Offset $2
+  `;
+  getBooks(req, res, query);
+};
+
 export const addBook = async (req, res) => {
   // note: we don't try/catch this because if connecting throws an exception
   // we don't need to dispose of the client (it will be undefined)
