@@ -22,7 +22,6 @@ UserName.propTypes = {
 export class UserCard extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = { url: 'api' };
     this.onClickRegister = this.register.bind(this);
     this.onClickLogin = this.login.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -96,5 +95,4 @@ UserCard.propTypes = {
   isRegister: PropTypes.bool.isRequired,
   createUser: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
-  // history: PropTypes.object.isRequired,
 };

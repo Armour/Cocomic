@@ -5,7 +5,6 @@ import { createUser, login } from 'actions/user';
 function mapStateToProps(state) {
   return {
     state,
-    isLoggedIn: state.register.get('isLoggedIn'),
   };
 }
 

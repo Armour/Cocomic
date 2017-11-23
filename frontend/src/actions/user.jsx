@@ -36,6 +36,7 @@ const receiveLogin = data => ({
 export const createUser = data =>
   (dispatch) => {
     dispatch(fetchDataIfNeeded('/user/register', 'POST', data, receiveRegister));
+    history.push('/login');
   };
 
 export const logout = () =>
