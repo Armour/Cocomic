@@ -1,13 +1,13 @@
 import express from 'express';
 
-import { updateLike } from '../controllers/chapter';
-import { getBook, addBook, addChapter } from '../controllers/book';
+import { updateLike, addChapter } from '../controllers/chapter';
+import { getBook, addBook } from '../controllers/book';
 
 const router = express.Router();
 
+router.post('/addBook', addBook);
+router.post('/addChapter', addChapter);
 router.put('/:bookId/:chapterId/like', updateLike);
 router.get('/:bookId', getBook);
-router.post('/addBook', addBook);
-router.post('/addChapter/:bookId', addChapter);
 
 export default router;
