@@ -6,6 +6,10 @@ h1 {
   text-align: center;
 }
 
+h1.page-title {
+  text-align: left !important;
+}
+
 // Images
 img {
   &.re-zero,
@@ -50,5 +54,12 @@ img {
 @media only screen and (min-width: 993px) {
   .container {
     width: 85%;
+  }
+}
+
+@media #{$large-and-up} {
+  .main-wrap {
+    margin-left: 140px;
+    margin-right: 140px;
   }
 }

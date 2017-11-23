@@ -4,7 +4,7 @@ import md5 from 'md5';
 import mkdirp from 'mkdirp';
 import jimp from 'jimp';
 
-export const uploadImages = (req, res) => {
+export const uploadImages = (req) => {
   try {
     const retHash = [];
     const { images = [] } = req.body;
@@ -32,12 +32,9 @@ export const uploadImages = (req, res) => {
 
       retHash.push(pathMd5);
     }
-
-    return res.json({
-      images: retHash,
-    });
+    return retHash;
   } catch (e) {
-    return res.status(500).json({ message: e.message });
+    throw e;
   }
 };
 

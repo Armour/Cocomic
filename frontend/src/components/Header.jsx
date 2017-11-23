@@ -46,21 +46,23 @@ export class Header extends React.Component {
       );
     }
     return (
-      <nav>
-        <div className="nav-wrapper">
-          <div className="container">
-            <div className="brand-logo">
-              <NavLink exact to="/">
-                <img className="logo" src={require('../image/logo.png')} alt="logo" />
-              </NavLink>
+      <div id="the-header">
+        <nav>
+          <div className="nav-wrapper">
+            <div className="container">
+              <div className="brand-logo">
+                <NavLink exact to="/">
+                  <img className="logo" src={require('../image/logo.png')} alt="logo" />
+                </NavLink>
+              </div>
+              <a href="#" data-activates="slide-out" className="button-collapse">
+                <i className="material-icons">menu</i>
+              </a>
+              {header}
             </div>
-            <a href="#" data-activates="slide-out" className="button-collapse">
-              <i className="material-icons">menu</i>
-            </a>
-            {header}
           </div>
-        </div>
-      </nav>
+        </nav>
+      </div>
     );
   }
 }

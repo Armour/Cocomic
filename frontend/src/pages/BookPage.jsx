@@ -4,10 +4,13 @@ import PropTypes from 'prop-types';
 import Book from 'containers/Book';
 
 export class BookPage extends React.Component {
+  componentDidMount() {
+    $('#the-header').addClass('navbar-fixed');
+  }
   render() {
     return (
-      <div>
-        <Book bookId={parseInt(this.props.match.params.bookId, 10)} currentChapterId={parseInt(this.props.match.params.chapterId, 10)} />
+      <div className="main-wrap">
+        <Book bookId={parseInt(this.props.match.params.bookId, 10)} currentChapterId={parseInt(this.props.location.hash, 10, 10)} />
       </div>
     );
   }
@@ -15,4 +18,5 @@ export class BookPage extends React.Component {
 
 BookPage.propTypes = {
   match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 };

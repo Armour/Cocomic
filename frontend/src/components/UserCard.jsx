@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 
 function UserName(props) {
   if (!props.isRegister) {
@@ -20,7 +19,7 @@ UserName.propTypes = {
   isRegister: PropTypes.bool.isRequired,
 };
 
-class userCard extends React.Component {
+export class UserCard extends React.Component {
   constructor(props) {
     super(props);
     // this.state = { url: 'api' };
@@ -93,11 +92,9 @@ class userCard extends React.Component {
     );
   }
 }
-userCard.propTypes = {
+UserCard.propTypes = {
   isRegister: PropTypes.bool.isRequired,
   createUser: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   // history: PropTypes.object.isRequired,
 };
-
-export const UserCard = withRouter(userCard);
