@@ -4,17 +4,15 @@ import PropTypes from 'prop-types';
 export class ComicCard extends React.Component {
   render() {
     return (
-      <div className="row">
-        <div className="col s12 m4">
-          <div className="card">
-            <div className="card-image">
-              <img src={require(`../image/${this.props.img_url}.jpg`)} alt="comic-cover" />
-            </div>
-            <div className="card-content">
-              <span className="card-title">{this.props.title}</span>
-              <p>{this.props.description}</p>
-              <p className="author-like">{this.props.author} | {this.props.likes} likes</p>
-            </div>
+      <div className="comic-card-wrap">
+        <div className="card">
+          <div className="card-image">
+            <img src={require(`../image/${this.props.img_url}.jpg`)} alt="comic-cover" />
+          </div>
+          <div className="card-content">
+            <span className="card-title">{this.props.title}</span>
+            <p>{this.props.description}</p>
+            <p className="author-like">{this.props.author} | {this.props.likes} likes</p>
           </div>
         </div>
       </div>

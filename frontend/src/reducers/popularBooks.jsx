@@ -1,4 +1,4 @@
-import { Map, fromJS } from 'immutable';
+import { List, fromJS } from 'immutable';
 
 import { RECEIVE_POPULAR_BOOKS } from 'constants/book';
 
@@ -10,7 +10,7 @@ state.popular_books:{
 }
 */
 
-const initialState = Map();
+const initialState = List();
 
 export const popularBooks = (state = initialState, action) => {
   let newState = state;
@@ -18,7 +18,7 @@ export const popularBooks = (state = initialState, action) => {
   case RECEIVE_POPULAR_BOOKS:
     if (action.data.books) {
       action.data.books.forEach((value) => {
-        newState = newState.mergeIn([value.id], fromJS(value));
+        newState = newState.push(fromJS(value));
       });
     }
     return newState;

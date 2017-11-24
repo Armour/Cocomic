@@ -1,7 +1,5 @@
 import React from 'react';
-
-import { ComicCard } from 'components/ComicCard';
-import Masonry from 'containers/Masonry';
+import Gallery from 'containers/Gallery';
 
 export class PopularPage extends React.Component {
   componentDidMount() {
@@ -11,28 +9,7 @@ export class PopularPage extends React.Component {
     return (
       <div className="main-wrap">
         <h1 className="page-title">Popular</h1>
-        <Masonry />
-        <ComicCard
-          img_url="sample-1"
-          title="Hahaha"
-          description="Conan paseó en bicicleta. Vio que el paisaje fue muy grante."
-          author="Kingston"
-          likes={25}
-        />
-        <ComicCard
-          img_url="sample-1"
-          title="Hahaha"
-          description="Conan paseó en bicicleta. Vio que el paisaje fue muy grante."
-          author="Kingston"
-          likes={25}
-        />
-        <ComicCard
-          img_url="sample-1"
-          title="Hahaha"
-          description="Conan paseó en bicicleta. Vio que el paisaje fue muy grante."
-          author="Kingston"
-          likes={25}
-        />
+        <Gallery />
       </div>
     );
   }

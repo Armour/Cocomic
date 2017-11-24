@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 
 import { fetchPopularBooks } from 'actions/book';
-import { Masonry } from 'components/Masonry';
+import { Gallery } from 'components/Gallery';
 
 const mapStateToProps = state => ({
-  state,
+  popularBooks: state.popularBooks,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -16,4 +16,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Masonry);
+)(Gallery);
