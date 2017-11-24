@@ -12,11 +12,13 @@ export const getBook = async (req, res) => {
     if (books === undefined || books.length === 0) Error();
 
     const chapterQuery = `
-    SELECT id, title, user_id as "userId", book_id as "bookId", parent_id as "parentId",
-    like_sum as "likeSum", images, create_date as "createDate", title, description
-    FROM chapter WHERE book_id=($1)
+    SELECT c.id, c.title, c.user_id as "userId", c.book_id as "bookId", c.parent_id as "parentId",
+    c.like_sum as "likeSum", c.images, c.create_date as "createDate", c.title, c.description,
+    ( SELECT COUNT(*) FROM likeinfo l WHERE c.id = l.chapter_id AND l.user_id = $2 ) isLiked
+    FROM chapter c WHERE book_id=($1)
     `;
-    const { rows: chapters } = await db.query(chapterQuery, [bookId]);
+    const userId = typeof req.session === 'undefined' || typeof req.session.uid === 'undefined' ? 0 : req.session.uid;
+    const { rows: chapters } = await db.query(chapterQuery, [bookId, userId]);
     res.json({ books, chapters });
   } catch (e) {
     res.status(404).json({ message: 'book not found' });

@@ -1,4 +1,4 @@
-import { METHOD_GET, METHOD_PUT, fetchDataIfNeeded } from 'actions/fetchApi';
+import { METHOD_GET, fetchDataIfNeeded } from 'actions/fetchApi';
 import { RECEIVE_BOOK, LIKE_CHAPTER } from 'constants/book';
 
 /*
@@ -21,8 +21,9 @@ const receiveBook = data => ({
   data,
 });
 
-const likeSuccess = () => ({
+const likeSuccess = data => ({
   type: LIKE_CHAPTER,
+  data,
 });
 
 export const fetchBookIfNeeded = bookId =>
@@ -40,8 +41,8 @@ export const fetchChapterIfNeeded = (bookId, chapterId) =>
   };
 
 // TODO: user should know whether they already like this chapter
-export const likeChapter = (bookId, chapterId) =>
+export const likeChapter = (chapterId, toggle) =>
   (dispatch) => {
-    const url = `/book/${bookId}/${chapterId}/like`;
-    dispatch(fetchDataIfNeeded(url, METHOD_PUT, {}, likeSuccess));
+    const url = `/book/like/${chapterId}/${toggle}`;
+    dispatch(fetchDataIfNeeded(url, METHOD_GET, {}, likeSuccess));
   };

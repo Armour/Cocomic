@@ -12,7 +12,12 @@ export class Chapter extends React.Component {
       <div className="chapter-wrap">
         <h1 className="chapter-title"> {this.props.title} </h1>
         {pictureCards}
-        <ChapterEndCard chapterId={this.props.chapterId} img_url={this.props.pictures.last()} likeChapter={this.props.likeChapter} />
+        <ChapterEndCard
+          chapterId={this.props.chapterId}
+          img_url={this.props.pictures.last()}
+          isLiked={this.props.isLiked}
+          likeChapter={this.props.likeChapter}
+        />
       </div>
     );
   }
@@ -23,4 +28,5 @@ Chapter.propTypes = {
   title: PropTypes.string.isRequired,
   pictures: PropTypes.object.isRequired,
   likeChapter: PropTypes.func.isRequired,
+  isLiked: PropTypes.bool.isRequired,
 };

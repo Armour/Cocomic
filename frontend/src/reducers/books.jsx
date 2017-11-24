@@ -1,6 +1,6 @@
 import { Map, List, fromJS, getIn } from 'immutable';
 
-import { RECEIVE_BOOK } from 'constants/book';
+import { RECEIVE_BOOK, LIKE_CHAPTER } from 'constants/book';
 
 /*
 state.books:{
@@ -33,6 +33,15 @@ export const books = (state = initialState, action) => {
       action.data.chapters.forEach((value) => {
         if (value.parentId !== undefined && value.parentId !== null) {
           newState = newState.updateIn([value.bookId, 'chapters', value.parentId, 'childrenIds'], (list = List()) => list.push(value.id));
+        }
+      });
+    }
+    return newState;
+  case LIKE_CHAPTER:
+    if (action.data.chapterId && action.data.toggle) {
+      newState.keySeq().forEach((key) => {
+        if (getIn(newState, [key, 'chapters', action.data.chapterId, 'isliked']) !== 'undefined') {
+          newState = newState.setIn([key, 'chapters', action.data.chapterId, 'isliked'], action.data.toggle);
         }
       });
     }

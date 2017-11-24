@@ -28,7 +28,8 @@ export class Book extends React.Component {
               chapterId={value.get('id')}
               title={value.get('title')}
               pictures={value.get('images')}
-              likeChapter={() => this.props.likeChapter(this.props.bookId, value.get('id'))}
+              isLiked={value.get('isliked') === '1'}
+              likeChapter={this.props.likeChapter}
             />
           </div>
         </Scroll.Element>
