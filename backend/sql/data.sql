@@ -1,4 +1,5 @@
 INSERT INTO userinfo(username, email, password) VALUES('Kingston', 'k@k.com', 'docker');
+INSERT INTO userinfo(username, email, password) VALUES('Ruijia', 'mao@123.com', '123456');
 INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
     VALUES(1, 'Conan Escalar Montañas', 'sample-1', 'Conan escalar montañas todos los sábados.', 1);
 

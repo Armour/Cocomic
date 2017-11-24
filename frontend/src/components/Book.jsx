@@ -55,10 +55,10 @@ export class Book extends React.Component {
               <BookCoverCard img_url={this.props.coverUrl} title={this.props.title} description={this.props.description} />
             }
             <Chapter
-              chapterId={value.get('id')}
-              title={value.get('title')}
-              pictures={value.get('images')}
-              isLiked={value.get('isliked') === '1'}
+              chapterId={chapter.get('id')}
+              title={chapter.get('title')}
+              pictures={chapter.get('images')}
+              isLiked={chapter.get('isliked') === '1'}
               likeChapter={this.props.likeChapter}
             />
           </div>

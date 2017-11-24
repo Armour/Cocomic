@@ -21,7 +21,7 @@ export const getBook = async (req, res) => {
     const { rows: chapters } = await db.query(chapterQuery, [bookId, userId]);
     res.json({ books, chapters });
   } catch (e) {
-    res.status(404).json({ message: 'book not found' });
+    res.status(404).json({ message: `book not found: ${e.message}` });
   }
 };
 
