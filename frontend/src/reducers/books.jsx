@@ -5,7 +5,7 @@ import { RECEIVE_BOOK } from 'constants/book';
 /*
 state.books:{
   bookId:{
-    name:string, coverImage:string, description:string, rootId:number, likeSum:number
+    name:string, coverImage:string, description:string, rootChapterId:number, likeSum:number
     chapters:{
       chapterId:{
         bookId:number, userId:number, createDate:date, parentId:number, likeSum:number, images:[string], childrenIds:[number]
@@ -43,4 +43,39 @@ export const books = (state = initialState, action) => {
 };
 
 export const getBook = (state, bookId) => getIn(state, ['books', bookId]);
+
 export const getChapter = (state, bookId, chapterId) => getIn(state, ['books', bookId, 'chapters', chapterId]);
+
+export const traverseToRoot = (state, bookId, chapterId) => {
+  const book = getBook(state, bookId);
+  if (book === undefined) return [];
+  let chapter = getIn(book, ['chapters', chapterId]);
+  let chapterIds = [];
+  while (chapter !== undefined && chapter.get('parentId') !== 0) {
+    chapter = getIn(book, ['chapters', chapter.get('parentId')]);
+    if (chapter === undefined) break;
+    chapterIds = [chapter.get('id'), ...chapterIds];
+  }
+  if (chapter === undefined) return [];
+  return chapterIds;
+};
+
+export const traverseToLeaf = (state, bookId, chapterId) => {
+  const book = getBook(state, bookId);
+  if (book === undefined) return [];
+  let chapter = getIn(book, ['chapters', chapterId]);
+  let chapterIds = [];
+  while (chapter !== undefined && chapter.get('childrenIds') !== undefined) {
+    chapter = getIn(book, ['chapters', getIn(chapter, ['childrenIds', 0])]);
+    if (chapter === undefined) break;
+    chapterIds = [...chapterIds, chapter.get('id')];
+  }
+  if (chapter === undefined) return [];
+  return chapterIds;
+};
+
+export const getChapterChain = (state, bookId, chapterId) => {
+  const chapter = getChapter(state, bookId, chapterId);
+  if (chapter === undefined) return [];
+  return traverseToRoot(state, bookId, chapterId).concat(chapter, traverseToLeaf(state, bookId, chapterId));
+};

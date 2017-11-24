@@ -1,9 +1,8 @@
 import { connect } from 'react-redux';
 
 import { fetchBookIfNeeded, likeChapter } from 'actions/book';
-import { getBook } from 'reducers/books';
+import { getBook, traverseToRoot, traverseToLeaf, getChapter } from 'reducers/books';
 import { Book } from 'components/Book';
-import { fromJS } from 'immutable';
 
 const mapStateToProps = (state, ownProps) => {
   const book = getBook(state, ownProps.bookId);
@@ -14,17 +13,20 @@ const mapStateToProps = (state, ownProps) => {
       description: '',
       coverUrl: 'sample-1',
       likeNum: 0,
-      chapters: fromJS([]),
-      chapterDepth: 0,
     };
   }
+  const startingChapterId = ownProps.chapterId ? ownProps.chapterId : book.get('rootChapterId');
+  window.location.hash = `#${startingChapterId}`;
 
   return {
     title: book.get('title'),
     description: book.get('description'),
     coverUrl: book.get('coverImage'),
     likeNum: book.get('likeNum'),
-    chapters: book.get('chapters'),
+    traverseToRoot: chapterId => traverseToRoot(state, ownProps.bookId, chapterId),
+    traverseToLeaf: chapterId => traverseToLeaf(state, ownProps.bookId, chapterId),
+    getChapter: chapterId => getChapter(state, ownProps.bookId, chapterId),
+    startingChapterId,
   };
 };
 

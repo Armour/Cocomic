@@ -10,7 +10,7 @@ export class BookPage extends React.Component {
   render() {
     return (
       <div className="main-wrap">
-        <Book bookId={parseInt(this.props.match.params.bookId, 10)} currentChapterId={parseInt(this.props.location.hash, 10, 10)} />
+        <Book bookId={parseInt(this.props.match.params.bookId, 10)} chapterId={parseInt(this.props.location.hash.slice(1), 10)} />
       </div>
     );
   }
