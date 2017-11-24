@@ -27,7 +27,8 @@
     "no-mixed-operators": ["error", { "allowSamePrecedence": true }],
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "react/prefer-stateless-function": "off",
-    "react/forbid-prop-types": "off"
+    "react/forbid-prop-types": "off",
+    "react/jsx-max-props-per-line": "off"
   },
   "settings": {
     "import/resolver": {
