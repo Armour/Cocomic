@@ -12,7 +12,8 @@
     "build-prod": "webpack --color --config webpack.config.prod.babel.js",
     "profile": "profile=true webpack --color --config webpack.config.prod.babel.js",
     "server": "nodemon --exec babel-node backend/server.js",
-    "prepush": "gulp eslint"
+    "prepush": "gulp eslint",
+    "prepare": "patch-package"
   },
   "dependencies": {
     "add-asset-html-webpack-plugin": "2.1.2",
@@ -109,5 +110,8 @@
       "backend/config.json",
       "backend/server.js"
     ]
+  },
+  "devDependencies": {
+    "patch-package": "^4.0.0"
   }
 }
