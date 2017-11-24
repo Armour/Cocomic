@@ -5,7 +5,7 @@ import { getBook, getPopularBooks, addBook } from '../controllers/book';
 
 const router = express.Router();
 
-router.get('/like/:chapterId/:toggle', updateLike);
+router.post('/like', updateLike);
 router.post('/addBook', addBook);
 router.post('/addChapter', addChapter);
 router.get('/popular/:offset/:amount', getPopularBooks);
