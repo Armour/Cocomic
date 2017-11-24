@@ -5,7 +5,7 @@ export const getBook = async (req, res) => {
   try {
     const { bookId } = req.params;
     const bookQuery = `
-    SELECT id, title, cover_image as "coverImage", description, root_chapter_id as "rootChapterId"
+    SELECT id, user_id as "userId", title, cover_image as "coverImage", description, root_chapter_id as "rootChapterId"
     FROM book WHERE id=($1)
     `;
     const { rows: books } = await db.query(bookQuery, [bookId]);
@@ -23,6 +23,26 @@ export const getBook = async (req, res) => {
   } catch (e) {
     res.status(404).json({ message: 'book not found' });
   }
+};
+
+const getBooks = async (req, res, query) => {
+  try {
+    const { offset, amount } = req.params;
+    const { rows: books } = await db.query(query, [amount, offset]);
+    if (books === undefined || books.length === 0) Error();
+
+    res.json({ books });
+  } catch (e) {
+    res.status(404).json({ message: 'book not found' });
+  }
+};
+
+export const getPopularBooks = async (req, res) => {
+  const query = `
+  SELECT id, title, cover_image as "coverImage", description, like_sum, user_id
+  FROM book ORDER BY like_sum LIMIT $1 Offset $2
+  `;
+  getBooks(req, res, query);
 };
 
 export const addBook = async (req, res) => {
@@ -45,10 +65,10 @@ export const addBook = async (req, res) => {
     await client.query('BEGIN');
     // Insert book
     const bookQuery = `
-    INSERT INTO book(title, cover_image, description)
-    VALUES ($1, $2, $3) RETURNING id
+    INSERT INTO book(user_id, title, cover_image, description)
+    VALUES ($1, $2, $3, $4) RETURNING id
     `;
-    const bookQueryValues = [bookTitle, coverImage, description];
+    const bookQueryValues = [userId, bookTitle, coverImage, description];
     const { id: bookId } = await client.query(bookQuery, bookQueryValues);
     // Insert chapter
     const chapterIds = [0];
@@ -74,28 +94,5 @@ export const addBook = async (req, res) => {
     res.status(500).json({ message: e.message });
   } finally {
     client.release();
-  }
-};
-
-export const addChapter = async (req, res) => {
-  try {
-    const {
-      title,
-      description,
-      parentId,
-      bookId,
-      images,
-    } = req.body;
-    const { uid: userId } = req.session;
-    const chapterImages = uploadImages(images);
-    const chapterQuery = `
-    INSERT INTO chapter(user_id, book_id, title, description, parent_id, images)
-    VALUES ($1, $2, $3, $4, $5, $6) RETURNING id
-    `;
-    const chapterQueryValues = [userId, bookId, title, description, parentId, chapterImages];
-    const { id: chapterId } = await db.query(chapterQuery, chapterQueryValues);
-    res.json({ chapterId });
-  } catch (e) {
-    res.status(404).json({ message: 'book not found' });
   }
 };

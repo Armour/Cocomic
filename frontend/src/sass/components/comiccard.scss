@@ -10,3 +10,25 @@
   color: #ccc !important;
   text-align: right;
 }
+
+@media #{$medium-and-down} {
+  .comic-card-wrap {
+    width: 100%;
+  }
+}
+
+@media #{$medium-and-up} {
+  .comic-card-wrap {
+    width: 50%;
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+}
+
+@media #{$large-and-up} {
+  .comic-card-wrap {
+    width: 33.3%;
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+}

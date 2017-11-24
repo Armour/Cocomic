@@ -12,7 +12,8 @@
     "build-prod": "webpack --color --config webpack.config.prod.babel.js",
     "profile": "profile=true webpack --color --config webpack.config.prod.babel.js",
     "server": "nodemon --exec babel-node backend/server.js",
-    "prepush": "gulp eslint"
+    "prepush": "gulp eslint",
+    "prepare": "patch-package"
   },
   "dependencies": {
     "add-asset-html-webpack-plugin": "2.1.2",
@@ -72,7 +73,7 @@
     "react": "16.1.1",
     "react-dom": "16.1.1",
     "react-hot-loader": "3.1.3",
-    "react-masonry-infinite": "^1.2.1",
+    "react-masonry-component": "^6.0.1",
     "react-redux": "5.0.6",
     "react-router-dom": "4.2.2",
     "react-scroll": "^1.6.4",
@@ -109,5 +110,8 @@
       "backend/config.json",
       "backend/server.js"
     ]
+  },
+  "devDependencies": {
+    "patch-package": "^4.0.0"
   }
 }

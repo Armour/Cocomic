@@ -1,0 +1,43 @@
+patch-package
+--- a/node_modules/react-scroll/modules/mixins/Helpers.js
++++ b/node_modules/react-scroll/modules/mixins/Helpers.js
+@@ -207,25 +207,25 @@ var Helpers = {
+ 
+         var offsetY = y - _this2.props.offset;
+         var isInside = offsetY >= Math.floor(elemTopBound) && offsetY < Math.floor(elemBottomBound);
+-        var isOutside = offsetY < Math.floor(elemTopBound) || offsetY >= Math.floor(elemBottomBound);
++        // var isOutside = offsetY < Math.floor(elemTopBound) || offsetY >= Math.floor(elemBottomBound);
+         var activeLink = scroller.getActiveLink();
+ 
+-        if (isOutside) {
+-          if (to === activeLink) {
+-            scroller.setActiveLink(void 0);
+-          }
++        // if (isOutside) {
++        //   if (to === activeLink) {
++        //     scroller.setActiveLink(void 0);
++        //   }
+ 
+-          if (_this2.props.hashSpy && scrollHash.getHash() === to) {
+-            scrollHash.changeHash();
+-          }
++        //   if (_this2.props.hashSpy && scrollHash.getHash() === to) {
++        //     scrollHash.changeHash();
++        //   }
+ 
+-          if (_this2.props.spy && _this2.state.active) {
+-            _this2.setState({ active: false });
+-            _this2.props.onSetInactive && _this2.props.onSetInactive();
+-          }
++        //   if (_this2.props.spy && _this2.state.active) {
++        //     _this2.setState({ active: false });
++        //     _this2.props.onSetInactive && _this2.props.onSetInactive();
++        //   }
+ 
+-          return scrollSpy.updateStates();
+-        }
++        //   return scrollSpy.updateStates();
++        // }
+ 
+         if (isInside && activeLink !== to) {
+           scroller.setActiveLink(to);

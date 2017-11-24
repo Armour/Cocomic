@@ -13,16 +13,17 @@ export class Book extends React.Component {
   }
 
   render() {
+    // console.error(this.props.chapters);
     const chaptersData = this.props.chapters.valueSeq().toArray().filter(value => value.get('id') !== undefined);
     const chaptersComp = chaptersData.map(value =>
       (
         <Scroll.Element key={value.get('id')} id={value.get('id').toString()}>
           <div>
-            {value.get('parentId') === null &&
+            {value.get('parentId') === 0 &&
               <BookCoverCard img_url={this.props.coverUrl} title={this.props.title} description={this.props.description} />
             }
             <Scroll.Link activeClass="active" to={value.get('id').toString()} spy smooth hashSpy hidden>
-            Test 1
+              Test 1
             </Scroll.Link>
             <Chapter
               chapterId={value.get('id')}
