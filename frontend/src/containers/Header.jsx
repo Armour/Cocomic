@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Header } from 'components/Header';
 import { getIsLoggedIn, getUsername } from 'reducers/user';
 import { logout, getUser } from 'actions/user';
@@ -22,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Header);
+)(Header));

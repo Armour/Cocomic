@@ -17,6 +17,7 @@ export class HomePage extends React.Component {
             title="Hahaha"
             description="Conan paseó en bicicleta. Vio que el paisaje fue muy grante."
             author="Kingston"
+            pageUrl="#"
             likes={25}
           />
         </div>

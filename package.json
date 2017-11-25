@@ -10,7 +10,7 @@
   "scripts": {
     "build-dll": "webpack --color --config webpack.config.dll.babel.js",
     "build-prod": "webpack --color --config webpack.config.prod.babel.js",
-    "profile": "profile=true webpack --color --config webpack.config.prod.babel.js",
+    "profile": "webpack --color --config webpack.config.profile.babel.js",
     "server": "nodemon --exec babel-node backend/server.js",
     "prepush": "gulp eslint",
     "prepare": "patch-package"
@@ -56,24 +56,25 @@
     "immutable": "4.0.0-rc.9",
     "jimp": "0.2.28",
     "jquery": "3.2.1",
-    "lodash": "^4.17.4",
+    "lodash": "4.17.4",
     "materialize-css": "0.100.2",
     "md5": "2.2.1",
     "mkdirp": "0.5.1",
     "morgan": "1.9.0",
     "node-sass": "4.7.2",
     "nodemon": "1.12.1",
+    "offline-plugin": "4.8.4",
     "pg": "7.4.0",
     "postcss": "6.0.14",
     "postcss-cssnext": "3.0.2",
     "postcss-import": "11.0.0",
-    "postcss-loader": "2.0.8",
+    "postcss-loader": "2.0.9",
     "progress-bar-webpack-plugin": "1.10.0",
     "prop-types": "15.6.0",
     "react": "16.1.1",
     "react-dom": "16.1.1",
     "react-hot-loader": "3.1.3",
-    "react-masonry-component": "^6.0.1",
+    "react-masonry-component": "6.0.1",
     "react-redux": "5.0.6",
     "react-router-dom": "4.2.2",
     "react-scroll": "1.6.4",
@@ -94,7 +95,7 @@
     "url-loader": "0.6.2",
     "webpack": "3.8.1",
     "webpack-bundle-analyzer": "2.9.1",
-    "webpack-dev-middleware": "1.12.0",
+    "webpack-dev-middleware": "1.12.1",
     "webpack-hot-middleware": "2.20.0",
     "webpack-merge": "4.1.1"
   },
@@ -112,6 +113,6 @@
     ]
   },
   "devDependencies": {
-    "patch-package": "^4.0.0"
+    "patch-package": "4.0.0"
   }
 }
