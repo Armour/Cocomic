@@ -13,12 +13,13 @@ export class HomePage extends React.Component {
         <Intro className="intro-panel" />
         <div className="main-wrap">
           <ComicCard
-            img_url="sample-1"
+            img_url="conan_cover_5"
             title="Hahaha"
             description="Conan paseó en bicicleta. Vio que el paisaje fue muy grante."
             author="Kingston"
             pageUrl="#"
             likes={25}
+            fixAspectRatio
           />
         </div>
       </div>
