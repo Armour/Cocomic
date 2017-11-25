@@ -5,8 +5,11 @@ CREATE TABLE book (
     cover_image text,
     description text,
     like_sum integer NOT NULL default 0 CHECK (like_sum >= 0),
-    root_chapter_id integer default 0
+    root_chapter_id integer default 0,
+    created_at TIMESTAMP
 );
+
+ALTER TABLE book ALTER COLUMN created_at SET DEFAULT now();
 
 CREATE TABLE chapter (
     id serial primary key,
@@ -48,7 +51,7 @@ CREATE FUNCTION update_likesum() RETURNS trigger AS $update_likesum$
             UPDATE book SET like_sum = like_sum - 1 WHERE id = (SELECT book_id FROM chapter AS c WHERE c.id = OLD.id);
             RETURN OLD;
         END IF;
-        
+
     END;
 $update_likesum$ LANGUAGE plpgsql;
 
