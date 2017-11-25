@@ -49,8 +49,7 @@ const fetchData = (url, method, postData, receiveData, receiveError) =>
         res.json().then((data) => {
           dispatch(receiveData(data));
         }).catch(() => {
-          // no content
-          dispatch(receiveData());
+          dispatch(receiveData()); // no content
         });
       } else {
         res.json().then((e) => {

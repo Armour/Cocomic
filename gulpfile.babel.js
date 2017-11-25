@@ -27,14 +27,13 @@ const tasks = {
   eslint: 'eslint',
   stylelint: 'stylelint',
   clean: 'clean',
-  buildDll: 'yarn:run-build-dll',
-  buildProd: 'yarn:run-build-prod',
-  profile: 'yarn:run-profile',
-  server: 'yarn:run-server',
+  buildDll: 'buildDll',
+  buildProd: 'buildProd',
+  profile: 'profile',
+  server: 'server',
   build: 'build',
-  start: 'build & run server',
+  start: 'start',
 };
-
 // Run eslint
 gulp.task(tasks.eslint, () =>
   gulp.src([path.src.js, path.src.jsx]) // respect .eslintignore
@@ -55,8 +54,8 @@ gulp.task(tasks.stylelint, () =>
 gulp.task(tasks.clean, () => del([path.dist]));
 
 // Yarn task generator
-const generateTask = (taskName, args) => {
-  gulp.task(taskName, (callback) => {
+const generateTask = args =>
+  (callback) => {
     const proc = spawn(yarn, args, { stdio: 'inherit' });
     proc.on('close', (code) => {
       console.log(`child process exited with code ${code}`); // eslint-disable-line no-console
@@ -65,20 +64,19 @@ const generateTask = (taskName, args) => {
     proc.on('error', (err) => {
       callback(err);
     });
-  });
-};
+  };
 
 // Build dll reference files
-generateTask(tasks.buildDll, ['run', 'build-dll']);
+gulp.task(tasks.buildDll, generateTask(['run', 'build-dll']));
 
 // Generate webpack asset bundles for production
-generateTask(tasks.buildProd, ['run', 'build-prod']);
+gulp.task(tasks.buildProd, generateTask(['run', 'build-prod']));
 
 // Profile webpack asset bundle
-generateTask(tasks.profile, ['run', 'profile']);
+gulp.task(tasks.profile, generateTask(['run', 'profile']));
 
 // Run server
-generateTask(tasks.server, ['run', 'server']);
+gulp.task(tasks.server, generateTask(['run', 'server']));
 
 // Generate asset bundles
 gulp.task(tasks.build, (callback) => {
