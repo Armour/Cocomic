@@ -67,8 +67,6 @@ export class Book extends React.Component {
     });
     return (
       <InfiniteScroll
-        id="book-scroll"
-        // className="book-wrap"
         hasMore={this.state.toLeaf.length > 0}
         hasPrev={this.state.toRoot.length > 0}
         loader={<div className="loader">Loading ...</div>}
