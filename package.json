@@ -10,7 +10,7 @@
   "scripts": {
     "build-dll": "webpack --color --config webpack.config.dll.babel.js",
     "build-prod": "webpack --color --config webpack.config.prod.babel.js",
-    "profile": "profile=true webpack --color --config webpack.config.prod.babel.js",
+    "profile": "webpack --color --config webpack.config.profile.babel.js",
     "server": "nodemon --exec babel-node backend/server.js",
     "prepush": "gulp eslint",
     "prepare": "patch-package"
@@ -63,6 +63,7 @@
     "morgan": "1.9.0",
     "node-sass": "4.7.2",
     "nodemon": "1.12.1",
+    "offline-plugin": "4.8.4",
     "pg": "7.4.0",
     "postcss": "6.0.14",
     "postcss-cssnext": "3.0.2",
