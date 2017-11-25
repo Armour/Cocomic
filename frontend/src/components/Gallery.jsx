@@ -16,8 +16,8 @@ export class Gallery extends React.Component {
   loadMore() {
     if (this.state.offset === this.props.popularBooks.size) {
       this.props.fetchPopularBooks(this.state.offset, this.props.batchSize);
+      this.state.offset += this.props.batchSize;
     }
-    this.state.offset += this.props.batchSize;
   }
 
   render() {
@@ -31,13 +31,13 @@ export class Gallery extends React.Component {
         img_url={el.get('coverImage')}
         title={el.get('title')}
         description={el.get('description')}
-        author={el.get('user_id')}
+        author={el.get('username')}
         likes={el.get('like_sum')}
+        pageUrl={`/book/${el.get('id')}`}
       />));
 
     return (
       <Masonry
-        ref={c => this.masonry = c && c.masonry}
         className="popular-gallery"
         options={masonryOptions} // default {}
         disableImagesLoaded={false} // default false

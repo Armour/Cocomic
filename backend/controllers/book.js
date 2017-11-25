@@ -39,8 +39,10 @@ const getBooks = async (req, res, query) => {
 
 export const getPopularBooks = async (req, res) => {
   const query = `
-  SELECT id, title, cover_image as "coverImage", description, like_sum, user_id
-  FROM book ORDER BY like_sum LIMIT $1 Offset $2
+  SELECT book.id, title, cover_image as "coverImage", description, like_sum, username
+  FROM book, userinfo
+  WHERE book.user_id = userinfo.id
+  ORDER BY like_sum LIMIT $1 Offset $2
   `;
   getBooks(req, res, query);
 };
