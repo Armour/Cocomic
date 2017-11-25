@@ -47,6 +47,16 @@ export const getPopularBooks = async (req, res) => {
   getBooks(req, res, query);
 };
 
+export const getNewestBooks = async (req, res) => {
+  const query = `
+  SELECT book.id, title, cover_image as "coverImage", description, like_sum, username
+  FROM book, userinfo
+  WHERE book.user_id = userinfo.id
+  ORDER BY book.id DESC LIMIT $1 Offset $2
+  `;
+  getBooks(req, res, query);
+};
+
 export const addBook = async (req, res) => {
   // note: we don't try/catch this because if connecting throws an exception
   // we don't need to dispose of the client (it will be undefined)

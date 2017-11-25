@@ -14,8 +14,13 @@ export class Gallery extends React.Component {
   }
 
   loadMore() {
-    if (this.state.offset === this.props.popularBooks.size) {
-      this.props.fetchPopularBooks(this.state.offset, this.props.batchSize);
+    if (this.props.orderType === 0) {
+      if (this.state.offset === this.props.popularBooks.size) {
+        this.props.fetchPopularBooks(this.state.offset, this.props.batchSize);
+        this.state.offset += this.props.batchSize;
+      }
+    } else if (this.state.offset === this.props.newestBooks.size) {
+      this.props.fetchNewestBooks(this.state.offset, this.props.batchSize);
       this.state.offset += this.props.batchSize;
     }
   }
@@ -25,7 +30,10 @@ export class Gallery extends React.Component {
       transitionDuration: 1000,
     };
 
-    const childElements = this.props.popularBooks.map(el => (
+    const galleryName = this.props.orderType === 0 ? 'gallery-popular' : 'gallery-new';
+    const galleryBooks = this.props.orderType === 0 ? this.props.popularBooks : this.props.newestBooks;
+
+    const childElements = galleryBooks.map(el => (
       <ComicCard
         key={el.get('id')}
         img_url={el.get('coverImage')}
@@ -38,10 +46,8 @@ export class Gallery extends React.Component {
 
     return (
       <Masonry
-        className="popular-gallery"
-        options={masonryOptions} // default {}
-        disableImagesLoaded={false} // default false
-        updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+        className={galleryName}
+        options={masonryOptions}
         onLayoutComplete={this.loadMore}
       >
         {childElements}
@@ -51,8 +57,11 @@ export class Gallery extends React.Component {
 }
 
 Gallery.propTypes = {
+  orderType: PropTypes.number.isRequired, // 0: popular; 1: newest
   fetchPopularBooks: PropTypes.func.isRequired,
+  fetchNewestBooks: PropTypes.func.isRequired,
   popularBooks: PropTypes.object.isRequired,
+  newestBooks: PropTypes.object.isRequired,
   batchSize: PropTypes.number,
 };
 

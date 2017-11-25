@@ -1,5 +1,5 @@
 import { METHOD_GET, METHOD_POST, fetchDataIfNeeded } from 'actions/fetchApi';
-import { RECEIVE_BOOK, RECEIVE_POPULAR_BOOKS, LIKE_CHAPTER } from 'constants/book';
+import { RECEIVE_BOOK, RECEIVE_POPULAR_BOOKS, RECEIVE_NEWEST_BOOKS, LIKE_CHAPTER } from 'constants/book';
 
 /*
 data:{
@@ -31,10 +31,21 @@ const receivePopularBooks = data => ({
   data,
 });
 
+const receiveNewestBooks = data => ({
+  type: RECEIVE_NEWEST_BOOKS,
+  data,
+});
+
 export const fetchPopularBooks = (offset, amount) =>
   (dispatch) => {
     const url = `/book/popular/${offset}/${amount}`;
     dispatch(fetchDataIfNeeded(url, METHOD_GET, {}, receivePopularBooks));
+  };
+
+export const fetchNewestBooks = (offset, amount) =>
+  (dispatch) => {
+    const url = `/book/newest/${offset}/${amount}`;
+    dispatch(fetchDataIfNeeded(url, METHOD_GET, {}, receiveNewestBooks));
   };
 
 export const fetchBookIfNeeded = bookId =>

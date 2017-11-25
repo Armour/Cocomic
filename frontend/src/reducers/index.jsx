@@ -4,10 +4,12 @@ import { books } from 'reducers/books';
 import { register } from 'reducers/user';
 import { images } from 'reducers/uploadImage';
 import { popularBooks } from 'reducers/popularBooks';
+import { newestBooks } from 'reducers/newestBooks';
 
 export default combineReducers({
   books,
   popularBooks,
+  newestBooks,
   register,
   fetchingData,
   images,

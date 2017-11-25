@@ -26,7 +26,7 @@ export class Header extends React.Component {
           <li key="home"><NavLink activeClassName="active-link" exact to="/">Home</NavLink></li>
           <li key="upload"><NavLink activeClassName="active-link" to="/upload">Upload</NavLink></li>
           <li key="popular"><NavLink activeClassName="active-link" to="/popular">Popular</NavLink></li>
-          <li key="new"><NavLink activeClassName="active-link" to="/new">New</NavLink></li>
+          <li key="newest"><NavLink activeClassName="active-link" to="/newest">New</NavLink></li>
           <li key="about"><NavLink activeClassName="active-link" to="/about">About us</NavLink></li>
           <li key="login"><NavLink activeClassName="active-link" to="/login">Log in</NavLink></li>
           <li key="register"><NavLink activeClassName="active-link" to="/register">Register</NavLink></li>
@@ -38,7 +38,7 @@ export class Header extends React.Component {
           <li key="home"><NavLink activeClassName="active-link" exact to="/">Home</NavLink></li>
           <li key="upload"><NavLink activeClassName="active-link" to="/upload">Upload</NavLink></li>
           <li key="popular"><NavLink activeClassName="active-link" to="/popular">Popular</NavLink></li>
-          <li key="new"><NavLink activeClassName="active-link" to="/new">New</NavLink></li>
+          <li key="newest"><NavLink activeClassName="active-link" to="/newest">New</NavLink></li>
           <li key="about"><NavLink activeClassName="active-link" to="/about">About us</NavLink></li>
           <li key="username"> Hello {this.props.username} </li>
           <li key="logout"><Link to="/user/logout" onClick={this.onClickLogout}>Log out</Link></li>

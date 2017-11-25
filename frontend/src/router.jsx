@@ -8,6 +8,7 @@ import Header from 'containers/Header';
 
 import { HomePage } from 'pages/HomePage';
 import { PopularPage } from 'pages/PopularPage';
+import { NewestPage } from 'pages/NewestPage';
 import { NotFoundPage } from 'pages/NotFoundPage';
 import { RegisterPage } from 'pages/RegisterPage';
 import { LoginPage } from 'pages/LoginPage';
@@ -25,6 +26,7 @@ export const router = (
       <Route path="/book/:bookId" component={BookPage} />
       <Route path="/upload" component={FilePage} />
       <Route path="/popular" component={PopularPage} />
+      <Route path="/newest" component={NewestPage} />
       <Route component={NotFoundPage} />
     </Switch>
     <Footer />
