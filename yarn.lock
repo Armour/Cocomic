@@ -6851,7 +6851,7 @@ react-router@^4.2.0:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-react-scroll@^1.6.4:
+react-scroll@1.6.4:
   version "1.6.4"
   resolved "https://registry.yarnpkg.com/react-scroll/-/react-scroll-1.6.4.tgz#c5bca461771bce460a1bfb19550350512b9d076b"
   dependencies:

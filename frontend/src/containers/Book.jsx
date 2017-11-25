@@ -16,7 +16,7 @@ const mapStateToProps = (state, ownProps) => {
     };
   }
   const startingChapterId = ownProps.chapterId ? ownProps.chapterId : book.get('rootChapterId');
-  window.location.hash = `#${startingChapterId}`;
+  window.history.replaceState(undefined, undefined, `#${startingChapterId}`);
 
   return {
     title: book.get('title'),
