@@ -1,5 +1,5 @@
 import { METHOD_GET, METHOD_POST, fetchDataIfNeeded } from 'actions/fetchApi';
-import { RECEIVE_BOOK, RECEIVE_POPULAR_BOOKS, RECEIVE_NEWEST_BOOKS, LIKE_CHAPTER } from 'constants/book';
+import { RECEIVE_BOOK, CLEAR_GALLERY_BOOKS, RECEIVE_POPULAR_BOOKS, RECEIVE_NEWEST_BOOKS, LIKE_CHAPTER } from 'constants/book';
 
 /*
 data:{
@@ -24,6 +24,10 @@ const receiveBook = data => ({
 const likeSuccess = data => ({
   type: LIKE_CHAPTER,
   data,
+});
+
+export const clearGalleryBooks = () => ({
+  type: CLEAR_GALLERY_BOOKS,
 });
 
 const receivePopularBooks = data => ({

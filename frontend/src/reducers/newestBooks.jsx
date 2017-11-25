@@ -1,6 +1,6 @@
 import { List, fromJS } from 'immutable';
 
-import { RECEIVE_NEWEST_BOOKS } from 'constants/book';
+import { CLEAR_GALLERY_BOOKS, RECEIVE_NEWEST_BOOKS } from 'constants/book';
 
 /*
 state.newestBooks:{
@@ -22,6 +22,8 @@ export const newestBooks = (state = initialState, action) => {
       });
     }
     return newState;
+  case CLEAR_GALLERY_BOOKS:
+    return List();
   default:
     return state;
   }

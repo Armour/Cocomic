@@ -9,7 +9,7 @@ export class PopularPage extends React.Component {
     return (
       <div className="main-wrap">
         <h1 className="page-title">Popular</h1>
-        <Gallery orderType={0} />
+        <Gallery key={0} orderType={0} />
       </div>
     );
   }

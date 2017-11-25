@@ -13,6 +13,13 @@ export class Gallery extends React.Component {
     this.loadMore = this.loadMore.bind(this);
   }
 
+  componentWillUnmount() {
+    this.state = {
+      offset: 0,
+    };
+    this.props.unmountGallery();
+  }
+
   loadMore() {
     if (this.props.orderType === 0) {
       if (this.state.offset === this.props.popularBooks.size) {
@@ -60,6 +67,7 @@ Gallery.propTypes = {
   orderType: PropTypes.number.isRequired, // 0: popular; 1: newest
   fetchPopularBooks: PropTypes.func.isRequired,
   fetchNewestBooks: PropTypes.func.isRequired,
+  unmountGallery: PropTypes.func.isRequired,
   popularBooks: PropTypes.object.isRequired,
   newestBooks: PropTypes.object.isRequired,
   batchSize: PropTypes.number,

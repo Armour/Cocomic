@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { fetchPopularBooks, fetchNewestBooks } from 'actions/book';
+import { clearGalleryBooks, fetchPopularBooks, fetchNewestBooks } from 'actions/book';
 import { Gallery } from 'components/Gallery';
 
 const mapStateToProps = state => ({
@@ -14,6 +14,9 @@ const mapDispatchToProps = dispatch => ({
   },
   fetchNewestBooks: (offset, amount) => {
     dispatch(fetchNewestBooks(offset, amount));
+  },
+  unmountGallery: () => {
+    dispatch(clearGalleryBooks());
   },
 });
 

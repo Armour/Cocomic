@@ -9,7 +9,7 @@ export class NewestPage extends React.Component {
     return (
       <div className="main-wrap">
         <h1 className="page-title">New</h1>
-        <Gallery orderType={1} />
+        <Gallery key={1} orderType={1} />
       </div>
     );
   }
