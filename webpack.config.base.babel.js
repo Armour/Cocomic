@@ -43,6 +43,7 @@ export default {
     ],
   },
 
+  // A list of used webpack plugins
   plugins: [
     // jQuery support
     new webpack.ProvidePlugin({

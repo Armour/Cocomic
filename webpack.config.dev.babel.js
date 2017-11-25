@@ -1,8 +1,8 @@
 import path from 'path';
 import webpack from 'webpack';
+import merge from 'webpack-merge';
 import postcssCssnext from 'postcss-cssnext';
 import postcssImport from 'postcss-import';
-import merge from 'webpack-merge';
 
 import BaseWebpackConfig from './webpack.config.base.babel';
 
@@ -54,6 +54,7 @@ export default merge(BaseWebpackConfig, {
     ],
   },
 
+  // A list of used webpack plugins
   plugins: [
     // Enable hot module reload, if have --hot parameter in npm script, then this line must be removed!
     new webpack.HotModuleReplacementPlugin(),

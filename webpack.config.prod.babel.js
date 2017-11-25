@@ -1,8 +1,8 @@
 import path from 'path';
 import webpack from 'webpack';
+import merge from 'webpack-merge';
 import postcssCssnext from 'postcss-cssnext';
 import postcssImport from 'postcss-import';
-import merge from 'webpack-merge';
 
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import OfflinePlugin from 'offline-plugin';
