@@ -8,7 +8,8 @@ state.books:{
     name:string, coverImage:string, description:string, rootChapterId:number, likeSum:number
     chapters:{
       chapterId:{
-        bookId:number, userId:number, createDate:date, parentId:number, likeSum:number, images:[string], childrenIds:[number]
+        bookId:number, userId:number, createDate:date, parentId:number, likeSum:number, images:[string], childrenIds:[number],
+        title: string, description: string,
       }
     }
   }

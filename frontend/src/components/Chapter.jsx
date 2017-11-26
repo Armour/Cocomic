@@ -17,6 +17,8 @@ export class Chapter extends React.Component {
           img_url={this.props.pictures.last()}
           isLiked={this.props.isLiked}
           likeChapter={this.props.likeChapter}
+          getChapter={this.props.getChapter}
+          selectBranch={this.props.selectBranch}
         />
       </div>
     );
@@ -29,4 +31,6 @@ Chapter.propTypes = {
   pictures: PropTypes.object.isRequired,
   likeChapter: PropTypes.func.isRequired,
   isLiked: PropTypes.bool.isRequired,
+  getChapter: PropTypes.func.isRequired,
+  selectBranch: PropTypes.func.isRequired,
 };

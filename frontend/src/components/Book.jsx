@@ -18,6 +18,7 @@ export class Book extends React.Component {
 
     this.loadNext = this.loadNext.bind(this);
     this.loadPrev = this.loadPrev.bind(this);
+    this.selectBranch = this.selectBranch.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -30,18 +31,38 @@ export class Book extends React.Component {
     }
   }
 
+  selectBranch(chapterId, branchChapterId) {
+    this.setState((prevState) => {
+      const index = prevState.loadedChapters.indexOf(chapterId);
+      return {
+        loadedChapters: [...prevState.loadedChapters.slice(0, index + 1), branchChapterId],
+        toLeaf: this.props.traverseToLeaf(branchChapterId),
+      };
+    });
+  }
+
   loadNext() {
-    this.setState(prevState => ({
-      loadedChapters: [...prevState.loadedChapters, prevState.toLeaf[0]],
-      toLeaf: prevState.toLeaf.slice(1),
-    }));
+    this.setState((prevState) => {
+      if (prevState.toLeaf.length > 0) {
+        return {
+          loadedChapters: [...prevState.loadedChapters, prevState.toLeaf[0]],
+          toLeaf: prevState.toLeaf.slice(1),
+        };
+      }
+      return prevState;
+    });
   }
 
   loadPrev() {
-    this.setState(prevState => ({
-      loadedChapters: [prevState.toRoot[prevState.toRoot.length - 1], ...prevState.loadedChapters],
-      toRoot: prevState.toRoot.slice(0, -1),
-    }));
+    this.setState((prevState) => {
+      if (prevState.toRoot.length > 0) {
+        return {
+          loadedChapters: [prevState.toRoot[prevState.toRoot.length - 1], ...prevState.loadedChapters],
+          toRoot: prevState.toRoot.slice(0, -1),
+        };
+      }
+      return prevState;
+    });
   }
 
   render() {
@@ -60,6 +81,8 @@ export class Book extends React.Component {
               pictures={chapter.get('images')}
               isLiked={chapter.get('isliked') === '1'}
               likeChapter={this.props.likeChapter}
+              getChapter={this.props.getChapter}
+              selectBranch={branchChapterId => this.selectBranch(chapterId, branchChapterId)}
             />
           </div>
         </Scroll.Element>

@@ -15,7 +15,7 @@ INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, i
     VALUES(1, 1, 'Conan acampa', 'Conan duerme en la tienda de campaña', 2, 5, '{"sample-1", "sample-1"}');
 
 INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 1, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 3, 15, '{"sample-1", "sample-1"}');
+    VALUES(1, 1, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 2, 15, '{"sample-1", "sample-1"}');
 
 /* book 2 */
 INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
