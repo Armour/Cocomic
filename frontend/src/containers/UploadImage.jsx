@@ -7,29 +7,21 @@ const mapStateToProps = (state) => {
     const ids = [];
     const files = [];
     const imagePreviewUrls = [];
-    /* const widths = [];
-    const heights = []; */
     state.images.valueSeq().forEach((value) => {
       ids.push(value.get('id'));
       files.push(value.get('file'));
       imagePreviewUrls.push(value.get('imagePreviewUrl'));
-      /* widths.push(value.get('imgWidth'));
-      heights.push(value.get('imgHeight')); */
     });
     return {
       id: ids,
       file: files,
       imagePreviewUrl: imagePreviewUrls,
-      /* width: widths,
-      height: heights, */
     };
   }
   return {
     id: [],
     file: [],
     imagePreviewUrl: [],
-    /* width: [],
-    height: [], */
   };
 };
 

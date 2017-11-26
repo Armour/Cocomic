@@ -5,6 +5,7 @@ import { register } from 'reducers/user';
 import { images } from 'reducers/uploadImage';
 import { popularBooks } from 'reducers/popularBooks';
 import { newestBooks } from 'reducers/newestBooks';
+import { bookCover } from 'reducers/uploadBook';
 
 export default combineReducers({
   books,
@@ -13,4 +14,5 @@ export default combineReducers({
   register,
   fetchingData,
   images,
+  bookCover,
 });

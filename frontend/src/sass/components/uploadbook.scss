@@ -1,0 +1,38 @@
+.upload-book-wrapper {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+#uploadBookText {
+  position: relative;
+  top: -210px;
+  left: 110px;
+  color: $primary-color;
+}
+
+#upload_book_btn {
+  background-color: $primary-color;
+  display: block;
+  height: 52px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#upload_book_input {
+  display: none;
+}
+
+#coverPreview {
+  height: 300px;
+}
+
+#book_input_field {
+  position: relative;
+  top: 50px;
+  left: 100px;
+}
+
+#content-row {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
