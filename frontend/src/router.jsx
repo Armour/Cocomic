@@ -6,7 +6,7 @@ import { Sidenav } from 'components/Sidenav';
 
 import Header from 'containers/Header';
 
-import { HomePage } from 'pages/HomePage';
+import HomePage from 'containers/HomePage';
 import { PopularPage } from 'pages/PopularPage';
 import { NewestPage } from 'pages/NewestPage';
 import { NotFoundPage } from 'pages/NotFoundPage';
