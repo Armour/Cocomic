@@ -4,10 +4,9 @@ import md5 from 'md5';
 import mkdirp from 'mkdirp';
 import jimp from 'jimp';
 
-export const uploadImages = (req) => {
+export const uploadImages = (images) => {
   try {
     const retHash = [];
-    const { images = [] } = req.body;
 
     for (let i = 0; i < images.length; i += 1) {
       const data = images[i].imageURL.replace(/^data:image\/\w+;base64,/, '').replace(/\s/g, '+');
@@ -23,12 +22,12 @@ export const uploadImages = (req) => {
           .write(`${pathFolder}/${pathMd5.slice(4)}-ori.jpg`, (error) => { if (error) throw error; });
       });
 
-      jimp.read(buf, (err, image) => {
-        if (err) throw err;
-        image.resize(120, 120)
-          .quality(60)
-          .write(`${pathFolder}/${pathMd5.slice(4)}-sml.jpg`, (error) => { if (error) throw error; });
-      });
+      // jimp.read(buf, (err, image) => {
+      //   if (err) throw err;
+      //   image.resize(120, 120)
+      //     .quality(60)
+      //     .write(`${pathFolder}/${pathMd5.slice(4)}-sml.jpg`, (error) => { if (error) throw error; });
+      // });
 
       retHash.push(pathMd5);
     }

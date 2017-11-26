@@ -70,8 +70,16 @@ export const addBook = async (req, res) => {
     } = req.body;
     const { uid: userId } = req.session;
     const chapterImagesList = [];
-    for (let i = 0; i < chapters.length(); i += 1) {
+    for (let i = 0; i < chapters.length; i += 1) {
       chapterImagesList.push(uploadImages(chapters[i].images));
+      if (chapterImagesList[chapterImagesList.length - 1] === undefined ||
+          chapterImagesList[chapterImagesList.length - 1].length === 0) {
+        throw Error('Should have at least one image for new chapter');
+      }
+    }
+    const coverImageHash = uploadImages(coverImage);
+    if (coverImageHash === undefined || coverImageHash.length === 0) {
+      throw Error('Should have at least one image for coverimage');
     }
 
     await client.query('BEGIN');
@@ -80,19 +88,27 @@ export const addBook = async (req, res) => {
     INSERT INTO book(user_id, title, cover_image, description)
     VALUES ($1, $2, $3, $4) RETURNING id
     `;
-    const bookQueryValues = [userId, bookTitle, coverImage, description];
-    const { id: bookId } = await client.query(bookQuery, bookQueryValues);
+    const bookQueryValues = [userId, bookTitle, coverImageHash, description];
+    const { rows: newBook } = await client.query(bookQuery, bookQueryValues);
+    if (newBook === undefined || newBook.length === 0) {
+      throw Error('Book insert failed');
+    }
+    const bookId = newBook[0].id;
     // Insert chapter
     const chapterIds = [0];
     const chapterQuery = `
     INSERT INTO chapter(user_id, book_id, title, description, parent_id, images)
     VALUES ($1, $2, $3, $4, $5, $6) RETURNING id
     `;
-    for (let i = 0; i < chapters.length(); i += 1) {
-      const chapterQueryValues = [userId, bookId, chapters[i].title, chapters[i].description, chapterIds.slice(-1), chapterImagesList[i]];
-      const { id: chapterId } = await client.query(chapterQuery, chapterQueryValues); // eslint-disable-line no-await-in-loop
-      chapterIds.push(chapterId);
+    for (let i = 0; i < chapters.length; i += 1) {
+      const chapterQueryValues = [userId, bookId, chapters[i].title, chapters[i].description, chapterIds[chapterIds.length - 1], chapterImagesList[i]];
+      const { rows: newChapter } = await client.query(chapterQuery, chapterQueryValues); // eslint-disable-line no-await-in-loop
+      if (newChapter === undefined || newChapter.length === 0) {
+        throw Error('Chapter insert failed');
+      }
+      chapterIds.push(newChapter[0].id);
     }
+    chapterIds.shift();
     // Update book root_chapter_id info
     const updateQuery = `
     UPDATE book
@@ -101,9 +117,10 @@ export const addBook = async (req, res) => {
     const updateQueryValues = [chapterIds[1], bookId];
     await client.query(updateQuery, updateQueryValues);
     await client.query('COMMIT');
+    return res.json({ bookId, chapters: chapterIds, chapterImages: chapterImagesList });
   } catch (e) {
     await client.query('ROLLBACK');
-    res.status(500).json({ message: e.message });
+    return res.status(500).json({ message: e.message });
   } finally {
     client.release();
   }
