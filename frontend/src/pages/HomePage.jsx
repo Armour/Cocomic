@@ -31,7 +31,7 @@ export class HomePage extends React.Component {
   }
 
   render() {
-    const popularRow1 = this.props.popularBooks.take(3).map(el => (
+    const popularRow = this.props.popularBooks.take(6).map(el => (
       <HomeCard
         key={el.get('id')}
         img_url={el.get('coverImage')}
@@ -43,31 +43,7 @@ export class HomePage extends React.Component {
       />
     ));
 
-    const popularRow2 = this.props.popularBooks.take(6).takeLast(3).map(el => (
-      <HomeCard
-        key={el.get('id')}
-        img_url={el.get('coverImage')}
-        title={el.get('title')}
-        description={el.get('description')}
-        author={el.get('username')}
-        likes={el.get('like_sum')}
-        pageUrl={`/book/${el.get('id')}`}
-      />
-    ));
-
-    const newestRow1 = this.props.newestBooks.take(3).map(el => (
-      <HomeCard
-        key={el.get('id')}
-        img_url={el.get('coverImage')}
-        title={el.get('title')}
-        description={el.get('description')}
-        author={el.get('username')}
-        likes={el.get('like_sum')}
-        pageUrl={`/book/${el.get('id')}`}
-      />
-    ));
-
-    const newestRow2 = this.props.newestBooks.take(6).takeLast(3).map(el => (
+    const newestRow = this.props.newestBooks.take(6).map(el => (
       <HomeCard
         key={el.get('id')}
         img_url={el.get('coverImage')}
@@ -85,17 +61,11 @@ export class HomePage extends React.Component {
         <div className="main-wrap">
           <h1 className="page-title">Popular</h1>
           <div className="row">
-            {popularRow1}
-          </div>
-          <div className="row">
-            {popularRow2}
+            {popularRow}
           </div>
           <h1 className="page-title">New</h1>
           <div className="row">
-            {newestRow1}
-          </div>
-          <div className="row">
-            {newestRow2}
+            {newestRow}
           </div>
         </div>
       </div>
