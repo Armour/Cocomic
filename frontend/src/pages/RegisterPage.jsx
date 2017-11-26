@@ -10,9 +10,7 @@ export class RegisterPage extends React.Component {
     return (
       <div>
         <Intro className="intro-panel" />
-        <div className="main-wrap">
-          <User isRegister />
-        </div>
+        <User isRegister />
       </div>
     );
   }
