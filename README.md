@@ -6,6 +6,12 @@ An open-source platform for comic/manga collaboration
 
 Placeholder here
 
+## Dump sql file
+
+```
+ pg_dump -U docker -d docker -h localhost --data-only > backend/sql/data.sql
+```
+
 ## Stack
 
 * [x] [express](http://expressjs.com/) - backend

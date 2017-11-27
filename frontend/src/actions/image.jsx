@@ -8,6 +8,6 @@ const receiveImage = data => ({
 
 export const fetchImageIfNeeded = data =>
   (dispatch) => {
-    const url = `/image/getImages`;
+    const url = `/image/getImages?imageHash=${data.images[0]}`;
     dispatch(fetchDataIfNeeded(url, METHOD_POST, data, receiveImage));
   };
