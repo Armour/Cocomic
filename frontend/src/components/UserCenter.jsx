@@ -1,47 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Masonry from 'react-masonry-component';
 
-import { ComicCard } from 'components/ComicCard';
+import { HomeCard } from 'components/HomeCard';
 
 export class UserCenter extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      offset: 0,
-    };
-    this.loadMore = this.loadMore.bind(this);
+    this.getData = this.getData.bind(this);
   }
 
-  // componentWillUnmount() {
-  //   this.state = {
-  //     offset: 0,
-  //   };
-  //   this.props.unmountGallery();
-  // }
+  componentWillMount() {
+    this.getData();
+  }
 
-  loadMore() {
+  async getData() {
     if (this.props.isCollection === 0) {
-      if (this.state.offset === this.props.userCollections.size) {
-        this.props.fetchUserCollections(this.state.offset, this.props.batchSize);
-        this.state.offset += this.props.batchSize;
-      }
-    } else if (this.state.offset === this.props.userFavorates.size) {
-      this.props.fetchUserFavorates(this.state.offset, this.props.batchSize);
-      this.state.offset += this.props.batchSize;
+      this.props.fetchUserCollections();
+    } else {
+      this.props.fetchUserFavorates();
     }
   }
 
   render() {
-    const masonryOptions = {
-      transitionDuration: 1000,
-    };
-
-    const masonryClassName = this.props.isCollection === 0 ? 'user-collection' : 'user-favorates';
     const books = this.props.isCollection === 0 ? this.props.userCollections : this.props.userFavorates;
-
     const childElements = books.map(el => (
-      <ComicCard
+      <HomeCard
         key={el.get('id')}
         img_url={el.get('coverImage')}
         title={el.get('title')}
@@ -53,13 +36,9 @@ export class UserCenter extends React.Component {
 
     return (
       <div className="container">
-        <Masonry
-          className={masonryClassName}
-          options={masonryOptions}
-          onLayoutComplete={this.loadMore}
-        >
+        <div className="row">
           {childElements}
-        </Masonry>
+        </div>
       </div>
     );
   }
@@ -72,9 +51,4 @@ UserCenter.propTypes = {
   // unmountGallery: PropTypes.func.isRequired,
   userCollections: PropTypes.object.isRequired,
   userFavorates: PropTypes.object.isRequired,
-  batchSize: PropTypes.number,
-};
-
-UserCenter.defaultProps = {
-  batchSize: 6,
 };

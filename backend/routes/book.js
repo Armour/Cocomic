@@ -10,8 +10,8 @@ router.post('/addBook', addBook);
 router.post('/addChapter', addChapter);
 router.get('/popular/:offset/:amount', getPopularBooks);
 router.get('/newest/:offset/:amount', getNewestBooks);
-router.get('/userCollections/:offset/:amount', getUserCollections);
-router.get('/userFavorates/:offset/:amount', getUserFavorates);
+router.get('/userCollections', getUserCollections);
+router.get('/userFavorates', getUserFavorates);
 router.get('/:bookId', getBook);
 
 export default router;

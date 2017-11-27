@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { fetchUserCollections, fetchUserFavorates } from 'actions/book';
+import { clearGalleryBooks, fetchUserCollections, fetchUserFavorates } from 'actions/book';
 import { UserCenter } from 'components/UserCenter';
 
 const mapStateToProps = state => ({
@@ -15,9 +15,9 @@ const mapDispatchToProps = dispatch => ({
   fetchUserFavorates: (offset, amount) => {
     dispatch(fetchUserFavorates(offset, amount));
   },
-  // unmountGallery: () => {
-  //   dispatch(clearGalleryBooks());
-  // },
+  unmountGallery: () => {
+    dispatch(clearGalleryBooks());
+  },
 });
 
 export default connect(

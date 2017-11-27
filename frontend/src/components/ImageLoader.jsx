@@ -11,7 +11,7 @@ export class ImageLoader extends React.Component {
 
   render() {
     return (
-      <img src={this.props.img_data} alt={this.props.alt} />
+      <img src={`data:image/jpeg;base64,${this.props.img_data}`} alt={this.props.alt} />
     );
   }
 }

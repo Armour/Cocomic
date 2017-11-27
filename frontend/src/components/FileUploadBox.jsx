@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 let fileInput;
 let discriptionInput;
+let titleInput;
 let imagePreview = [];
 let imageIdCounter = 0;
 
@@ -14,6 +15,10 @@ const setInput = (node) => {
   fileInput = node;
 };
 
+const setTitleInput = (node) => {
+  titleInput = node;
+};
+
 export const setDescriptionInput = (node) => {
   discriptionInput = node;
 };
@@ -23,11 +28,13 @@ export class FileUploadBox extends React.Component {
     super(props);
     this.addButtonOnClick = addButtonOnClick.bind(this);
     this.setInput = setInput.bind(this);
+    this.setTitleInput = setTitleInput.bind(this);
     this.setDescriptionInput = setDescriptionInput.bind(this);
     this.uploadButtonOnClick = this.uploadButtonOnClick.bind(this);
     this.handlePicChange = this.handlePicChange.bind(this);
     this.cancelButtonOnClick = this.cancelButtonOnClick.bind(this);
     this.handleDescriptionOnBlur = this.handleDescriptionOnBlur.bind(this);
+    this.handleTitleOnBlur = this.handleTitleOnBlur.bind(this);
     this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="200" width="200" /></div>);
   }
 
@@ -35,6 +42,13 @@ export class FileUploadBox extends React.Component {
     e.preventDefault();
     this.props.descriptionUpload({
       description: discriptionInput.value,
+    });
+  }
+
+  handleTitleOnBlur(e) {
+    e.preventDefault();
+    this.props.titleUpload({
+      title: titleInput.value,
     });
   }
 
@@ -64,16 +78,23 @@ export class FileUploadBox extends React.Component {
 
   uploadButtonOnClick(e) {
     e.preventDefault();
+    const imageArray = [];
+    for (let i = 0; i < imagePreview.length; i += 1) {
+      imageArray.push({
+        imageURL: imagePreview[i].imageURL,
+      });
+    }
     this.props.imageUpload({
-      /*
-      title: "23333"
+      /* title: "23333"
       description: "......",
       parentId: "",
       bookId: "",
-      images: [{"imageURL": "imagedata......"}, {}, {}]
-      */
-      images: imagePreview,
+      images: [{"imageURL": "imagedata......"}, {}, {}] */
+      title: titleInput.value,
       description: discriptionInput.value,
+      parentId: '0',
+      bookId: '0',
+      images: imageArray,
     });
   }
 
@@ -118,6 +139,12 @@ export class FileUploadBox extends React.Component {
                 <span className="card-title center-align"> New Chapter </span>
                 <div className="row">
                   <div className="input-field col s12">
+                    <input id="title" onBlur={this.handleTitleOnBlur} ref={this.setTitleInput} type="text" className="validate" />
+                    <label htmlFor="title">Title</label>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="input-field col s12">
                     <input id="description" onBlur={this.handleDescriptionOnBlur} ref={this.setDescriptionInput} type="text" className="validate" />
                     <label htmlFor="description">Description</label>
                   </div>
@@ -154,6 +181,7 @@ FileUploadBox.propTypes = {
   imageUpload: PropTypes.func.isRequired,
   imageRemove: PropTypes.func.isRequired,
   descriptionUpload: PropTypes.func.isRequired,
+  titleUpload: PropTypes.func.isRequired,
 };
 
 FileUploadBox.defaultProps = {

@@ -1,16 +1,14 @@
-import { List, fromJS, getIn } from 'immutable';
+import { Map, getIn } from 'immutable';
 
 import { RECEIVE_IMAGE } from 'constants/uploadImage';
 
 /*
 state.getImages:{
-  imageHash:{
-    dataUrl: string
-  }
+  imageHash: imageData
 }
 */
 
-const initialState = List();
+const initialState = Map();
 
 export const getImages = (state = initialState, action) => {
   let newState = state;
@@ -18,7 +16,7 @@ export const getImages = (state = initialState, action) => {
   case RECEIVE_IMAGE:
     if (action.data.images) {
       action.data.images.forEach((value) => {
-        newState = newState.push(fromJS(value));
+        newState = newState.set(value.imageHash, value.imageData);
       });
     }
     return newState;

@@ -40,22 +40,21 @@ export class NewBook extends React.Component {
   }
   uploadButtonOnClick(e) {
     e.preventDefault();
+    const imageArray = [];
+    for (let i = 0; i < bookCover.chapterImages.length; i += 1) {
+      imageArray.push({
+        imageURL: bookCover.chapterImages[i],
+      });
+    }
     this.props.bookUpload({
-      /*
-      bookTitle: "test",
-      coverImage: [{"imageURL": "imagedata......"}],
-      description: "book description",
-      chapters: [{
-        "title": "23333"
-        "description": "......",
-        "images": [{"imageURL": "imagedata......"}, {}, {}]
-      }]
-      */
-      file: bookCover.file,
-      coverPreviewUrl: bookCover.coverPreviewUrl,
-      title: titleInput.value,
+      bookTitle: titleInput.value,
+      coverImage: [{ imageURL: bookCover.coverPreviewUrl }],
       description: discriptionInput.value,
-      chapterDescription: bookCover.chapterDescription,
+      chapters: [{
+        title: bookCover.chapterTitle,
+        description: bookCover.chapterDescription,
+        images: imageArray,
+      }],
     });
   }
 
@@ -78,6 +77,8 @@ export class NewBook extends React.Component {
       file: this.props.file,
       coverPreviewUrl: this.props.coverPreviewUrl,
       chapterDescription: this.props.chapterDescription,
+      chapterTitle: this.props.chapterTitle,
+      chapterImages: this.props.chapterImages,
     };
     if (bookCover.coverPreviewUrl) {
       this.previewSrc = bookCover.coverPreviewUrl;
@@ -134,6 +135,8 @@ NewBook.propTypes = {
   file: PropTypes.object,
   coverPreviewUrl: PropTypes.string,
   chapterDescription: PropTypes.string,
+  chapterTitle: PropTypes.string,
+  chapterImages: PropTypes.array,
   newBookCover: PropTypes.func.isRequired,
   bookUpload: PropTypes.func.isRequired,
 };
@@ -142,4 +145,6 @@ NewBook.defaultProps = {
   file: fromJS([]),
   coverPreviewUrl: '',
   chapterDescription: '',
+  chapterTitle: '',
+  chapterImages: [],
 };
