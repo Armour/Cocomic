@@ -18,6 +18,6 @@ export const newBookCover = data =>
 
 export const bookUpload = data =>
   (dispatch) => {
-    dispatch(fetchDataIfNeeded('/bookUrl', METHOD_POST, data, uploadBook));
+    dispatch(fetchDataIfNeeded('/book/addBook', METHOD_POST, data, uploadBook));
   };
 

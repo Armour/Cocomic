@@ -65,6 +65,13 @@ export class FileUploadBox extends React.Component {
   uploadButtonOnClick(e) {
     e.preventDefault();
     this.props.imageUpload({
+      /*
+      title: "23333"
+      description: "......",
+      parentId: "",
+      bookId: "",
+      images: [{"imageURL": "imagedata......"}, {}, {}]
+      */
       images: imagePreview,
       description: discriptionInput.value,
     });
@@ -81,11 +88,11 @@ export class FileUploadBox extends React.Component {
       buttonStyle = { display: 'none' };
     } else {
       buttonStyle = {
-        'background-color': '$primary-color',
+        backgroundColor: '$primary-color',
         display: 'block',
         height: '52px',
-        'padding-top': '10px',
-        'padding-bottom': '10px',
+        paddingTop: '10px',
+        paddingBottom: '10px',
         top: '20px',
       };
     }
