@@ -14,6 +14,7 @@ import { RegisterPage } from 'pages/RegisterPage';
 import { LoginPage } from 'pages/LoginPage';
 import { BookPage } from 'pages/BookPage';
 import { FilePage } from 'pages/uploadPage';
+import { UserCenterPage } from 'pages/UserCenterPage';
 
 export const router = (
   <div>
@@ -27,6 +28,7 @@ export const router = (
       <Route path="/upload" component={FilePage} />
       <Route path="/popular" component={PopularPage} />
       <Route path="/newest" component={NewestPage} />
+      <Route path="/userCenter" component={UserCenterPage} />
       <Route component={NotFoundPage} />
     </Switch>
     <Footer />

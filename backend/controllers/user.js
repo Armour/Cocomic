@@ -84,6 +84,6 @@ export const login = async (req, res) => {
       username: rows[0].username,
     });
   } catch (e) {
-    return res.status(500).json({ message: `user login error: ${e}` });
+    return res.status(500).json({ message: `user login error: ${e} ${e.stack}` });
   }
 };

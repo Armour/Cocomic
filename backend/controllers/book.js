@@ -54,6 +54,42 @@ export const getNewestBooks = async (req, res) => {
   WHERE book.user_id = userinfo.id
   ORDER BY book.id DESC LIMIT $1 Offset $2
   `;
+  try {
+    const { offset, amount } = req.params;
+    const { rows: books } = await db.query(query, [amount, offset]);
+    if (books === undefined || books.length === 0) Error();
+
+    res.json({ books });
+  } catch (e) {
+    res.status(404).json({ message: `book not found ${e.message} ` });
+  }
+};
+
+export const getUserCollections = async (req, res) => {
+  const query = `
+  SELECT b.id, b.title, b.cover_image as "coverImage", b.description, b.like_sum, u.username
+  FROM book b LEFT JOIN userinfo u ON b.user_id = u.id
+  WHERE b.user_id = $1
+  ORDER BY like_sum LIMIT $2 Offset $3
+  `;
+  try {
+    const { offset, amount } = req.params;
+    const { rows: books } = await db.query(query, [req.session.uid, amount, offset]);
+    if (books === undefined || books.length === 0) Error();
+
+    res.json({ books });
+  } catch (e) {
+    res.status(500).json({ message: `user collection errors: ${e.message} ` });
+  }
+};
+
+export const getUserFavorates = async (req, res) => {
+  const query = `
+  SELECT book.id, title, cover_image as "coverImage", description, like_sum, username
+  FROM book, userinfo
+  WHERE book.user_id = userinfo.id
+  ORDER BY book.id DESC LIMIT $1 Offset $2
+  `;
   getBooks(req, res, query);
 };
 
