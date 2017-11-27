@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
+import UploadImage from 'containers/UploadImage';
 
 let fileInput;
 let bookCover = {};
@@ -35,14 +36,33 @@ export class NewBook extends React.Component {
     this.setTitleInput = setTitleInput.bind(this);
     this.previewSrc = require('../image/dash-rectangle.png');
     this.displayText = { display: 'inline' };
+    this.newChapterBox = UploadImage;
   }
   uploadButtonOnClick(e) {
     e.preventDefault();
+    const imageArray = [];
+    for (let i = 0; i < bookCover.chapterImages.length; i += 1) {
+      imageArray.push({
+        imageURL: bookCover.chapterImages[i],
+      });
+    }
     this.props.bookUpload({
-      title: titleInput.value,
-      discription: discriptionInput.value,
-      coverfile: bookCover.file,
-      coverPreviewUrl: bookCover.coverPreviewUrl,
+      /* bookTitle: "test",
+      coverImage: [{"imageURL": "imagedata......"}],
+      description: "book description",
+      chapters: [{
+        "title": "23333"
+        "description": "......",
+        "images": [{"imageURL": "imagedata......"}, {}, {}]
+      }] */
+      bookTitle: titleInput.value,
+      coverImage: [{ imageURL: bookCover.coverPreviewUrl }],
+      description: discriptionInput.value,
+      chapters: [{
+        title: bookCover.chapterTitle,
+        description: bookCover.chapterDescription,
+        images: imageArray,
+      }],
     });
   }
 
@@ -64,48 +84,54 @@ export class NewBook extends React.Component {
     bookCover = {
       file: this.props.file,
       coverPreviewUrl: this.props.coverPreviewUrl,
+      chapterDescription: this.props.chapterDescription,
+      chapterTitle: this.props.chapterTitle,
+      chapterImages: this.props.chapterImages,
     };
     if (bookCover.coverPreviewUrl) {
       this.previewSrc = bookCover.coverPreviewUrl;
       this.displayText = { display: 'none' };
     }
     return (
-      <div className="upload-book-wrapper">
-        <div className="row">
-          <div className="col s12">
-            <div className="card">
-              <div className="card-content">
-                <span className="card-title center-align"> New Book </span>
-                <div id="content-row" className="row">
-                  <div className="col s4" id="coverPreview">
-                    <a onClick={this.imageOnClick} onKeyDown={this.imageOnClick}>
-                      <img src={this.previewSrc} alt="placeholder" width="300px" height="300px" />
-                      <p id="uploadBookText" className="flow-text" style={this.displayText}>Upload <br /> &nbsp;&nbsp;Book <br /> &nbsp;Cover</p>
-                    </a>
-                  </div>
-                  <div className="col s8">
-                    <div className="row">
-                      <div id="book_input_field" className="input-field col s8">
-                        <input id="title" ref={this.setTitleInput} type="text" />
-                        <label htmlFor="title">Book Title</label>
+      <div>
+        <div className="upload-book-wrapper">
+          <div className="row">
+            <div className="col s12">
+              <div className="card">
+                <div className="card-content">
+                  <span className="card-title center-align"> New Book </span>
+                  <div id="content-row" className="row">
+                    <div className="col s4" id="coverPreview">
+                      <a onClick={this.imageOnClick} onKeyDown={this.imageOnClick}>
+                        <img src={this.previewSrc} alt="placeholder" width="300px" height="300px" />
+                        <p id="uploadBookText" className="flow-text" style={this.displayText}>Upload <br /> &nbsp;&nbsp;Book <br /> &nbsp;Cover</p>
+                      </a>
+                    </div>
+                    <div className="col s8">
+                      <div className="row">
+                        <div id="book_input_field" className="input-field col s8">
+                          <input id="title" ref={this.setTitleInput} type="text" />
+                          <label htmlFor="title">Book Title</label>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div id="book_input_field" className="input-field col s8">
+                          <textarea id="descriptionArea" ref={this.setDescriptionInput} className="materialize-textarea" data-length="120" />
+                          <label htmlFor="descriptionArea">Description</label>
+                        </div>
                       </div>
                     </div>
-                    <div className="row">
-                      <div id="book_input_field" className="input-field col s8">
-                        <textarea id="descriptionArea" ref={this.setDescriptionInput} className="materialize-textarea" data-length="120" />
-                        <label htmlFor="descriptionArea">Description</label>
-                      </div>
-                    </div>
                   </div>
+                  <input id="upload_book_input" type="file" ref={this.setFileInput} onChange={(e) => { this.handleCoverChange(e); }} />
                 </div>
-                <div className="row">
-                  <div className="col s12">
-                    <a id="upload_book_btn" className="waves-effect waves-light btn" onClick={this.uploadButtonOnClick} onKeyDown={this.uploadButtonOnClick} role="button" tabIndex={-1}>upload</a>
-                  </div>
-                </div>
-                <input id="upload_book_input" type="file" ref={this.setFileInput} onChange={(e) => { this.handleCoverChange(e); }} />
               </div>
             </div>
+          </div>
+        </div>
+        <this.newChapterBox fromNewBook />
+        <div className="row">
+          <div className="col s8">
+            <a id="add_chapter_btn" className="waves-effect waves-light btn" onClick={this.uploadButtonOnClick} onKeyDown={this.uploadButtonOnClick} role="button" tabIndex={-1}>Upload</a>
           </div>
         </div>
       </div>
@@ -116,6 +142,9 @@ export class NewBook extends React.Component {
 NewBook.propTypes = {
   file: PropTypes.object,
   coverPreviewUrl: PropTypes.string,
+  chapterDescription: PropTypes.string,
+  chapterTitle: PropTypes.string,
+  chapterImages: PropTypes.array,
   newBookCover: PropTypes.func.isRequired,
   bookUpload: PropTypes.func.isRequired,
 };
@@ -123,4 +152,7 @@ NewBook.propTypes = {
 NewBook.defaultProps = {
   file: fromJS([]),
   coverPreviewUrl: '',
+  chapterDescription: '',
+  chapterTitle: '',
+  chapterImages: [],
 };

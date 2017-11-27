@@ -36,3 +36,13 @@
   padding-top: 50px;
   padding-bottom: 50px;
 }
+
+#add_chapter_btn {
+  background-color: $primary-color;
+  display: block;
+  height: 52px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+  left: 25%;
+}
