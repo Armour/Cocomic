@@ -11,8 +11,6 @@ export class Carousel extends React.Component {
   componentDidMount() {
     $(`#carousel-${this.props.chapterId}`).carousel({
       onCycleTo: (ele) => {
-        // $(`#${this.props.chapterId} #next-chapter-title`).text(`Chapter ${$(ele).index().toString()}`);
-        // $(`#${this.props.chapterId} #next-chapter-description`).text(`${$(ele).index().toString()} So, after those actions get dispatched, where do they get handled? That happens in the reducer.`);
         this.selectItem($(ele).index());
         this.props.selectBranch(this.props.childrenIds.get($(ele).index()));
       },
@@ -26,14 +24,11 @@ export class Carousel extends React.Component {
   }
 
   render() {
-    if (this.props.childrenIds === undefined) {
-      return (<div>end of book</div>);
-    }
     const branchComp = this.props.childrenIds.map((childId, index) => {
       const chapter = this.props.getChapter(childId);
       const imageUrl = getIn(chapter, ['images', 0]);
       return (
-        <a className="carousel-item" href={index} key={childId} >
+        <a className="carousel-item" key={childId} >
           <img src={require(`../image/${imageUrl}.jpg`)} alt={index} />
         </a>
       );
