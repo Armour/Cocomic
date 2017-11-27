@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { imageInsert, imageUpload, imageRemove } from 'actions/uploadImage';
+import { imageInsert, imageUpload, imageRemove, descriptionUpload } from 'actions/uploadImage';
 import { FileUploadBox } from 'components/FileUploadBox';
 
 const mapStateToProps = (state) => {
@@ -8,9 +8,11 @@ const mapStateToProps = (state) => {
     const files = [];
     const imagePreviewUrls = [];
     state.images.valueSeq().forEach((value) => {
-      ids.push(value.get('id'));
-      files.push(value.get('file'));
-      imagePreviewUrls.push(value.get('imagePreviewUrl'));
+      if (typeof value !== 'string') {
+        ids.push(value.get('id'));
+        files.push(value.get('file'));
+        imagePreviewUrls.push(value.get('imagePreviewUrl'));
+      }
     });
     return {
       id: ids,
@@ -34,6 +36,9 @@ const mapDispatchToProps = dispatch => ({
   },
   imageRemove: (imgId) => {
     dispatch(imageRemove(imgId));
+  },
+  descriptionUpload: (data) => {
+    dispatch(descriptionUpload(data));
   },
 });
 

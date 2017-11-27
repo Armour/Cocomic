@@ -4,6 +4,11 @@ import { NewBook } from 'components/UploadBook';
 import { fromJS } from 'immutable';
 
 const mapStateToProps = (state) => {
+  let returnState = {
+    file: fromJS([]),
+    chapterDescription: '',
+    coverPreviewUrl: '',
+  };
   if (state.bookCover) {
     let fileObj;
     let coverUrl;
@@ -11,15 +16,21 @@ const mapStateToProps = (state) => {
       fileObj = value.get('file');
       coverUrl = value.get('coverPreviewUrl');
     });
-    return {
+    returnState = {
       file: fileObj,
       coverPreviewUrl: coverUrl,
     };
   }
-  return {
-    file: fromJS([]),
-    coverPreviewUrl: '',
-  };
+  if (state.images) {
+    let des;
+    state.images.valueSeq().forEach((value) => {
+      if (typeof value === 'string') {
+        des = value;
+      }
+    });
+    returnState.chapterDescription = des;
+  }
+  return returnState;
 };
 
 const mapDispatchToProps = dispatch => ({
