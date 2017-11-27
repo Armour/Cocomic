@@ -13,7 +13,7 @@ import { NotFoundPage } from 'pages/NotFoundPage';
 import { RegisterPage } from 'pages/RegisterPage';
 import { LoginPage } from 'pages/LoginPage';
 import { BookPage } from 'pages/BookPage';
-import { FilePage } from 'pages/uploadPage';
+import { FilePage } from 'pages/UploadPage';
 import { UserCenterPage } from 'pages/UserCenterPage';
 import { NewBookPage } from 'pages/UploadBookPage';
 
