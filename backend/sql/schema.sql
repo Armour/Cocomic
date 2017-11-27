@@ -58,8 +58,3 @@ $update_likesum$ LANGUAGE plpgsql;
 
 CREATE TRIGGER update_likesum BEFORE INSERT OR DELETE ON likeinfo
     FOR EACH ROW EXECUTE PROCEDURE update_likesum();
-
-CREATE VIEW book_chapter_like AS
-    SELECT *
-    FROM book b
-        LEFT JOIN chapter
