@@ -5,7 +5,7 @@ export class HomeCard extends React.Component {
   render() {
     return (
       <a href={this.props.pageUrl}>
-        <div className="col s12 m4">
+        <div className="col s12 m6 l4">
           <div className="card hoverable">
             <div className="card-image card-image-fix">
               <div className="card-image-cropper">

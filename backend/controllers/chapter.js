@@ -43,10 +43,16 @@ export const addChapter = async (req, res) => {
     INSERT INTO chapter(user_id, book_id, title, description, parent_id, images)
     VALUES ($1, $2, $3, $4, $5, $6) RETURNING id
     `;
+    if (chapterImages === undefined || chapterImages.length === 0) {
+      throw Error('Should have at least one image for new chapter');
+    }
     const chapterQueryValues = [userId, bookId, title, description, parentId, chapterImages];
-    const { id: chapterId } = await db.query(chapterQuery, chapterQueryValues);
-    res.json({ chapterId });
+    const { rows } = await db.query(chapterQuery, chapterQueryValues);
+    if (rows !== undefined && rows.length !== 0) {
+      return res.json({ chapterId: rows[0].id, images: chapterImages });
+    }
+    throw Error('insert failed');
   } catch (e) {
-    res.status(404).json({ message: 'book not found' });
+    return res.status(404).json({ message: e.message });
   }
 };

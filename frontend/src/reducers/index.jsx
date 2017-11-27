@@ -7,6 +7,7 @@ import { popularBooks } from 'reducers/popularBooks';
 import { newestBooks } from 'reducers/newestBooks';
 import { userCollections } from 'reducers/userCollections';
 import { userFavorates } from 'reducers/userFavorates';
+import { bookCover } from 'reducers/uploadBook';
 
 export default combineReducers({
   books,
@@ -17,4 +18,5 @@ export default combineReducers({
   images,
   userCollections,
   userFavorates,
+  bookCover,
 });
