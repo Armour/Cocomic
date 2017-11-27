@@ -26,8 +26,10 @@ export class ChapterEndCard extends React.Component {
     }
     const childrenIds = this.props.getChapter(this.props.chapterId).get('childrenIds');
     let chapterEndComp;
-    if (childrenIds === undefined || childrenIds.length === 0) {
+    if (childrenIds === undefined || childrenIds.size === 0) {
       chapterEndComp = (<div className="card-content"><p className="chapter-end-text"> End of Book </p></div>);
+    } else if (childrenIds.size === 1) {
+      chapterEndComp = (<div className="card-content"><p className="chapter-end-text"> End of Chapter </p></div>);
     } else {
       chapterEndComp = (
         <div className="card-content">
