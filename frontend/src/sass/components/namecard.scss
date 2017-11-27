@@ -1,22 +1,15 @@
-.name-card-wrapper {
-  padding-top: 30px;
-  padding-bottom: 30px;
+@media #{$medium-and-up} {
+  .name-card-wrapper {
+    padding-top: 30px;
+    padding-bottom: 30px;
 
-  /* centering user card */
-  width: 600px;
-  margin: 0 auto;
+    /* centering user card */
+    width: 600px;
+    margin: 0 auto;
+  }
 }
 
 #user_card_title {
   font-weight: bold;
   font-size: 200%;
 }
-
-.user-card-btn {
-  background-color: $primary-color;
-  display: block;
-  height: 50px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-

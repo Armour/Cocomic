@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { Footer } from 'components/Footer';
-import { Sidenav } from 'components/Sidenav';
 
+import Sidenav from 'containers/Sidenav';
 import Header from 'containers/Header';
 
 import HomePage from 'containers/HomePage';

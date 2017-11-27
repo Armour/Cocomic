@@ -1,3 +1,5 @@
-.login-wrap {
-  min-height: 468px;
+@media #{$medium-and-up} {
+  .login-wrap {
+    min-height: 468px;
+  }
 }

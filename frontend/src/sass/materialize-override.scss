@@ -9,3 +9,8 @@
 .input-field input:focus + label {
   color: $primary-color !important;
 }
+
+.row .input-field input:focus {
+  border-bottom: 1px solid $primary-color !important;
+  box-shadow: 0 1px 0 0 $primary-color !important;
+}

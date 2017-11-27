@@ -54,9 +54,9 @@ export class UserCard extends React.Component {
   render() {
     let submitBtn;
     if (this.props.isRegister) {
-      submitBtn = <button id="create_account_btn" className="waves-effect waves-light btn user-card-btn" onClick={this.onClickRegister} onKeyDown={this.handleKeyDown}>Create Account</button>;
+      submitBtn = <button id="create_account_btn" className="waves-effect waves-light btn blue" onClick={this.onClickRegister} onKeyDown={this.handleKeyDown}>Create Account</button>;
     } else {
-      submitBtn = <button id="login_btn" className="waves-effect waves-light btn user-card-btn" onClick={this.onClickLogin} onKeyDown={this.handleKeyDown}>Login</button>;
+      submitBtn = <button id="login_btn" className="waves-effect waves-light btn blue" onClick={this.onClickLogin} onKeyDown={this.handleKeyDown}>Login</button>;
     }
     return (
       <div className="name-card-wrapper">
