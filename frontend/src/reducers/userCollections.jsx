@@ -16,14 +16,10 @@ export const userCollections = (state = initialState, action) => {
   let newState = state;
   switch (action.type) {
   case RECEIVE_USER_COLLECTIONS:
-    if (action.data.books) {
-      action.data.books.forEach((value) => {
-        newState = newState.push(fromJS(value));
-      });
+    if (action.data !== undefined && action.data.books !== undefined) {
+      newState = List(fromJS(action.data.books));
     }
     return newState;
-  // case CLEAR_GALLERY_BOOKS:
-  //   return List();
   default:
     return state;
   }

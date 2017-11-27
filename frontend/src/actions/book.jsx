@@ -62,16 +62,14 @@ export const fetchNewestBooks = (offset, amount) =>
     dispatch(fetchDataIfNeeded(url, METHOD_GET, {}, receiveNewestBooks));
   };
 
-export const fetchUserCollections = (offset, amount) =>
+export const fetchUserCollections = () =>
   (dispatch) => {
-    const url = `/book/userCollections/${offset}/${amount}`;
-    dispatch(fetchDataIfNeeded(url, METHOD_GET, {}, receiveUserCollections));
+    dispatch(fetchDataIfNeeded('/book/userCollections', METHOD_GET, {}, receiveUserCollections));
   };
 
-export const fetchUserFavorates = (offset, amount) =>
+export const fetchUserFavorates = () =>
   (dispatch) => {
-    const url = `/book/userFavorates/${offset}/${amount}`;
-    dispatch(fetchDataIfNeeded(url, METHOD_GET, {}, receiveFavorates));
+    dispatch(fetchDataIfNeeded('/book/userFavorates', METHOD_GET, {}, receiveFavorates));
   };
 
 export const fetchBookIfNeeded = bookId =>
