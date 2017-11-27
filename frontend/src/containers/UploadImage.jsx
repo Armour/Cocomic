@@ -3,11 +3,11 @@ import { imageInsert, imageUpload, imageRemove, descriptionUpload, titleUpload }
 import { FileUploadBox } from 'components/FileUploadBox';
 
 const mapStateToProps = (state) => {
-  if (state.images) {
+  if (state.uploadImages) {
     const ids = [];
     const files = [];
     const imagePreviewUrls = [];
-    state.images.valueSeq().forEach((value) => {
+    state.uploadImages.valueSeq().forEach((value) => {
       if (typeof value !== 'string') {
         ids.push(value.get('id'));
         files.push(value.get('file'));

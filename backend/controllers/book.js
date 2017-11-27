@@ -127,7 +127,7 @@ export const addBook = async (req, res) => {
     INSERT INTO book(user_id, title, cover_image, description)
     VALUES ($1, $2, $3, $4) RETURNING id
     `;
-    const bookQueryValues = [userId, bookTitle, coverImageHash, description];
+    const bookQueryValues = [userId, bookTitle, coverImageHash[0], description];
     const { rows: newBook } = await client.query(bookQuery, bookQueryValues);
     if (newBook === undefined || newBook.length === 0) {
       throw Error('Book insert failed');
@@ -147,7 +147,6 @@ export const addBook = async (req, res) => {
       }
       chapterIds.push(newChapter[0].id);
     }
-    chapterIds.shift();
     // Update book root_chapter_id info
     const updateQuery = `
     UPDATE book
@@ -156,6 +155,7 @@ export const addBook = async (req, res) => {
     const updateQueryValues = [chapterIds[1], bookId];
     await client.query(updateQuery, updateQueryValues);
     await client.query('COMMIT');
+    chapterIds.shift(); // remove 0 root_id
     return res.json({ bookId, chapters: chapterIds, chapterImages: chapterImagesList });
   } catch (e) {
     await client.query('ROLLBACK');

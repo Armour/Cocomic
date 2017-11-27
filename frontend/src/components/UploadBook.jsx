@@ -47,14 +47,6 @@ export class NewBook extends React.Component {
       });
     }
     this.props.bookUpload({
-      /* bookTitle: "test",
-      coverImage: [{"imageURL": "imagedata......"}],
-      description: "book description",
-      chapters: [{
-        "title": "23333"
-        "description": "......",
-        "images": [{"imageURL": "imagedata......"}, {}, {}]
-      }] */
       bookTitle: titleInput.value,
       coverImage: [{ imageURL: bookCover.coverPreviewUrl }],
       description: discriptionInput.value,

@@ -4,7 +4,7 @@ import { RECEIVE_IMAGE, UPLOAD_IMAGE, REMOVE_IMAGE, UPLOAD_DESCRIPTION, UPLOAD_T
 
 const initialState = Map();
 
-export const images = (state = initialState, action) => {
+export const uploadImages = (state = initialState, action) => {
   let newState = state;
   switch (action.type) {
   case RECEIVE_IMAGE:

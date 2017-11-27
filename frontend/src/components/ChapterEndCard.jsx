@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { Carousel } from 'components/Carousel';
+import ImageLoader from 'containers/ImageLoader';
 
 export class ChapterEndCard extends React.Component {
   constructor(props) {
@@ -48,7 +50,7 @@ export class ChapterEndCard extends React.Component {
         <div className="col s12 l6 offset-l3">
           <div className="card">
             <div className="card-image">
-              <img src={require(`../image/${this.props.img_url}.jpg`)} alt="comic-cover" />
+              <ImageLoader img_url={this.props.img_url} alt="comic-cover" />
               <a
                 className="btn-floating halfway-fab waves-effect waves-light chapter-end-btn chapter-end-like-btn"
                 onClick={this.onClickToggleLike}

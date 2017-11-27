@@ -35,7 +35,6 @@ export class Header extends React.Component {
       header = (
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li key="home"><NavLink activeClassName="active-link" exact to="/">Home</NavLink></li>
-          <li key="upload"><NavLink activeClassName="active-link" to="/upload">Upload</NavLink></li>
           <li key="newbook"><NavLink activeClassName="active-link" to="/newbook">Newbook</NavLink></li>
           <li key="popular"><NavLink activeClassName="active-link" to="/popular">Popular</NavLink></li>
           <li key="newest"><NavLink activeClassName="active-link" to="/newest">New</NavLink></li>

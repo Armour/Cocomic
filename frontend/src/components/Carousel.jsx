@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getIn } from 'immutable';
 
+import ImageLoader from 'containers/ImageLoader';
+
 export class Carousel extends React.Component {
   constructor() {
     super();
@@ -29,7 +31,7 @@ export class Carousel extends React.Component {
       const imageUrl = getIn(chapter, ['images', 0]);
       return (
         <a className="carousel-item" key={childId} >
-          <img src={require(`../image/${imageUrl}.jpg`)} alt={index} />
+          <ImageLoader img_url={imageUrl} alt={index.toString()} />
         </a>
       );
     });

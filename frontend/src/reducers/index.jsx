@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 import { fetchingData } from 'reducers/fetchingData';
+import { getImages } from 'reducers/getImage';
 import { books } from 'reducers/books';
 import { register } from 'reducers/user';
-import { images } from 'reducers/uploadImage';
+import { uploadImages } from 'reducers/uploadImage';
 import { popularBooks } from 'reducers/popularBooks';
 import { newestBooks } from 'reducers/newestBooks';
 import { userCenter } from 'reducers/userCenter';
@@ -12,9 +13,10 @@ export default combineReducers({
   books,
   popularBooks,
   newestBooks,
+  getImages,
   register,
   fetchingData,
-  images,
   userCenter,
+  uploadImages,
   bookCover,
 });

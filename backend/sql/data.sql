@@ -1,138 +1,89 @@
-INSERT INTO userinfo(username, email, password) VALUES('Kingston', 'k@k.com', 'docker');
-INSERT INTO userinfo(username, email, password) VALUES('Ruijia', 'mao@123.com', '123456');
+--
+-- PostgreSQL database dump
+--
 
-/* book 1 */
-INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
-    VALUES(1, 'Conan Escalar Montañas', 'sample-1', 'Conan escalar montañas todos los sábados.', 1);
+-- Dumped from database version 9.5.10
+-- Dumped by pg_dump version 9.5.10
 
-INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
-    VALUES(1, 1, 'Conan Prepara el Equipaje', 'Conan hace la maleta y reserve un habitación individual', 23, '{"sample-1", "sample-1"}');
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
 
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 1, 'Conan Va a las Montañas', 'Conan compra un pasaje de avión y llega al aeropuerte', 1, 17, '{"sample-1", "sample-1"}');
+SET search_path = public, pg_catalog;
 
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 1, 'Conan acampa', 'Conan duerme en la tienda de campaña', 2, 5, '{"sample-1", "sample-1"}');
+--
+-- Data for Name: book; Type: TABLE DATA; Schema: public; Owner: docker
+--
 
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 1, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 2, 15, '{"sample-1", "sample-1"}');
+COPY book (id, user_id, title, cover_image, description, like_sum, root_chapter_id, created_at) FROM stdin;
+1	3	Test book 1	658643f84aba87a24667f9f30bb84583	Test description of book 1	0	1	2017-11-27 05:37:05.888175
+2	3	Test book 2	f079751ff41532e36b4bc350e7c1ee76	Description for test book 2	0	2	2017-11-27 05:57:47.269069
+3	3	Test book 3	e39a073b04465f91e8011c4ba683762b	Description for test book 3	0	3	2017-11-27 06:00:40.527435
+\.
 
-/* book 2 */
-INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
-    VALUES(2, 'Conan Escalar Montañas', 'conan_cover_1', 'Conan escalar montañas todos los sábados.', 5);
 
-INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
-    VALUES(2, 2, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 15, '{"chapter_1_1", "chapter_1_2", "chapter_1_3", "chapter_1_4"}');
+--
+-- Name: book_id_seq; Type: SEQUENCE SET; Schema: public; Owner: docker
+--
 
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 2, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 5, 15, '{"chapter_2_1", "chapter_2_2", "chapter_2_3", "chapter_2_4"}');
+SELECT pg_catalog.setval('book_id_seq', 3, true);
 
-/* book 3 */
-INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
-    VALUES(1, 'Conan Escalar Montañas', 'conan_cover_2', 'Conan escalar montañas todos los sábados.', 7);
 
-INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
-    VALUES(1, 3, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 15, '{"chapter_1_1", "chapter_1_2", "chapter_1_3", "chapter_1_4"}');
+--
+-- Data for Name: chapter; Type: TABLE DATA; Schema: public; Owner: docker
+--
 
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 3, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 7, 15, '{"chapter_2_1", "chapter_2_2", "chapter_2_3", "chapter_2_4"}');
+COPY chapter (id, user_id, book_id, title, description, parent_id, like_sum, images, create_date) FROM stdin;
+1	3	1	Test chapter 1 for book 1	23333	0	0	{58166c0ea8b1c4111747917ef747b590,64d38d494c3b735944686a6915bf0630,30daac764f2029edcdbb643b2d0ab898,92de50a684145256dc2a6bbca013dfc6}	2017-11-27 05:37:05.888175
+2	3	2	Test chapter 1 for test book 2	Its's not a bug it's a feature!!!	0	0	{6ee9e7dd24e2927fc2abbc3983a8304e,8ea0655247ac97b3463b49e36a116c1c,f40d19a5ab6b7bd7b547b7666f4b358b,1ee881e0bc988ebe86031bfbbffd42bb}	2017-11-27 05:57:47.269069
+3	3	3	Test chapter 1 for test book 3	0.0 <script> alert("test") </script>	0	0	{d8eae4ecf06ce8c5384a0f31693a42f9,d24200218cd7a29afba2b38c7e9e6455,d7bbed021ba8fc7bb32898b0e9acd29f}	2017-11-27 06:00:40.527435
+\.
 
-/* book 4 */
-INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
-    VALUES(2, 'Conan Escalar Montañas', 'conan_cover_3', 'Conan escalar montañas todos los sábados.', 9);
 
-INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
-    VALUES(2, 4, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 15, '{"chapter_1_1", "chapter_1_2", "chapter_1_3", "chapter_1_4"}');
+--
+-- Name: chapter_id_seq; Type: SEQUENCE SET; Schema: public; Owner: docker
+--
 
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 4, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 9, 15, '{"chapter_2_1", "chapter_2_2", "chapter_2_3", "chapter_2_4"}');
+SELECT pg_catalog.setval('chapter_id_seq', 3, true);
 
-/* book 5 */
-INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
-    VALUES(1, 'Conan Escalar Montañas', 'conan_cover_4', 'Conan escalar montañas todos los sábados.', 11);
 
-INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
-    VALUES(1, 5, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 15, '{"chapter_1_1", "chapter_1_2", "chapter_1_3", "chapter_1_4"}');
+--
+-- Data for Name: userinfo; Type: TABLE DATA; Schema: public; Owner: docker
+--
 
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 5, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 11, 15, '{"chapter_2_1", "chapter_2_2", "chapter_2_3", "chapter_2_4"}');
+COPY userinfo (id, username, password, email, create_date) FROM stdin;
+1	Kingston	docker	k@k.com	2017-11-27 05:31:37.62178
+2	Ruijia	123456	mao@123.com	2017-11-27 05:31:37.623147
+3	Armour	123456	armourg@sfu.ca	2017-11-27 05:31:37.623791
+\.
 
-/* book 6 */
-INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
-    VALUES(2, 'Conan Escalar Montañas', 'conan_cover_5', 'Conan escalar montañas todos los sábados.', 13);
 
-INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
-    VALUES(2, 6, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 15, '{"chapter_1_1", "chapter_1_2", "chapter_1_3", "chapter_1_4"}');
+--
+-- Data for Name: likeinfo; Type: TABLE DATA; Schema: public; Owner: docker
+--
 
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 6, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 13, 15, '{"chapter_2_1", "chapter_2_2", "chapter_2_3", "chapter_2_4"}');
+COPY likeinfo (id, user_id, chapter_id) FROM stdin;
+\.
 
-/* book 7 */
-INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
-    VALUES(1, 'Conan Escalar Montañas', 'conan_cover_6', 'Conan escalar montañas todos los sábados.', 15);
 
-INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
-    VALUES(1, 7, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 15, '{"chapter_1_1", "chapter_1_2", "chapter_1_3", "chapter_1_4"}');
+--
+-- Name: likeinfo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: docker
+--
 
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 7, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 15, 15, '{"chapter_2_1", "chapter_2_2", "chapter_2_3", "chapter_2_4"}');
+SELECT pg_catalog.setval('likeinfo_id_seq', 1, false);
 
-/* book 8 */
-INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
-    VALUES(2, 'Conan Escalar Montañas', 'conan_cover_1', 'Conan escalar montañas todos los sábados.', 17);
 
-INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
-    VALUES(2, 2, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 15, '{"chapter_1_1", "chapter_1_2", "chapter_1_3", "chapter_1_4"}');
+--
+-- Name: userinfo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: docker
+--
 
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 2, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 17, 15, '{"chapter_2_1", "chapter_2_2", "chapter_2_3", "chapter_2_4"}');
+SELECT pg_catalog.setval('userinfo_id_seq', 3, true);
 
-/* book 9 */
-INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
-    VALUES(1, 'Conan Escalar Montañas', 'conan_cover_2', 'Conan escalar montañas todos los sábados.', 19);
 
-INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
-    VALUES(1, 3, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 15, '{"chapter_1_1", "chapter_1_2", "chapter_1_3", "chapter_1_4"}');
-
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 3, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 19, 15, '{"chapter_2_1", "chapter_2_2", "chapter_2_3", "chapter_2_4"}');
-
-/* book 10 */
-INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
-    VALUES(2, 'Conan Escalar Montañas', 'conan_cover_3', 'Conan escalar montañas todos los sábados.', 21);
-
-INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
-    VALUES(2, 4, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 15, '{"chapter_1_1", "chapter_1_2", "chapter_1_3", "chapter_1_4"}');
-
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 4, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 21, 15, '{"chapter_2_1", "chapter_2_2", "chapter_2_3", "chapter_2_4"}');
-
-/* book 11 */
-INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
-    VALUES(1, 'Conan Escalar Montañas', 'conan_cover_4', 'Conan escalar montañas todos los sábados.', 23);
-
-INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
-    VALUES(1, 5, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 15, '{"chapter_1_1", "chapter_1_2", "chapter_1_3", "chapter_1_4"}');
-
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 5, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 23, 15, '{"chapter_2_1", "chapter_2_2", "chapter_2_3", "chapter_2_4"}');
-
-/* book 12 */
-INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
-    VALUES(2, 'Conan Escalar Montañas', 'conan_cover_5', 'Conan escalar montañas todos los sábados.', 25);
-
-INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
-    VALUES(2, 6, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 15, '{"chapter_1_1", "chapter_1_2", "chapter_1_3", "chapter_1_4"}');
-
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 6, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 25, 15, '{"chapter_2_1", "chapter_2_2", "chapter_2_3", "chapter_2_4"}');
-
-/* book 13 */
-INSERT INTO book(user_id, title, cover_image, description, root_chapter_id)
-    VALUES(1, 'Conan Escalar Montañas', 'conan_cover_6', 'Conan escalar montañas todos los sábados.', 27);
-
-INSERT INTO chapter(user_id, book_id, title, description, like_sum, images)
-    VALUES(1, 7, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 15, '{"chapter_1_1", "chapter_1_2", "chapter_1_3", "chapter_1_4"}');
-
-INSERT INTO chapter(user_id, book_id, title, description, parent_id, like_sum, images)
-    VALUES(1, 7, 'Conan compra un pez', 'Conan ve a hombre qien está pescando, y compra un pez de él.', 27, 15, '{"chapter_2_1", "chapter_2_2", "chapter_2_3", "chapter_2_4"}');
+--
+-- PostgreSQL database dump complete
+--

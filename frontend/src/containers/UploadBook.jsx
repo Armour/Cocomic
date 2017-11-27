@@ -21,19 +21,19 @@ const mapStateToProps = (state) => {
       coverPreviewUrl: coverUrl,
     };
   }
-  if (state.images) {
+  if (state.uploadImages) {
     let des;
     let title;
-    state.images.keySeq().forEach((key) => {
+    state.uploadImages.keySeq().forEach((key) => {
       if (key === 'title') {
-        title = state.images.get(key);
+        title = state.uploadImages.get(key);
       }
       if (key === 'description') {
-        des = state.images.get(key);
+        des = state.uploadImages.get(key);
       }
     });
     const imagePreviewUrls = [];
-    state.images.valueSeq().forEach((value) => {
+    state.uploadImages.valueSeq().forEach((value) => {
       if (typeof value !== 'string') {
         imagePreviewUrls.push(value.get('imagePreviewUrl'));
       }

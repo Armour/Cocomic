@@ -40,13 +40,16 @@ export const uploadImages = (images) => {
 export const getImages = (req, res) => {
   try {
     const retImages = [];
-    const { images = [] } = req.body;
+    const { images: imagesHash = [] } = req.body;
 
-    for (let i = 0; i < images.length; i += 1) {
-      const pathMd5 = images[i];
+    for (let i = 0; i < imagesHash.length; i += 1) {
+      const pathMd5 = imagesHash[i];
       const pathFolder = path.resolve(__dirname, '../uploads', pathMd5.slice(0, 2), pathMd5.slice(2, 4));
-      const data = fs.readFileSync(`${pathFolder}/${pathMd5.slice(4)}-ori.jpg`, 'utf8');
-      retImages.push(data);
+      const data = fs.readFileSync(`${pathFolder}/${pathMd5.slice(4)}-ori.jpg`).toString('base64');
+      retImages.push({
+        imageHash: imagesHash[i],
+        imageData: data,
+      });
     }
 
     return res.json({
