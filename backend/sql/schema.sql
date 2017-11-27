@@ -36,8 +36,9 @@ CREATE TABLE userinfo (
 CREATE TABLE likeinfo (
     id serial primary key,
     user_id integer NOT NULL references userinfo(id),
+    book_id integer NOT NULL references book(id),
     chapter_id integer NOT NULL references chapter(id),
-    UNIQUE (user_id, chapter_id)
+    UNIQUE (user_id, book_id, chapter_id)
 );
 
 CREATE FUNCTION update_likesum() RETURNS trigger AS $update_likesum$
@@ -57,3 +58,8 @@ $update_likesum$ LANGUAGE plpgsql;
 
 CREATE TRIGGER update_likesum BEFORE INSERT OR DELETE ON likeinfo
     FOR EACH ROW EXECUTE PROCEDURE update_likesum();
+
+CREATE VIEW book_chapter_like AS
+    SELECT *
+    FROM book b
+        LEFT JOIN chapter

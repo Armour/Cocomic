@@ -15,7 +15,7 @@ export const updateLike = async (req, res) => {
     }
 
     const chapterId = parseInt(req.body.chapterId, 10);
-    const toggleQuery = req.body.toggle ? 'INSERT INTO likeinfo(user_id, chapter_id) VALUES($1, $2)' : 'DELETE FROM likeinfo WHERE user_id = $1 AND chapter_id = $2';
+    const toggleQuery = req.body.toggle ? 'INSERT INTO likeinfo(user_id, chapter_id, book_id) SELECT $1, id, book_id FROM chapter WHERE id = $2;' : 'DELETE FROM likeinfo WHERE user_id = $1 AND chapter_id = $2';
     await db.query(toggleQuery, [req.session.uid, chapterId]);
     return res.status(200).json({
       code: 0,

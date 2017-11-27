@@ -83,8 +83,9 @@ export const getUserCollections = async (req, res) => {
 export const getUserFavorates = async (req, res) => {
   const query = `
   SELECT b.id, b.title, b.cover_image as "coverImage", b.description, b.like_sum, u.username
-  FROM book b LEFT JOIN userinfo u ON b.user_id = u.id
-  WHERE b.user_id = $1 ORDER BY like_sum
+  FROM book b 
+    LEFT JOIN userinfo u ON b.user_id = u.id
+  WHERE b.id = (SELECT book_id FROM likeinfo l WHERE l.user_id = $1)  ORDER BY like_sum
   `;
   try {
     const { rows: books } = await db.query(query, [req.session.uid]);

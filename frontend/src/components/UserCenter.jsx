@@ -19,13 +19,15 @@ export class UserCenter extends React.Component {
       <div className="container">
         <div className="row">
           {childElements}
-          <a href="/newbook">
-            <div className="col s12 m6 l4">
-              <div className="valign-wrapper newbook-center">
-                <a className="btn-floating btn-large waves-effect waves-light blue center-align"><i className="material-icons">add</i></a>
+          {this.props.isCollection &&
+            <a href="/newbook">
+              <div className="col s12 m6 l4">
+                <div className="valign-wrapper newbook-center">
+                  <a className="btn-floating btn-large waves-effect waves-light blue center-align"><i className="material-icons">add</i></a>
+                </div>
               </div>
-            </div>
-          </a>
+            </a>
+          }
         </div>
       </div>
     );
@@ -33,5 +35,6 @@ export class UserCenter extends React.Component {
 }
 
 UserCenter.propTypes = {
+  isCollection: PropTypes.bool.isRequired,
   books: PropTypes.object.isRequired,
 };
