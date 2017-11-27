@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { imageInsert, imageUpload, imageRemove, descriptionUpload } from 'actions/uploadImage';
+import { imageInsert, imageUpload, imageRemove, descriptionUpload, titleUpload } from 'actions/uploadImage';
 import { FileUploadBox } from 'components/FileUploadBox';
 
 const mapStateToProps = (state) => {
@@ -39,6 +39,9 @@ const mapDispatchToProps = dispatch => ({
   },
   descriptionUpload: (data) => {
     dispatch(descriptionUpload(data));
+  },
+  titleUpload: (data) => {
+    dispatch(titleUpload(data));
   },
 });
 

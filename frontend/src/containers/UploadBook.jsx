@@ -23,12 +23,24 @@ const mapStateToProps = (state) => {
   }
   if (state.images) {
     let des;
+    let title;
+    state.images.keySeq().forEach((key) => {
+      if (key === 'title') {
+        title = state.images.get(key);
+      }
+      if (key === 'description') {
+        des = state.images.get(key);
+      }
+    });
+    const imagePreviewUrls = [];
     state.images.valueSeq().forEach((value) => {
-      if (typeof value === 'string') {
-        des = value;
+      if (typeof value !== 'string') {
+        imagePreviewUrls.push(value.get('imagePreviewUrl'));
       }
     });
     returnState.chapterDescription = des;
+    returnState.chapterTitle = title;
+    returnState.chapterImages = imagePreviewUrls;
   }
   return returnState;
 };
