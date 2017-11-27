@@ -1,5 +1,5 @@
 import { METHOD_GET, METHOD_POST, fetchDataIfNeeded } from 'actions/fetchApi';
-import { RECEIVE_BOOK, CLEAR_GALLERY_BOOKS, RECEIVE_POPULAR_BOOKS, RECEIVE_NEWEST_BOOKS, LIKE_CHAPTER, RECEIVE_USER_COLLECTIONS, RECEIVE_FAVORATES } from 'constants/book';
+import { RECEIVE_BOOK, CLEAR_GALLERY_BOOKS, RECEIVE_POPULAR_BOOKS, RECEIVE_NEWEST_BOOKS, LIKE_CHAPTER, RECEIVE_USER_COLLECTIONS, RECEIVE_FAVORATES, TOGGLE_USER_CENTER_TAB } from 'constants/book';
 
 /*
 data:{
@@ -50,6 +50,10 @@ const receiveUserCollections = data => ({
   data,
 });
 
+export const toggleUserCenterTab = () => ({
+  type: TOGGLE_USER_CENTER_TAB,
+});
+
 export const fetchPopularBooks = (offset, amount) =>
   (dispatch) => {
     const url = `/book/popular/${offset}/${amount}`;
@@ -62,14 +66,23 @@ export const fetchNewestBooks = (offset, amount) =>
     dispatch(fetchDataIfNeeded(url, METHOD_GET, {}, receiveNewestBooks));
   };
 
-export const fetchUserCollections = () =>
+const fetchUserCollections = () =>
   (dispatch) => {
     dispatch(fetchDataIfNeeded('/book/userCollections', METHOD_GET, {}, receiveUserCollections));
   };
 
-export const fetchUserFavorates = () =>
+const fetchUserFavorates = () =>
   (dispatch) => {
     dispatch(fetchDataIfNeeded('/book/userFavorates', METHOD_GET, {}, receiveFavorates));
+  };
+
+export const fetchUserCenterBooks = () =>
+  (dispatch, getState) => {
+    if (getState().userCenter.get('isCollection')) {
+      dispatch(fetchUserCollections());
+    } else {
+      dispatch(fetchUserFavorates());
+    }
   };
 
 export const fetchBookIfNeeded = bookId =>

@@ -1,10 +1,23 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 export class UserCenterTab extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.onClickToggleTab = this.toggleTab.bind(this);
+    this.fetchBooks = this.props.fetchUserCenterBooks.bind(this);
+    this.toggle = this.props.toggleUserCenterTab.bind(this);
+  }
+
+  componentWillMount() {
+    this.fetchBooks();
+  }
+
+  toggleTab(e) {
+    e.preventDefault();
+    this.toggle();
+    this.fetchBooks();
+  }
 
   render() {
     return (
@@ -14,8 +27,8 @@ export class UserCenterTab extends React.Component {
           <nav className="user-center-nav nav-extended z-depth-0">
             <div id="user_center_tab" className="nav-content">
               <ul className="tabs tabs-transparent">
-                <li className="tab user-center-tab-li right-border-black"><a className="active user-center-tab-text" href="#">My Collections</a></li>
-                <li className="tab user-center-tab-li"><a className="user-center-tab-text" href="#">Favorates</a></li>
+                <li className="tab user-center-tab-li right-border-black"><a className="active user-center-tab-text" onClick={this.onClickToggleTab}>My Collections</a></li>
+                <li className="tab user-center-tab-li"><a className="user-center-tab-text" onClick={this.onClickToggleTab}>Favorates</a></li>
               </ul>
             </div>
           </nav>
@@ -24,12 +37,8 @@ export class UserCenterTab extends React.Component {
     );
   }
 }
-// Header.propTypes = {
-//   isLoggedIn: PropTypes.bool.isRequired,
-//   username: PropTypes.string,
-//   logout: PropTypes.func.isRequired,
-//   getUser: PropTypes.func.isRequired,
-// };
-// Header.defaultProps = {
-//   username: '',
-// };
+UserCenterTab.propTypes = {
+  // isCollection: PropTypes.bool.isRequired,
+  fetchUserCenterBooks: PropTypes.func.isRequired,
+  toggleUserCenterTab: PropTypes.func.isRequired,
+};

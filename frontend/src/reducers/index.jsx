@@ -5,8 +5,7 @@ import { register } from 'reducers/user';
 import { images } from 'reducers/uploadImage';
 import { popularBooks } from 'reducers/popularBooks';
 import { newestBooks } from 'reducers/newestBooks';
-import { userCollections } from 'reducers/userCollections';
-import { userFavorates } from 'reducers/userFavorates';
+import { userCenter } from 'reducers/userCenter';
 import { bookCover } from 'reducers/uploadBook';
 
 export default combineReducers({
@@ -16,7 +15,6 @@ export default combineReducers({
   register,
   fetchingData,
   images,
-  userCollections,
-  userFavorates,
+  userCenter,
   bookCover,
 });

@@ -14,7 +14,7 @@ import { RegisterPage } from 'pages/RegisterPage';
 import { LoginPage } from 'pages/LoginPage';
 import { BookPage } from 'pages/BookPage';
 import { FilePage } from 'pages/UploadPage';
-import { UserCenterPage } from 'pages/UserCenterPage';
+import UserCenterPage from 'containers/UserCenterPage';
 import { NewBookPage } from 'pages/UploadBookPage';
 
 export const router = (
