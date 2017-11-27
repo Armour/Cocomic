@@ -9,8 +9,10 @@ export class UserCenterPage extends React.Component {
     return (
       <div>
         <UserCenterTab
+          isCollection={this.props.isCollection}
           fetchUserCenterBooks={() => this.props.fetchUserCenterBooks()}
-          toggleUserCenterTab={() => this.props.toggleUserCenterTab()}
+          toFavorates={() => this.props.toFavorates()}
+          toCollections={() => this.props.toCollections()}
         />
         <UserCenter
           isCollection={this.props.isCollection}
@@ -25,5 +27,6 @@ UserCenterPage.propTypes = {
   books: PropTypes.object.isRequired,
   isCollection: PropTypes.bool.isRequired,
   fetchUserCenterBooks: PropTypes.func.isRequired,
-  toggleUserCenterTab: PropTypes.func.isRequired,
+  toFavorates: PropTypes.func.isRequired,
+  toCollections: PropTypes.func.isRequired,
 };

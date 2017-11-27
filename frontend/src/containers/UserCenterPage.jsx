@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { fetchUserCenterBooks, toggleUserCenterTab } from 'actions/book';
+import { fetchUserCenterBooks, toFavorates, toCollections } from 'actions/userCenter';
 import { UserCenterPage } from 'pages/UserCenterPage';
 
 const mapStateToProps = state => ({
@@ -12,8 +12,11 @@ const mapDispatchToProps = dispatch => ({
   fetchUserCenterBooks: () => {
     dispatch(fetchUserCenterBooks());
   },
-  toggleUserCenterTab: () => {
-    dispatch(toggleUserCenterTab());
+  toFavorates: () => {
+    dispatch(toFavorates());
+  },
+  toCollections: () => {
+    dispatch(toCollections());
   },
 });
 
