@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import ImageLoader from 'containers/ImageLoader';
+
 export class HomeCard extends React.Component {
   render() {
     return (
@@ -9,7 +11,7 @@ export class HomeCard extends React.Component {
           <div className="card hoverable">
             <div className="card-image card-image-fix">
               <div className="card-image-cropper">
-                <img src={require(`../image/${this.props.img_url}.jpg`)} alt="comic-cover" />
+                <ImageLoader img_url={this.props.img_url} alt="comic-cover" />
               </div>
             </div>
             <div className="card-content">

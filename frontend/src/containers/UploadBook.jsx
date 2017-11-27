@@ -21,9 +21,9 @@ const mapStateToProps = (state) => {
       coverPreviewUrl: coverUrl,
     };
   }
-  if (state.images) {
+  if (state.uploadImages) {
     let des;
-    state.images.valueSeq().forEach((value) => {
+    state.uploadImages.valueSeq().forEach((value) => {
       if (typeof value === 'string') {
         des = value;
       }
