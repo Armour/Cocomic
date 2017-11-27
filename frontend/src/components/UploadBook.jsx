@@ -41,6 +41,16 @@ export class NewBook extends React.Component {
   uploadButtonOnClick(e) {
     e.preventDefault();
     this.props.bookUpload({
+      /*
+      bookTitle: "test",
+      coverImage: [{"imageURL": "imagedata......"}],
+      description: "book description",
+      chapters: [{
+        "title": "23333"
+        "description": "......",
+        "images": [{"imageURL": "imagedata......"}, {}, {}]
+      }]
+      */
       file: bookCover.file,
       coverPreviewUrl: bookCover.coverPreviewUrl,
       title: titleInput.value,

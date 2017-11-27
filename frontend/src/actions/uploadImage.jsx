@@ -33,7 +33,7 @@ export const imageRemove = imgId =>
 
 export const imageUpload = data =>
   (dispatch) => {
-    dispatch(fetchDataIfNeeded('/image/uploadImages', METHOD_POST, data, uploadImage));
+    dispatch(fetchDataIfNeeded('/book/addChapter', METHOD_POST, data, uploadImage));
   };
 
 export const descriptionUpload = data =>
