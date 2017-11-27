@@ -1,0 +1,24 @@
+.user-center-nav {
+  background-color: transparent;
+  position: relative !important;
+}
+
+.user-center-tab-text {
+  color: black;
+  font-size: 16px;
+}
+
+.user-center-tab-text.active {
+  color: black;
+  font-size: 16px;
+  border-bottom: solid 2px black;
+}
+
+.right-border-black {
+  border-right: solid thin black;
+}
+
+.user-center-tab-li {
+  height: 20px;
+  padding: 0 10px;
+}

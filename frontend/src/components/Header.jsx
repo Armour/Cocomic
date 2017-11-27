@@ -42,14 +42,14 @@ export class Header extends React.Component {
           <li key="popular"><NavLink activeClassName="active-link" to="/popular">Popular</NavLink></li>
           <li key="newest"><NavLink activeClassName="active-link" to="/newest">New</NavLink></li>
           <li key="about"><NavLink activeClassName="active-link" to="/about">About us</NavLink></li>
-          <li key="username"> Hello {this.props.username} </li>
+          <li key="username"><NavLink activeClassName="active-link" to="/userCenter">Hello {this.props.username}</NavLink></li>
           <li key="logout"><Link to="/user/logout" onClick={this.onClickLogout}>Log out</Link></li>
         </ul>
       );
     }
     return (
       <div id="the-header">
-        <nav>
+        <nav className="blue-nav">
           <div className="nav-wrapper">
             <div className="container">
               <div className="brand-logo">

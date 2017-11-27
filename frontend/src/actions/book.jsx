@@ -1,5 +1,5 @@
 import { METHOD_GET, METHOD_POST, fetchDataIfNeeded } from 'actions/fetchApi';
-import { RECEIVE_BOOK, CLEAR_GALLERY_BOOKS, RECEIVE_POPULAR_BOOKS, RECEIVE_NEWEST_BOOKS, LIKE_CHAPTER } from 'constants/book';
+import { RECEIVE_BOOK, CLEAR_GALLERY_BOOKS, RECEIVE_POPULAR_BOOKS, RECEIVE_NEWEST_BOOKS, LIKE_CHAPTER, RECEIVE_USER_COLLECTIONS, RECEIVE_FAVORATES } from 'constants/book';
 
 /*
 data:{
@@ -40,6 +40,16 @@ const receiveNewestBooks = data => ({
   data,
 });
 
+const receiveFavorates = data => ({
+  type: RECEIVE_FAVORATES,
+  data,
+});
+
+const receiveUserCollections = data => ({
+  type: RECEIVE_USER_COLLECTIONS,
+  data,
+});
+
 export const fetchPopularBooks = (offset, amount) =>
   (dispatch) => {
     const url = `/book/popular/${offset}/${amount}`;
@@ -50,6 +60,18 @@ export const fetchNewestBooks = (offset, amount) =>
   (dispatch) => {
     const url = `/book/newest/${offset}/${amount}`;
     dispatch(fetchDataIfNeeded(url, METHOD_GET, {}, receiveNewestBooks));
+  };
+
+export const fetchUserCollections = (offset, amount) =>
+  (dispatch) => {
+    const url = `/book/userCollections/${offset}/${amount}`;
+    dispatch(fetchDataIfNeeded(url, METHOD_GET, {}, receiveUserCollections));
+  };
+
+export const fetchUserFavorates = (offset, amount) =>
+  (dispatch) => {
+    const url = `/book/userFavorates/${offset}/${amount}`;
+    dispatch(fetchDataIfNeeded(url, METHOD_GET, {}, receiveFavorates));
   };
 
 export const fetchBookIfNeeded = bookId =>

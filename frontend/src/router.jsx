@@ -13,8 +13,9 @@ import { NotFoundPage } from 'pages/NotFoundPage';
 import { RegisterPage } from 'pages/RegisterPage';
 import { LoginPage } from 'pages/LoginPage';
 import { BookPage } from 'pages/BookPage';
-import { NewBookPage } from 'pages/UploadBookPage';
 import { FilePage } from 'pages/UploadPage';
+import { UserCenterPage } from 'pages/UserCenterPage';
+import { NewBookPage } from 'pages/UploadBookPage';
 
 export const router = (
   <div>
@@ -28,6 +29,7 @@ export const router = (
       <Route path="/upload" component={FilePage} />
       <Route path="/popular" component={PopularPage} />
       <Route path="/newest" component={NewestPage} />
+      <Route path="/userCenter" component={UserCenterPage} />
       <Route path="/newbook" component={NewBookPage} />
       <Route component={NotFoundPage} />
     </Switch>
