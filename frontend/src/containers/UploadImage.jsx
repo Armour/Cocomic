@@ -27,12 +27,33 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   imageInsert: (data) => {
     dispatch(imageInsert(data));
   },
-  imageUpload: (data) => {
-    dispatch(imageUpload(data));
+  imageUpload: (title, description, images) => {
+    if (ownProps.fromNewBook) {
+      /* title: "23333"
+      description: "......",
+      parentId: "",
+      bookId: "",
+      images: [{"imageURL": "imagedata......"}, {}, {}] */
+      dispatch(imageUpload({
+        title,
+        description,
+        parentId: '0',
+        bookId: '0',
+        images,
+      }));
+    } else {
+      dispatch(imageUpload({
+        title,
+        description,
+        parentId: ownProps.parentId,
+        bookId: ownProps.bookId,
+        images,
+      }));
+    }
   },
   imageRemove: (imgId) => {
     dispatch(imageRemove(imgId));

@@ -1,54 +1,64 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-let fileInput;
-let discriptionInput;
-let titleInput;
-let imagePreview = [];
-let imageIdCounter = 0;
-
-const addButtonOnClick = () => {
-  fileInput.click();
-};
-
-const setInput = (node) => {
-  fileInput = node;
-};
-
-const setTitleInput = (node) => {
-  titleInput = node;
-};
-
-export const setDescriptionInput = (node) => {
-  discriptionInput = node;
-};
-
 export class FileUploadBox extends React.Component {
   constructor(props) {
     super(props);
-    this.addButtonOnClick = addButtonOnClick.bind(this);
-    this.setInput = setInput.bind(this);
-    this.setTitleInput = setTitleInput.bind(this);
-    this.setDescriptionInput = setDescriptionInput.bind(this);
+    this.addButtonOnClick = this.addButtonOnClick.bind(this);
+    this.setInput = this.setInput.bind(this);
+    this.setTitleInput = this.setTitleInput.bind(this);
+    this.setDescriptionInput = this.setDescriptionInput.bind(this);
     this.uploadButtonOnClick = this.uploadButtonOnClick.bind(this);
     this.handlePicChange = this.handlePicChange.bind(this);
     this.cancelButtonOnClick = this.cancelButtonOnClick.bind(this);
     this.handleDescriptionOnBlur = this.handleDescriptionOnBlur.bind(this);
     this.handleTitleOnBlur = this.handleTitleOnBlur.bind(this);
     this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="200" width="200" /></div>);
+    this.fileInput = null;
+    this.discriptionInput = '';
+    this.titleInput = '';
+    this.imagePreview = [];
+    this.imageIdCounter = 0;
+  }
+
+  componentDidMount() {
+    if (this.props.modalId !== undefined) {
+      $('.modal').modal({
+        dismissible: true,
+        opacity: 0.5,
+        inDuration: 300,
+        outDuration: 200,
+      });
+    }
+  }
+
+  setInput(node) {
+    this.fileInput = node;
+  }
+
+  setTitleInput(node) {
+    this.titleInput = node;
+  }
+
+  setDescriptionInput(node) {
+    this.discriptionInput = node;
+  }
+
+  addButtonOnClick() {
+    this.fileInput.click();
   }
 
   handleDescriptionOnBlur(e) {
     e.preventDefault();
     this.props.descriptionUpload({
-      description: discriptionInput.value,
+      description: this.discriptionInput.value,
     });
   }
 
   handleTitleOnBlur(e) {
     e.preventDefault();
     this.props.titleUpload({
-      title: titleInput.value,
+      title: this.titleInput.value,
     });
   }
 
@@ -61,16 +71,16 @@ export class FileUploadBox extends React.Component {
       let duplicateFlag = false;
 
       reader.onloadend = () => {
-        imageIdCounter += 1;
+        this.imageIdCounter += 1;
         this.props.imageInsert({
-          id: 'img'.concat(String(imageIdCounter)),
+          id: 'img'.concat(String(this.imageIdCounter)),
           file: fileObject,
           imagePreviewUrl: reader.result,
         });
       };
       fileObject = e.target.files[i];
-      for (let j = 0; j < imagePreview.length; j += 1) {
-        if (imagePreview[j].file.name === fileObject.name) duplicateFlag = true;
+      for (let j = 0; j < this.imagePreview.length; j += 1) {
+        if (this.imagePreview[j].file.name === fileObject.name) duplicateFlag = true;
       }
       if (!duplicateFlag) reader.readAsDataURL(fileObject);
     }
@@ -79,23 +89,12 @@ export class FileUploadBox extends React.Component {
   uploadButtonOnClick(e) {
     e.preventDefault();
     const imageArray = [];
-    for (let i = 0; i < imagePreview.length; i += 1) {
+    for (let i = 0; i < this.imagePreview.length; i += 1) {
       imageArray.push({
-        imageURL: imagePreview[i].imageURL,
+        imageURL: this.imagePreview[i].imageURL,
       });
     }
-    this.props.imageUpload({
-      /* title: "23333"
-      description: "......",
-      parentId: "",
-      bookId: "",
-      images: [{"imageURL": "imagedata......"}, {}, {}] */
-      title: titleInput.value,
-      description: discriptionInput.value,
-      parentId: '0',
-      bookId: '0',
-      images: imageArray,
-    });
+    this.props.imageUpload(this.titleInput.value, this.discriptionInput.value, imageArray);
   }
 
   cancelButtonOnClick(e) {
@@ -117,18 +116,56 @@ export class FileUploadBox extends React.Component {
         top: '20px',
       };
     }
-    imagePreview = [];
+    this.imagePreview = [];
     for (let i = 0; i < this.props.id.length; i += 1) {
       if (this.props.imagePreviewUrl[i]) {
-        imagePreview.push({
+        this.imagePreview.push({
           id: this.props.id[i],
           file: this.props.file[i],
           imageURL: this.props.imagePreviewUrl[i],
         });
       }
     }
-    if (imagePreview.length % 4 === 0) {
+    if (this.imagePreview.length % 4 === 0) {
       this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="200" width="200" /></div>);
+    }
+    const inputComp = (
+      <div>
+        <div className="row">
+          <div className="input-field col s12">
+            <input id="title" onBlur={this.handleTitleOnBlur} ref={this.setTitleInput} type="text" className="validate" />
+            <label htmlFor="title">Title</label>
+          </div>
+        </div>
+        <div className="row">
+          <div className="input-field col s12">
+            <input id="description" onBlur={this.handleDescriptionOnBlur} ref={this.setDescriptionInput} type="text" className="validate" />
+            <label htmlFor="description">Description</label>
+          </div>
+        </div>
+        {this.imagePreview.map((image, index) => (
+          <div key={image.id} className="col s3">
+            <img id={index} src={image.imageURL} alt="placeholder" height="200px" width="200px" />
+            <a id="cancel_pic_button" role="button" tabIndex={-2} className="btn-floating btn-tiny waves-effect waves-light" onClick={this.cancelButtonOnClick} onKeyDown={this.cancelButtonOnClick}><i id={image.id} className="material-icons">cancel</i></a>
+          </div>
+        ))}
+        <div className="col s3"><a id="add_pic_button" role="button" tabIndex={0} className="btn-floating btn-large waves-effect waves-light" onClick={this.addButtonOnClick} onKeyDown={this.addButtonOnClick}><i className="material-icons">add</i></a></div>
+        {this.placeHolder}
+        <input id="upload_input" type="file" multiple ref={this.setInput} onChange={(e) => { this.handlePicChange(e); }} />
+      </div>
+    );
+    if (this.props.modalId !== undefined) {
+      return (
+        <div id={this.props.modalId} className="modal modal-fixed-footer">
+          <div className="modal-content">
+            <h4>New Chapter</h4>
+            {inputComp}
+          </div>
+          <div className="modal-footer">
+            <a onClick={this.uploadButtonOnClick} className="modal-action modal-close waves-effect waves-green btn-flat ">upload</a>
+          </div>
+        </div>
+      );
     }
     return (
       <div className="upload-box-wrapper">
@@ -137,32 +174,12 @@ export class FileUploadBox extends React.Component {
             <div className="card">
               <div className="card-content">
                 <span className="card-title center-align"> New Chapter </span>
-                <div className="row">
-                  <div className="input-field col s12">
-                    <input id="title" onBlur={this.handleTitleOnBlur} ref={this.setTitleInput} type="text" className="validate" />
-                    <label htmlFor="title">Title</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="input-field col s12">
-                    <input id="description" onBlur={this.handleDescriptionOnBlur} ref={this.setDescriptionInput} type="text" className="validate" />
-                    <label htmlFor="description">Description</label>
-                  </div>
-                </div>
-                {imagePreview.map((image, index) => (
-                  <div key={image.id} className="col s3">
-                    <img id={index} src={image.imageURL} alt="placeholder" height="200px" width="200px" />
-                    <a id="cancel_pic_button" role="button" tabIndex={-2} className="btn-floating btn-tiny waves-effect waves-light" onClick={this.cancelButtonOnClick} onKeyDown={this.cancelButtonOnClick}><i id={image.id} className="material-icons">cancel</i></a>
-                  </div>
-                ))}
-                <div className="col s3"><a id="add_pic_button" role="button" tabIndex={0} className="btn-floating btn-large waves-effect waves-light" onClick={this.addButtonOnClick} onKeyDown={this.addButtonOnClick}><i className="material-icons">add</i></a></div>
-                {this.placeHolder}
+                {inputComp}
                 <div className="row">
                   <div className="col s12">
                     <a id="upload_btn" className="waves-effect waves-light btn" style={buttonStyle} onClick={this.uploadButtonOnClick} onKeyDown={this.uploadButtonOnClick} role="button" tabIndex={-1}>upload</a>
                   </div>
                 </div>
-                <input id="upload_input" type="file" multiple ref={this.setInput} onChange={(e) => { this.handlePicChange(e); }} />
               </div>
             </div>
           </div>
@@ -182,6 +199,7 @@ FileUploadBox.propTypes = {
   imageRemove: PropTypes.func.isRequired,
   descriptionUpload: PropTypes.func.isRequired,
   titleUpload: PropTypes.func.isRequired,
+  modalId: PropTypes.string,
 };
 
 FileUploadBox.defaultProps = {
@@ -189,5 +207,6 @@ FileUploadBox.defaultProps = {
   file: [],
   fromNewBook: false,
   imagePreviewUrl: [],
+  modalId: undefined,
 };
 
