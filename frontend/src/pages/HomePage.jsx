@@ -59,11 +59,11 @@ export class HomePage extends React.Component {
       <div>
         <Intro className="intro-panel" />
         <div className="main-wrap">
-          <h1 className="page-title">Popular</h1>
+          <h2 className="page-title">Popular</h2>
           <div className="row">
             {popularRow}
           </div>
-          <h1 className="page-title">New</h1>
+          <h2 className="page-title">New</h2>
           <div className="row">
             {newestRow}
           </div>

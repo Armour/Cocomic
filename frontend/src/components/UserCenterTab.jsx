@@ -36,7 +36,7 @@ export class UserCenterTab extends React.Component {
     }
     return (
       <div className="container">
-        <h1 className="page-title">My Center</h1>
+        <h2 className="page-title">My Center</h2>
         <div className="navbar-fixed">
           <nav className="user-center-nav nav-extended z-depth-0">
             <div id="user_center_tab" className="nav-content">
