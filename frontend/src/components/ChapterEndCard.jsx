@@ -54,6 +54,11 @@ export class ChapterEndCard extends React.Component {
             <div className="card-image">
               <ImageLoader img_url={this.props.img_url} alt="comic-cover" />
               <a
+                className="btn-floating halfway-fab waves-effect waves-light blue chapter-end-bookmark-btn modal-trigger"
+                href={`#add_chapter_modal-${chapter.get('id')}`}
+              ><i className="material-icons">bookmark</i>
+              </a>
+              <a
                 className="btn-floating halfway-fab waves-effect waves-light chapter-end-btn chapter-end-like-btn"
                 onClick={this.onClickToggleLike}
               >{likeBtn}
