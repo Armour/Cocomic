@@ -11,9 +11,10 @@ const removeImage = data => ({
   data,
 });
 
-const uploadImage = data => ({
+const uploadImage = uploadedData => data => ({
   type: UPLOAD_IMAGE,
   data,
+  uploadedData,
 });
 
 const description = data => ({
@@ -38,7 +39,7 @@ export const imageRemove = imgId =>
 
 export const imageUpload = data =>
   (dispatch) => {
-    dispatch(fetchDataIfNeeded('/book/addChapter', METHOD_POST, data, uploadImage));
+    dispatch(fetchDataIfNeeded('/book/addChapter', METHOD_POST, data, uploadImage(data)));
   };
 
 export const descriptionUpload = data =>

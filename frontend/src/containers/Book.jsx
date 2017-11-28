@@ -27,6 +27,7 @@ const mapStateToProps = (state, ownProps) => {
     traverseToLeaf: chapterId => traverseToLeaf(state, ownProps.bookId, chapterId),
     getChapter: chapterId => getChapter(state, ownProps.bookId, chapterId),
     startingChapterId,
+    uploadedChapterId: book.get('uploadedChapterId'),
   };
 };
 

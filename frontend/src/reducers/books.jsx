@@ -1,11 +1,12 @@
 import { Map, List, fromJS, getIn } from 'immutable';
 
 import { RECEIVE_BOOK, LIKE_CHAPTER } from 'constants/book';
+import { UPLOAD_IMAGE } from 'constants/uploadImage';
 
 /*
 state.books:{
   bookId:{
-    name:string, coverImage:string, description:string, rootChapterId:number, likeSum:number
+    name:string, coverImage:string, description:string, rootChapterId:number, likeSum:number, uploadedChapterId:number
     chapters:{
       chapterId:{
         bookId:number, userId:number, createDate:date, parentId:number, likeSum:number, images:[string], childrenIds:[number],
@@ -45,6 +46,13 @@ export const books = (state = initialState, action) => {
           newState = newState.setIn([key, 'chapters', action.data.chapterId, 'isliked'], action.data.toggle);
         }
       });
+    }
+    return newState;
+  case UPLOAD_IMAGE:
+    if (action.data.chapterId) {
+      const chapter = { id: action.data.chapterId, ...action.uploadedData, images: action.data.images };
+      newState = newState.mergeIn([chapter.bookId, 'chapters', chapter.id], fromJS(chapter));
+      newState = newState.setIn([chapter.bookId, 'uploadedChapterId'], chapter.id);
     }
     return newState;
   default:

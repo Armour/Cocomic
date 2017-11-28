@@ -29,6 +29,16 @@ export class Book extends React.Component {
         toLeaf: nextProps.traverseToLeaf(nextProps.startingChapterId),
       });
     }
+    if (this.props.uploadedChapterId !== nextProps.uploadedChapterId) {
+      this.setState((prevState) => {
+        const chapter = nextProps.getChapter(nextProps.uploadedChapterId);
+        const index = prevState.loadedChapters.indexOf(chapter.get('parentId'));
+        return {
+          loadedChapters: [...prevState.loadedChapters.slice(0, index + 1), chapter.get('id')],
+          toLeaf: this.props.traverseToLeaf(chapter.get('id')),
+        };
+      });
+    }
   }
 
   selectBranch(chapterId, branchChapterId) {
@@ -114,6 +124,7 @@ Book.propTypes = {
   coverUrl: PropTypes.string,
   // likeNum: PropTypes.number,
   startingChapterId: PropTypes.number,
+  uploadedChapterId: PropTypes.number,
 };
 
 Book.defaultProps = {
@@ -126,4 +137,5 @@ Book.defaultProps = {
   traverseToRoot: undefined,
   traverseToLeaf: undefined,
   getChapter: undefined,
+  uploadedChapterId: undefined,
 };
