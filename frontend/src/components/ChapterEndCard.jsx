@@ -25,7 +25,7 @@ export class ChapterEndCard extends React.Component {
     } else {
       likeBtn = <i className="material-icons">thumb_up</i>;
     }
-    const childrenIds = this.props.getChapter(this.props.chapterId).get('childrenIds');
+    const { childrenIds } = this.props;
     let chapterEndComp;
     if (childrenIds === undefined || childrenIds.size === 0) {
       chapterEndComp = (<div className="card-content"><p className="chapter-end-text"> End of Book </p></div>);
@@ -88,6 +88,7 @@ ChapterEndCard.propTypes = {
   chapterId: PropTypes.number.isRequired,
   likeChapter: PropTypes.func.isRequired,
   isLiked: PropTypes.bool.isRequired,
+  childrenIds: PropTypes.array.isRequired,
   getChapter: PropTypes.func.isRequired,
   selectBranch: PropTypes.func.isRequired,
 };

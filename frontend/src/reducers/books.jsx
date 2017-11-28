@@ -53,6 +53,7 @@ export const books = (state = initialState, action) => {
       const chapter = { id: action.data.chapterId, ...action.uploadedData, images: action.data.images };
       newState = newState.mergeIn([chapter.bookId, 'chapters', chapter.id], fromJS(chapter));
       newState = newState.setIn([chapter.bookId, 'uploadedChapterId'], chapter.id);
+      newState = newState.updateIn([chapter.bookId, 'chapters', chapter.parentId, 'childrenIds'], (list = List()) => list.push(chapter.id));
     }
     return newState;
   default:
