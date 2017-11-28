@@ -31,7 +31,7 @@ export class Carousel extends React.Component {
       const imageUrl = getIn(chapter, ['images', 0]);
       return (
         <a className="carousel-item" key={childId} >
-          <ImageLoader img_url={imageUrl} alt={index.toString()} />
+          <ImageLoader img_url={imageUrl} alt={index.toString()} className="carousel-image" />
         </a>
       );
     });
