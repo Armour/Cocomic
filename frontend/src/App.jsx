@@ -10,6 +10,7 @@ import { isProduction } from 'utils';
 
 import 'image/favicon.ico';
 import 'materialize-css';
+import 'material-design-icons/iconfont/material-icons.css';
 import 'sass/index.scss';
 
 // Set the store, history and routers
@@ -29,6 +30,6 @@ export default class App extends React.Component {
 }
 
 App.propTypes = {
-  store: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  store: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };

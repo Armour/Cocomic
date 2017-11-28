@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Carousel } from 'components/Carousel';
 import ImageLoader from 'containers/ImageLoader';
+import UploadImage from 'containers/UploadImage';
 
 export class ChapterEndCard extends React.Component {
   constructor(props) {
@@ -44,6 +45,7 @@ export class ChapterEndCard extends React.Component {
         </div>
       );
     }
+    const chapter = this.props.getChapter(this.props.chapterId);
 
     return (
       <div className="row book-row">
@@ -56,11 +58,21 @@ export class ChapterEndCard extends React.Component {
                 onClick={this.onClickToggleLike}
               >{likeBtn}
               </a>
-              <a className="btn-floating halfway-fab waves-effect waves-light chapter-end-btn"><i className="material-icons">create</i></a>
+              <a
+                className="btn-floating halfway-fab waves-effect waves-light chapter-end-btn modal-trigger"
+                href={`#add_chapter_modal-${chapter.get('id')}`}
+              ><i className="material-icons">create</i>
+              </a>
             </div>
             {chapterEndComp}
           </div>
         </div>
+        <UploadImage
+          fromNewBook={false}
+          parentId={chapter.get('id')}
+          bookId={chapter.get('bookId')}
+          modalId={`add_chapter_modal-${chapter.get('id')}`}
+        />
       </div>
     );
   }
