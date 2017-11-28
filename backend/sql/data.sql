@@ -98,4 +98,3 @@ SELECT pg_catalog.setval('userinfo_id_seq', 4, true);
 --
 -- PostgreSQL database dump complete
 --
-
