@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Dropdown } from 'components/Dropdown';
 
 export class Header extends React.Component {
   async componentDidMount() {
@@ -39,8 +40,7 @@ export class Header extends React.Component {
           <li key="popular"><NavLink activeClassName="active-link" to="/popular">Popular</NavLink></li>
           <li key="newest"><NavLink activeClassName="active-link" to="/newest">New</NavLink></li>
           <li key="about"><NavLink activeClassName="active-link" to="/about">About us</NavLink></li>
-          <li key="username"><NavLink activeClassName="active-link" to="/userCenter">Hello {this.props.username}</NavLink></li>
-          <li key="logout"><Link to="/user/logout" onClick={this.onClickLogout}>Log out</Link></li>
+          <Dropdown id="header-dropdown" title={`Hello ${this.props.username}`} logout={this.onClickLogout} />
         </ul>
       );
     }
