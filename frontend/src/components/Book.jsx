@@ -91,7 +91,6 @@ export class Book extends React.Component {
               pictures={chapter.get('images')}
               isLiked={chapter.get('isliked') === '1'}
               likeChapter={this.props.likeChapter}
-              childrenIds={chapter.get('childrenIds')}
               getChapter={this.props.getChapter}
               selectBranch={branchChapterId => this.selectBranch(chapterId, branchChapterId)}
             />
