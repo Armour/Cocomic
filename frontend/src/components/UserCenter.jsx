@@ -16,7 +16,7 @@ export class UserCenter extends React.Component {
         pageUrl={`/book/${el.get('id')}`}
       />));
     return (
-      <div className="container">
+      <div className="usercenter-wrap">
         <div className="row">
           {childElements}
           {this.props.isCollection &&
