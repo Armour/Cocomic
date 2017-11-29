@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { NavLink } from 'react-router-dom';
-
-import { upperCaseFirstChar } from 'utils';
+import { Link, NavLink } from 'react-router-dom';
 
 export class Dropdown extends React.Component {
   componentDidMount() {
@@ -11,18 +8,20 @@ export class Dropdown extends React.Component {
   }
 
   render() {
-    const links = this.props.dropdownLists.map(key =>
-      <li key={key}><NavLink activeClassName="active-link" to={`/${key}`}>{upperCaseFirstChar(key)}</NavLink></li>,
-    );
     return (
-      <ul id={this.props.id} className="dropdown-content">
-        {links}
-      </ul>
+      <li key="dropdown">
+        <a className="dropdown-button" data-beloworigin="true" data-activates="header-dropdown">{this.props.title}</a>
+        <ul id={this.props.id} className="dropdown-content">
+          <li className="dropdown-nav"><NavLink activeClassName="active-link" to="userCenter">User Center</NavLink></li>
+          <li className="dropdown-nav"><Link to="/user/logout" onClick={this.props.logout}>Log out</Link></li>
+        </ul>
+      </li>
     );
   }
 }
 
 Dropdown.propTypes = {
   id: PropTypes.string.isRequired,
-  dropdownLists: PropTypes.arrayOf(PropTypes.string).isRequired,
+  title: PropTypes.string.isRequired,
+  logout: PropTypes.func.isRequired,
 };

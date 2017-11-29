@@ -7,14 +7,16 @@ export class FileUploadBox extends React.Component {
     this.addButtonOnClick = this.addButtonOnClick.bind(this);
     this.setInput = this.setInput.bind(this);
     this.setTitleInput = this.setTitleInput.bind(this);
+    this.setFormInput = this.setFormInput.bind(this);
     this.setDescriptionInput = this.setDescriptionInput.bind(this);
     this.uploadButtonOnClick = this.uploadButtonOnClick.bind(this);
     this.handlePicChange = this.handlePicChange.bind(this);
     this.cancelButtonOnClick = this.cancelButtonOnClick.bind(this);
     this.handleDescriptionOnBlur = this.handleDescriptionOnBlur.bind(this);
     this.handleTitleOnBlur = this.handleTitleOnBlur.bind(this);
-    this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="200" width="200" /></div>);
+    this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="170" width="170" /></div>);
     this.fileInput = null;
+    this.formInput = null;
     this.discriptionInput = '';
     this.titleInput = '';
     this.imagePreview = [];
@@ -30,6 +32,10 @@ export class FileUploadBox extends React.Component {
         outDuration: 200,
       });
     }
+  }
+
+  setFormInput(node) {
+    this.formInput = node;
   }
 
   setInput(node) {
@@ -84,6 +90,7 @@ export class FileUploadBox extends React.Component {
       }
       if (!duplicateFlag) reader.readAsDataURL(fileObject);
     }
+    this.formInput.reset();
   }
 
   uploadButtonOnClick(e) {
@@ -127,7 +134,7 @@ export class FileUploadBox extends React.Component {
       }
     }
     if (this.imagePreview.length % 4 === 0) {
-      this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="200" width="200" /></div>);
+      this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="175" width="175" /></div>);
     }
     const inputComp = (
       <div>
@@ -145,13 +152,15 @@ export class FileUploadBox extends React.Component {
         </div>
         {this.imagePreview.map((image, index) => (
           <div key={image.id} className="col s3">
-            <img id={index} src={image.imageURL} alt="placeholder" height="200px" width="200px" />
+            <img id={index} src={image.imageURL} alt="placeholder" height="170px" width="170px" />
             <a id="cancel_pic_button" role="button" tabIndex={-2} className="btn-floating btn-tiny waves-effect waves-light" onClick={this.cancelButtonOnClick} onKeyDown={this.cancelButtonOnClick}><i id={image.id} className="material-icons">cancel</i></a>
           </div>
         ))}
         <div className="col s3"><a id="add_pic_button" role="button" tabIndex={0} className="btn-floating btn-large waves-effect waves-light" onClick={this.addButtonOnClick} onKeyDown={this.addButtonOnClick}><i className="material-icons">add</i></a></div>
         {this.placeHolder}
-        <input id="upload_input" type="file" multiple ref={this.setInput} onChange={(e) => { this.handlePicChange(e); }} />
+        <form ref={this.setFormInput}>
+          <input id="upload_input" type="file" multiple ref={this.setInput} onChange={(e) => { this.handlePicChange(e); }} />
+        </form>
       </div>
     );
     if (this.props.modalId !== undefined) {

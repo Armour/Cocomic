@@ -14,7 +14,7 @@ export const getBook = async (req, res) => {
     const chapterQuery = `
     SELECT c.id, c.title, c.user_id as "userId", c.book_id as "bookId", c.parent_id as "parentId",
     c.like_sum as "likeSum", c.images, c.create_date as "createDate", c.title, c.description,
-    ( SELECT COUNT(*) FROM likeinfo l WHERE c.id = l.chapter_id AND l.user_id = $2 ) isLiked,
+    ( SELECT COUNT(*) = 1 FROM likeinfo l WHERE c.id = l.chapter_id AND l.user_id = $2 ) isLiked,
     ( SELECT COUNT(*) = 1 FROM bookmarkinfo l WHERE c.id = l.chapter_id AND l.user_id = $2 ) isBookmarked
     FROM chapter c WHERE book_id=($1)
     `;
@@ -43,7 +43,7 @@ export const getPopularBooks = async (req, res) => {
   SELECT book.id, title, cover_image as "coverImage", description, like_sum, username
   FROM book, userinfo
   WHERE book.user_id = userinfo.id
-  ORDER BY like_sum LIMIT $1 Offset $2
+  ORDER BY like_sum DESC LIMIT $1 Offset $2
   `;
   getBooks(req, res, query);
 };
@@ -84,7 +84,7 @@ export const getUserCollections = async (req, res) => {
 export const getUserFavorates = async (req, res) => {
   const query = `
   SELECT b.id, b.title, b.cover_image as "coverImage", b.description, b.like_sum, u.username
-  FROM book b 
+  FROM book b
     LEFT JOIN userinfo u ON b.user_id = u.id
   WHERE b.id IN (SELECT book_id FROM bookmarkinfo l WHERE l.user_id = $1)  ORDER BY like_sum DESC
   `;

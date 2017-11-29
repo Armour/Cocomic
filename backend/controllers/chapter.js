@@ -10,18 +10,24 @@ export const updateLike = async (req, res) => {
       return res.status(500).json({ message: 'chapter id undefined' });
     }
 
+    if (typeof req.body.bookId === 'undefined') {
+      return res.status(500).json({ message: 'book id undefined' });
+    }
+
     if (typeof req.session === 'undefined' || typeof req.session.uid === 'undefined') {
       return res.status(500).json({ message: 'session or session.uid undefined' });
     }
 
     const chapterId = parseInt(req.body.chapterId, 10);
-    const toggleQuery = req.body.toggle ? 'INSERT INTO likeinfo(user_id, chapter_id, book_id) SELECT $1, id, book_id FROM chapter WHERE id = $2;' : 'DELETE FROM likeinfo WHERE user_id = $1 AND chapter_id = $2';
-    await db.query(toggleQuery, [req.session.uid, chapterId]);
+    const bookId = parseInt(req.body.bookId, 10);
+    const toggleQuery = req.body.toggle ? 'INSERT INTO likeinfo(user_id, chapter_id, book_id) VALUES($1, $2, $3)' : 'DELETE FROM likeinfo WHERE user_id = $1 AND chapter_id = $2 AND book_id = $3';
+    await db.query(toggleQuery, [req.session.uid, chapterId, bookId]);
     return res.status(200).json({
       code: 0,
       message: 'success',
       chapterId,
-      toggle: req.body.toggle ? '1' : '0',
+      bookId,
+      toggle: req.body.toggle,
     });
   } catch (e) {
     return res.status(500).json({ message: `like toggle failed: ${e.message} ` });

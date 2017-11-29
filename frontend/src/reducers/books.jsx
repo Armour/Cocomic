@@ -1,11 +1,12 @@
 import { Map, List, fromJS, getIn } from 'immutable';
 
 import { RECEIVE_BOOK, LIKE_CHAPTER, RECEIVE_BOOKMARK } from 'constants/book';
+import { UPLOAD_IMAGE } from 'constants/uploadImage';
 
 /*
 state.books:{
   bookId:{
-    name:string, coverImage:string, description:string, rootChapterId:number, likeSum:number
+    name:string, coverImage:string, description:string, rootChapterId:number, likeSum:number, uploadedChapterId:number
     chapters:{
       chapterId:{
         bookId:number, userId:number, createDate:date, parentId:number, likeSum:number, images:[string], childrenIds:[number],
@@ -39,17 +40,20 @@ export const books = (state = initialState, action) => {
     }
     return newState;
   case LIKE_CHAPTER:
-    if (action.data.chapterId && action.data.toggle) {
-      newState.keySeq().forEach((key) => {
-        if (getIn(newState, [key, 'chapters', action.data.chapterId, 'isliked']) !== 'undefined') {
-          newState = newState.setIn([key, 'chapters', action.data.chapterId, 'isliked'], action.data.toggle);
-        }
-      });
+    if (action.data && action.data.bookId && action.data.chapterId && action.data.toggle !== undefined) {
+      newState = newState.setIn([action.data.bookId, 'chapters', action.data.chapterId, 'isliked'], action.data.toggle);
     }
     return newState;
   case RECEIVE_BOOKMARK:
-    if (action.data && action.data.bookId && action.data.chapterId && action.data.bookmark) {
+    if (action.data && action.data.bookId && action.data.chapterId && action.data.bookmark !== undefined) {
       newState = newState.setIn([action.data.bookId, 'chapters', action.data.chapterId, 'isbookmarked'], action.data.bookmark);
+    }
+    return newState;
+  case UPLOAD_IMAGE:
+    if (action.data.chapterId) {
+      const chapter = { id: action.data.chapterId, ...action.uploadedData, images: action.data.images };
+      newState = newState.mergeIn([chapter.bookId, 'chapters', chapter.id], fromJS(chapter));
+      newState = newState.setIn([chapter.bookId, 'uploadedChapterId'], chapter.id);
     }
     return newState;
   default:

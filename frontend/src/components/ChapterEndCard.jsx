@@ -24,6 +24,7 @@ export class ChapterEndCard extends React.Component {
   async toggleLike(e) {
     e.preventDefault();
     this.props.likeChapter({
+      bookId: this.props.bookId,
       chapterId: this.props.chapterId,
       toggle: !this.props.isLiked,
     });
