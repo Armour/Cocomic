@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 export class ImageLoader extends React.Component {
   constructor(props) {
     super(props);
-    this.props.fetchImageIfNeeded({
-      images: [this.props.img_url],
-    });
+    if (this.props.img_data === '') {
+      this.props.fetchImageIfNeeded({
+        images: [this.props.img_url],
+      });
+    }
   }
 
   render() {
