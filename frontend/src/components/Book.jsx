@@ -77,10 +77,13 @@ export class Book extends React.Component {
             }
             <Chapter
               chapterId={chapter.get('id')}
+              bookId={this.props.bookId}
               title={chapter.get('title')}
               pictures={chapter.get('images')}
               isLiked={chapter.get('isliked') === '1'}
+              isBookmarked={chapter.get('isbookmarked')}
               likeChapter={this.props.likeChapter}
+              bookmarkChapter={this.props.bookmarkChapter}
               getChapter={this.props.getChapter}
               selectBranch={branchChapterId => this.selectBranch(chapterId, branchChapterId)}
             />
@@ -109,6 +112,7 @@ Book.propTypes = {
   getChapter: PropTypes.func,
   fetchBookIfNeeded: PropTypes.func.isRequired,
   likeChapter: PropTypes.func.isRequired,
+  bookmarkChapter: PropTypes.func.isRequired,
   title: PropTypes.string,
   description: PropTypes.string,
   coverUrl: PropTypes.string,

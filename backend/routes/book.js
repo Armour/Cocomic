@@ -1,11 +1,12 @@
 import express from 'express';
 
-import { updateLike, addChapter } from '../controllers/chapter';
+import { updateLike, addChapter, updateBookmark } from '../controllers/chapter';
 import { getBook, getPopularBooks, getNewestBooks, addBook, getUserFavorates, getUserCollections } from '../controllers/book';
 
 const router = express.Router();
 
 router.post('/like', updateLike);
+router.post('/bookmark', updateBookmark);
 router.post('/addBook', addBook);
 router.post('/addChapter', addChapter);
 router.get('/popular/:offset/:amount', getPopularBooks);

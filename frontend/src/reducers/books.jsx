@@ -1,6 +1,6 @@
 import { Map, List, fromJS, getIn } from 'immutable';
 
-import { RECEIVE_BOOK, LIKE_CHAPTER } from 'constants/book';
+import { RECEIVE_BOOK, LIKE_CHAPTER, RECEIVE_BOOKMARK } from 'constants/book';
 
 /*
 state.books:{
@@ -45,6 +45,11 @@ export const books = (state = initialState, action) => {
           newState = newState.setIn([key, 'chapters', action.data.chapterId, 'isliked'], action.data.toggle);
         }
       });
+    }
+    return newState;
+  case RECEIVE_BOOKMARK:
+    if (action.data && action.data.bookId && action.data.chapterId && action.data.bookmark) {
+      newState = newState.setIn([action.data.bookId, 'chapters', action.data.chapterId, 'isbookmarked'], action.data.bookmark);
     }
     return newState;
   default:
