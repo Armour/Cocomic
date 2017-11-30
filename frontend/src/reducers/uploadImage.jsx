@@ -13,7 +13,7 @@ export const uploadImages = (state = initialState, action) => {
     }
     return newState;
   case UPLOAD_IMAGE:
-    return newState;
+    return Map();
   case REMOVE_IMAGE:
     newState = newState.delete(action.data);
     return newState;
