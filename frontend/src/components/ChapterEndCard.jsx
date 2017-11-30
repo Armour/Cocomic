@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Carousel } from 'components/Carousel';
+import { CarouselWrapper } from 'components/CarouselWrapper';
 import ImageLoader from 'containers/ImageLoader';
 import UploadImage from 'containers/UploadImage';
 import { getChapter } from 'reducers/books';
@@ -55,7 +55,7 @@ export class ChapterEndCard extends React.Component {
         <div className="card-content">
           <p className="chapter-end-text"> End of Chapter </p>
           <p className="select-branch-text"> Continue reading or select a different branch </p>
-          <Carousel
+          <CarouselWrapper
             book={this.props.book}
             chapterId={this.props.chapterId}
             selectedChapterId={this.props.selectedChapterId}
