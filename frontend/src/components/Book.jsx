@@ -5,6 +5,7 @@ import Scroll from 'react-scroll';
 import InfiniteScroll from 'utils/libs/infiniteScroll';
 import { Chapter } from 'components/Chapter';
 import { BookCoverCard } from 'components/BookCoverCard';
+import { traverseToRoot, traverseToLeaf, getChapter } from 'reducers/books';
 
 export class Book extends React.Component {
   constructor(props) {
@@ -25,17 +26,17 @@ export class Book extends React.Component {
     if (this.state.loadedChapters.length === 0 && nextProps.startingChapterId) {
       this.setState({
         loadedChapters: [nextProps.startingChapterId],
-        toRoot: nextProps.traverseToRoot(nextProps.startingChapterId),
-        toLeaf: nextProps.traverseToLeaf(nextProps.startingChapterId),
+        toRoot: traverseToRoot(nextProps.book, nextProps.startingChapterId),
+        toLeaf: traverseToLeaf(nextProps.book, nextProps.startingChapterId),
       });
     }
     if (this.props.uploadedChapterId !== nextProps.uploadedChapterId) {
       this.setState((prevState) => {
-        const chapter = nextProps.getChapter(nextProps.uploadedChapterId);
+        const chapter = getChapter(nextProps.book, nextProps.uploadedChapterId);
         const index = prevState.loadedChapters.indexOf(chapter.get('parentId'));
         return {
           loadedChapters: [...prevState.loadedChapters.slice(0, index + 1), chapter.get('id')],
-          toLeaf: this.props.traverseToLeaf(chapter.get('id')),
+          toLeaf: traverseToLeaf(nextProps.book, chapter.get('id')),
         };
       });
     }
@@ -55,7 +56,7 @@ export class Book extends React.Component {
       const index = prevState.loadedChapters.indexOf(chapterId);
       return {
         loadedChapters: [...prevState.loadedChapters.slice(0, index + 1), branchChapterId],
-        toLeaf: this.props.traverseToLeaf(branchChapterId),
+        toLeaf: traverseToLeaf(this.props.book, branchChapterId),
       };
     });
   }
@@ -85,8 +86,11 @@ export class Book extends React.Component {
   }
 
   render() {
+    if (this.props.book === undefined) {
+      return null;
+    }
     const loadedChaptersComp = this.state.loadedChapters.map((chapterId, index) => {
-      const chapter = this.props.getChapter(chapterId);
+      const chapter = getChapter(this.props.book, chapterId);
       const selectedChapterId = this.state.loadedChapters[index + 1];
       return (
         <Scroll.Element key={`scroll-element-${chapterId}`} name={chapterId.toString()}>
@@ -97,6 +101,7 @@ export class Book extends React.Component {
             }
             <Chapter
               key={`chapter-${chapterId}`}
+              book={this.props.book}
               chapterId={chapter.get('id')}
               bookId={this.props.bookId}
               title={chapter.get('title')}
@@ -106,7 +111,6 @@ export class Book extends React.Component {
               likeChapter={this.props.likeChapter}
               bookmarkChapter={this.props.bookmarkChapter}
               selectedChapterId={selectedChapterId}
-              getChapter={this.props.getChapter}
               selectBranch={branchChapterId => this.selectBranch(chapterId, branchChapterId)}
             />
           </div>
@@ -129,9 +133,7 @@ export class Book extends React.Component {
 
 Book.propTypes = {
   bookId: PropTypes.number.isRequired,
-  traverseToRoot: PropTypes.func,
-  traverseToLeaf: PropTypes.func,
-  getChapter: PropTypes.func,
+  book: PropTypes.object,
   fetchBookIfNeeded: PropTypes.func.isRequired,
   likeChapter: PropTypes.func.isRequired,
   bookmarkChapter: PropTypes.func.isRequired,
@@ -144,14 +146,12 @@ Book.propTypes = {
 };
 
 Book.defaultProps = {
+  book: undefined,
   // currentChapterId: 0,
   title: '',
   description: '',
   coverUrl: '',
   // likeNum: 0,
   startingChapterId: undefined,
-  traverseToRoot: undefined,
-  traverseToLeaf: undefined,
-  getChapter: undefined,
   uploadedChapterId: undefined,
 };

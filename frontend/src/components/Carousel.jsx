@@ -4,12 +4,13 @@ import { getIn } from 'immutable';
 import Slider from 'react-slick';
 
 import ImageLoader from 'containers/ImageLoader';
+import { getChapter } from 'reducers/books';
 
 export class Carousel extends React.Component {
   constructor(props) {
     super(props);
     const selectedChapterId = this.props.selectedChapterId ? this.props.selectedChapterId : this.props.childrenIds.get(0);
-    const chapter = this.props.getChapter(selectedChapterId);
+    const chapter = getChapter(props.book, selectedChapterId);
     this.state = {
       branchTitle: chapter.get('title'),
       branchDescription: chapter.get('description'),
@@ -43,14 +44,14 @@ export class Carousel extends React.Component {
 
   selectItem(index) {
     const chapterId = this.props.childrenIds.get(index);
-    const chapter = this.props.getChapter(chapterId);
+    const chapter = getChapter(this.props.book, chapterId);
     this.setState({ branchTitle: chapter.get('title'), branchDescription: chapter.get('description') });
     this.props.selectBranch(chapterId);
   }
 
   render() {
     const branchComp = this.props.childrenIds.map((childId, index) => {
-      const chapter = this.props.getChapter(childId);
+      const chapter = getChapter(this.props.book, childId);
       const imageUrl = getIn(chapter, ['images', 0]);
       return (
         <div key={childId}>
@@ -76,9 +77,9 @@ export class Carousel extends React.Component {
 }
 
 Carousel.propTypes = {
+  book: PropTypes.object.isRequired,
   chapterId: PropTypes.number.isRequired,
   selectedChapterId: PropTypes.number,
-  getChapter: PropTypes.func.isRequired,
   selectBranch: PropTypes.func.isRequired,
   childrenIds: PropTypes.object,
 };

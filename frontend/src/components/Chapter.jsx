@@ -13,6 +13,7 @@ export class Chapter extends React.Component {
         <h1 className="chapter-title"> {this.props.title} </h1>
         {pictureCards}
         <ChapterEndCard
+          book={this.props.book}
           chapterId={this.props.chapterId}
           bookId={this.props.bookId}
           img_url={this.props.pictures.last()}
@@ -21,7 +22,6 @@ export class Chapter extends React.Component {
           likeChapter={this.props.likeChapter}
           bookmarkChapter={this.props.bookmarkChapter}
           selectedChapterId={this.props.selectedChapterId}
-          getChapter={this.props.getChapter}
           selectBranch={this.props.selectBranch}
         />
       </div>
@@ -30,6 +30,7 @@ export class Chapter extends React.Component {
 }
 
 Chapter.propTypes = {
+  book: PropTypes.object.isRequired,
   bookId: PropTypes.number.isRequired,
   chapterId: PropTypes.number.isRequired,
   selectedChapterId: PropTypes.number,
@@ -39,7 +40,6 @@ Chapter.propTypes = {
   bookmarkChapter: PropTypes.func.isRequired,
   isLiked: PropTypes.bool.isRequired,
   isBookmarked: PropTypes.bool.isRequired,
-  getChapter: PropTypes.func.isRequired,
   selectBranch: PropTypes.func.isRequired,
 };
 
