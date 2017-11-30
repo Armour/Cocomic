@@ -5,8 +5,8 @@ import { ChapterEndCard } from 'components/ChapterEndCard';
 
 export class Chapter extends React.Component {
   render() {
-    const pictureCards = this.props.pictures.skipLast(1).map(key =>
-      <PictureCard key={key} img_url={key} />,
+    const pictureCards = this.props.pictures.skipLast(1).map(value =>
+      <PictureCard key={value} img_url={value} />,
     );
     return (
       <div className="chapter-wrap">
@@ -20,6 +20,7 @@ export class Chapter extends React.Component {
           isBookmarked={this.props.isBookmarked}
           likeChapter={this.props.likeChapter}
           bookmarkChapter={this.props.bookmarkChapter}
+          selectedChapterId={this.props.selectedChapterId}
           getChapter={this.props.getChapter}
           selectBranch={this.props.selectBranch}
         />
@@ -31,6 +32,7 @@ export class Chapter extends React.Component {
 Chapter.propTypes = {
   bookId: PropTypes.number.isRequired,
   chapterId: PropTypes.number.isRequired,
+  selectedChapterId: PropTypes.number,
   title: PropTypes.string.isRequired,
   pictures: PropTypes.object.isRequired,
   likeChapter: PropTypes.func.isRequired,
@@ -39,4 +41,8 @@ Chapter.propTypes = {
   isBookmarked: PropTypes.bool.isRequired,
   getChapter: PropTypes.func.isRequired,
   selectBranch: PropTypes.func.isRequired,
+};
+
+Chapter.defaultProps = {
+  selectedChapterId: undefined,
 };

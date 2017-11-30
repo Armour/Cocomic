@@ -41,6 +41,15 @@ export class Book extends React.Component {
     }
   }
 
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (this.state !== nextState) return true;
+  //   return this.props.title !== nextProps.title ||
+  //   this.props.description !== nextProps.description ||
+  //   this.props.coverUrl !== nextProps.coverUrl ||
+  //   this.props.startingChapterId !== nextProps.startingChapterId ||
+  //   this.props.uploadedChapterId !== nextProps.uploadedChapterId;
+  // }
+
   selectBranch(chapterId, branchChapterId) {
     this.setState((prevState) => {
       const index = prevState.loadedChapters.indexOf(chapterId);
@@ -76,16 +85,18 @@ export class Book extends React.Component {
   }
 
   render() {
-    const loadedChaptersComp = this.state.loadedChapters.map((chapterId) => {
+    const loadedChaptersComp = this.state.loadedChapters.map((chapterId, index) => {
       const chapter = this.props.getChapter(chapterId);
+      const selectedChapterId = this.state.loadedChapters[index + 1];
       return (
-        <Scroll.Element key={chapterId} name={chapterId.toString()}>
+        <Scroll.Element key={`scroll-element-${chapterId}`} name={chapterId.toString()}>
           <Scroll.Link to={chapter.get('id').toString()} spy hashSpy hidden isDynamic />
           <div>
             {chapter.get('parentId') === 0 &&
               <BookCoverCard img_url={this.props.coverUrl} title={this.props.title} description={this.props.description} />
             }
             <Chapter
+              key={`chapter-${chapterId}`}
               chapterId={chapter.get('id')}
               bookId={this.props.bookId}
               title={chapter.get('title')}
@@ -94,6 +105,7 @@ export class Book extends React.Component {
               isBookmarked={chapter.get('isbookmarked')}
               likeChapter={this.props.likeChapter}
               bookmarkChapter={this.props.bookmarkChapter}
+              selectedChapterId={selectedChapterId}
               getChapter={this.props.getChapter}
               selectBranch={branchChapterId => this.selectBranch(chapterId, branchChapterId)}
             />

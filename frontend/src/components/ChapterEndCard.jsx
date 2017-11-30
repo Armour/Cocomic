@@ -56,6 +56,7 @@ export class ChapterEndCard extends React.Component {
           <p className="select-branch-text"> Continue reading or select a different branch </p>
           <Carousel
             chapterId={this.props.chapterId}
+            selectedChapterId={this.props.selectedChapterId}
             getChapter={this.props.getChapter}
             selectBranch={this.props.selectBranch}
             childrenIds={childrenIds}
@@ -105,10 +106,15 @@ ChapterEndCard.propTypes = {
   bookId: PropTypes.number.isRequired,
   img_url: PropTypes.string.isRequired,
   chapterId: PropTypes.number.isRequired,
+  selectedChapterId: PropTypes.number,
   likeChapter: PropTypes.func.isRequired,
   bookmarkChapter: PropTypes.func.isRequired,
   isLiked: PropTypes.bool.isRequired,
   isBookmarked: PropTypes.bool.isRequired,
   getChapter: PropTypes.func.isRequired,
   selectBranch: PropTypes.func.isRequired,
+};
+
+ChapterEndCard.defaultProps = {
+  selectedChapterId: undefined,
 };

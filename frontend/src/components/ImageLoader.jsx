@@ -18,6 +18,7 @@ export class ImageLoader extends React.Component {
     const loaderStyle = {
       top: '50%',
     };
+    const imgStyle = { height: this.props.height, width: this.props.width };
     if (this.props.img_data === '') {
       return (
         <div className="center" style={frameStyle}>
@@ -38,7 +39,11 @@ export class ImageLoader extends React.Component {
       );
     }
     return (
-      <img src={`data:image/jpeg;base64,${this.props.img_data}`} alt={this.props.alt} />
+      <img
+        src={`data:image/jpeg;base64,${this.props.img_data}`}
+        alt={this.props.alt}
+        style={imgStyle}
+      />
     );
   }
 }
@@ -48,4 +53,11 @@ ImageLoader.propTypes = {
   img_data: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   fetchImageIfNeeded: PropTypes.func.isRequired,
+  height: PropTypes.any,
+  width: PropTypes.any,
+};
+
+ImageLoader.defaultProps = {
+  height: undefined,
+  width: undefined,
 };
