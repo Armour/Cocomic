@@ -63,10 +63,9 @@ export const books = (state = initialState, action) => {
 
 export const getBook = (state, bookId) => getIn(state, ['books', bookId]);
 
-export const getChapter = (state, bookId, chapterId) => getIn(state, ['books', bookId, 'chapters', chapterId]);
+export const getChapter = (book, chapterId) => getIn(book, ['chapters', chapterId]);
 
-export const traverseToRoot = (state, bookId, chapterId) => {
-  const book = getBook(state, bookId);
+export const traverseToRoot = (book, chapterId) => {
   if (book === undefined) return [];
   let chapter = getIn(book, ['chapters', chapterId]);
   let chapterIds = [];
@@ -79,8 +78,7 @@ export const traverseToRoot = (state, bookId, chapterId) => {
   return chapterIds;
 };
 
-export const traverseToLeaf = (state, bookId, chapterId) => {
-  const book = getBook(state, bookId);
+export const traverseToLeaf = (book, chapterId) => {
   if (book === undefined) return [];
   let chapter = getIn(book, ['chapters', chapterId]);
   let chapterIds = [];

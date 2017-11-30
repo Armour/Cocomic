@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Carousel } from 'components/Carousel';
 import ImageLoader from 'containers/ImageLoader';
 import UploadImage from 'containers/UploadImage';
+import { getChapter } from 'reducers/books';
 
 export class ChapterEndCard extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ export class ChapterEndCard extends React.Component {
     } else {
       bookmarkBtn = <i className="material-icons">bookmark</i>;
     }
-    const childrenIds = this.props.getChapter(this.props.chapterId).get('childrenIds');
+    const childrenIds = getChapter(this.props.book, this.props.chapterId).get('childrenIds');
     let chapterEndComp;
     if (childrenIds === undefined || childrenIds.size === 0) {
       chapterEndComp = (<div className="card-content"><p className="chapter-end-text"> End of Book </p></div>);
@@ -55,15 +56,16 @@ export class ChapterEndCard extends React.Component {
           <p className="chapter-end-text"> End of Chapter </p>
           <p className="select-branch-text"> Continue reading or select a different branch </p>
           <Carousel
+            book={this.props.book}
             chapterId={this.props.chapterId}
-            getChapter={this.props.getChapter}
+            selectedChapterId={this.props.selectedChapterId}
             selectBranch={this.props.selectBranch}
             childrenIds={childrenIds}
           />
         </div>
       );
     }
-    const chapter = this.props.getChapter(this.props.chapterId);
+    const chapter = getChapter(this.props.book, this.props.chapterId);
 
     return (
       <div className="row book-row">
@@ -102,13 +104,18 @@ export class ChapterEndCard extends React.Component {
 }
 
 ChapterEndCard.propTypes = {
+  book: PropTypes.object.isRequired,
   bookId: PropTypes.number.isRequired,
   img_url: PropTypes.string.isRequired,
   chapterId: PropTypes.number.isRequired,
+  selectedChapterId: PropTypes.number,
   likeChapter: PropTypes.func.isRequired,
   bookmarkChapter: PropTypes.func.isRequired,
   isLiked: PropTypes.bool.isRequired,
   isBookmarked: PropTypes.bool.isRequired,
-  getChapter: PropTypes.func.isRequired,
   selectBranch: PropTypes.func.isRequired,
+};
+
+ChapterEndCard.defaultProps = {
+  selectedChapterId: undefined,
 };

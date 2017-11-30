@@ -5,14 +5,15 @@ import { ChapterEndCard } from 'components/ChapterEndCard';
 
 export class Chapter extends React.Component {
   render() {
-    const pictureCards = this.props.pictures.skipLast(1).map(key =>
-      <PictureCard key={key} img_url={key} />,
+    const pictureCards = this.props.pictures.skipLast(1).map(value =>
+      <PictureCard key={value} img_url={value} />,
     );
     return (
       <div className="chapter-wrap">
         <h1 className="chapter-title"> {this.props.title} </h1>
         {pictureCards}
         <ChapterEndCard
+          book={this.props.book}
           chapterId={this.props.chapterId}
           bookId={this.props.bookId}
           img_url={this.props.pictures.last()}
@@ -20,7 +21,7 @@ export class Chapter extends React.Component {
           isBookmarked={this.props.isBookmarked}
           likeChapter={this.props.likeChapter}
           bookmarkChapter={this.props.bookmarkChapter}
-          getChapter={this.props.getChapter}
+          selectedChapterId={this.props.selectedChapterId}
           selectBranch={this.props.selectBranch}
         />
       </div>
@@ -29,14 +30,19 @@ export class Chapter extends React.Component {
 }
 
 Chapter.propTypes = {
+  book: PropTypes.object.isRequired,
   bookId: PropTypes.number.isRequired,
   chapterId: PropTypes.number.isRequired,
+  selectedChapterId: PropTypes.number,
   title: PropTypes.string.isRequired,
   pictures: PropTypes.object.isRequired,
   likeChapter: PropTypes.func.isRequired,
   bookmarkChapter: PropTypes.func.isRequired,
   isLiked: PropTypes.bool.isRequired,
   isBookmarked: PropTypes.bool.isRequired,
-  getChapter: PropTypes.func.isRequired,
   selectBranch: PropTypes.func.isRequired,
+};
+
+Chapter.defaultProps = {
+  selectedChapterId: undefined,
 };

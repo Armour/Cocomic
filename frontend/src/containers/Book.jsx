@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { fetchBookIfNeeded, likeChapter, bookmarkChapter } from 'actions/book';
-import { getBook, traverseToRoot, traverseToLeaf, getChapter } from 'reducers/books';
+import { getBook } from 'reducers/books';
 import { Book } from 'components/Book';
 
 const mapStateToProps = (state, ownProps) => {
@@ -19,13 +19,11 @@ const mapStateToProps = (state, ownProps) => {
   window.history.replaceState(undefined, undefined, `#${startingChapterId}`);
 
   return {
+    book,
     title: book.get('title'),
     description: book.get('description'),
     coverUrl: book.get('coverImage'),
     likeNum: book.get('likeNum'),
-    traverseToRoot: chapterId => traverseToRoot(state, ownProps.bookId, chapterId),
-    traverseToLeaf: chapterId => traverseToLeaf(state, ownProps.bookId, chapterId),
-    getChapter: chapterId => getChapter(state, ownProps.bookId, chapterId),
     startingChapterId,
     uploadedChapterId: book.get('uploadedChapterId'),
   };

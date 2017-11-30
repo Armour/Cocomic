@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Materialize from 'materialize-css';
 
 export class FileUploadBox extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ export class FileUploadBox extends React.Component {
     this.setInput = this.setInput.bind(this);
     this.setTitleInput = this.setTitleInput.bind(this);
     this.setFormInput = this.setFormInput.bind(this);
+    this.setModalBoxButton = this.setModalBoxButton.bind(this);
     this.setDescriptionInput = this.setDescriptionInput.bind(this);
     this.uploadButtonOnClick = this.uploadButtonOnClick.bind(this);
     this.handlePicChange = this.handlePicChange.bind(this);
@@ -17,10 +19,15 @@ export class FileUploadBox extends React.Component {
     this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="170" width="170" /></div>);
     this.fileInput = null;
     this.formInput = null;
+    this.modalBoxButton = null;
     this.discriptionInput = '';
     this.titleInput = '';
     this.imagePreview = [];
     this.imageIdCounter = 0;
+    this.displayUpload = { display: 'inline' };
+    this.displayCircle = { display: 'none' };
+    this.uploadTrigger = false;
+    this.uploadNumber = 0;
   }
 
   componentDidMount() {
@@ -34,12 +41,26 @@ export class FileUploadBox extends React.Component {
     }
   }
 
+  componentWillUpdate() {
+    if (this.uploadTrigger && this.uploadNumber <= this.props.getImageSize) this.uploadNumber = this.props.getImageSize;
+    if (this.uploadTrigger && this.uploadNumber > this.props.getImageSize) {
+      this.uploadTrigger = false;
+      this.displayCircle = { display: 'none' };
+      this.displayUpload = { display: 'inline' };
+      this.modalBoxButton.click();
+    }
+  }
+
   setFormInput(node) {
     this.formInput = node;
   }
 
   setInput(node) {
     this.fileInput = node;
+  }
+
+  setModalBoxButton(node) {
+    this.modalBoxButton = node;
   }
 
   setTitleInput(node) {
@@ -95,7 +116,20 @@ export class FileUploadBox extends React.Component {
 
   uploadButtonOnClick(e) {
     e.preventDefault();
+    if (!this.props.isLoggedin) {
+      Materialize.toast('Please log in before upload pictures :)', 3000, 'rounded');
+      return;
+    }
+    this.uploadTrigger = true;
+    this.uploadNumber = 0;
+    if (this.imagePreview.length === 0) return;
     const imageArray = [];
+    this.displayUpload = { display: 'none' };
+    this.displayCircle = {
+      display: 'inline-block',
+      position: 'relative',
+      left: '-20px',
+    };
     for (let i = 0; i < this.imagePreview.length; i += 1) {
       imageArray.push({
         imageURL: this.imagePreview[i].imageURL,
@@ -136,6 +170,21 @@ export class FileUploadBox extends React.Component {
     if (this.imagePreview.length % 4 === 0) {
       this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="175" width="175" /></div>);
     }
+    const loadingCircle = (
+      <div className="preloader-wrapper active" style={this.displayCircle}>
+        <div className="spinner-layer spinner-blue-only">
+          <div className="circle-clipper left">
+            <div className="circle" />
+          </div>
+          <div className="gap-patch">
+            <div className="circle" />
+          </div>
+          <div className="circle-clipper right">
+            <div className="circle" />
+          </div>
+        </div>
+      </div>
+    );
     const inputComp = (
       <div>
         <div className="row">
@@ -165,13 +214,15 @@ export class FileUploadBox extends React.Component {
     );
     if (this.props.modalId !== undefined) {
       return (
-        <div id={this.props.modalId} className="modal modal-fixed-footer">
+        <div id={this.props.modalId} className="modal modal-fixed-footer" ref={this.setModal} >
           <div className="modal-content">
             <h4>New Chapter</h4>
             {inputComp}
+            <button className="modal-action modal-close" id="modalBoxButton" ref={this.setModalBoxButton}> hidden button </button>
           </div>
           <div className="modal-footer">
-            <a onClick={this.uploadButtonOnClick} className="modal-action modal-close waves-effect waves-green btn-flat ">upload</a>
+            <a onClick={this.uploadButtonOnClick} style={this.displayUpload} className="waves-effect waves-green btn-flat ">upload</a>
+            {loadingCircle}
           </div>
         </div>
       );
@@ -187,6 +238,7 @@ export class FileUploadBox extends React.Component {
                 <div className="row">
                   <div className="col s12">
                     <a id="upload_btn" className="waves-effect waves-light btn" style={buttonStyle} onClick={this.uploadButtonOnClick} onKeyDown={this.uploadButtonOnClick} role="button" tabIndex={-1}>upload</a>
+                    {loadingCircle}
                   </div>
                 </div>
               </div>
@@ -208,6 +260,8 @@ FileUploadBox.propTypes = {
   imageRemove: PropTypes.func.isRequired,
   descriptionUpload: PropTypes.func.isRequired,
   titleUpload: PropTypes.func.isRequired,
+  getImageSize: PropTypes.number,
+  isLoggedin: PropTypes.bool,
   modalId: PropTypes.string,
 };
 
@@ -216,6 +270,8 @@ FileUploadBox.defaultProps = {
   file: [],
   fromNewBook: false,
   imagePreviewUrl: [],
+  getImageSize: 0,
+  isLoggedin: false,
   modalId: undefined,
 };
 
