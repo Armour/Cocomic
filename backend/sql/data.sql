@@ -54,6 +54,7 @@ COPY userinfo (id, username, password, email, create_date) FROM stdin;
 2	Ruijia	123456	mao@123.com	2017-11-27 05:31:37.623147
 3	Armour	123456	armourg@sfu.ca	2017-11-27 05:31:37.623791
 4	luyor	luyuhelyh	yuhel@sfu.ca	2017-11-28 07:33:12.279
+5	zip	zip	zip@zip.com	2017-11-28 07:33:12.279
 \.
 
 
