@@ -3,6 +3,18 @@ import { imageInsert, imageUpload, imageRemove, descriptionUpload, titleUpload }
 import { FileUploadBox } from 'components/FileUploadBox';
 
 const mapStateToProps = (state) => {
+  let getImageNum;
+  let logInStatus;
+  if (state.fetchingData) {
+    getImageNum = state.fetchingData.valueSeq().size;
+  }
+  if (state.register) {
+    state.register.keySeq().forEach((key) => {
+      if (key === 'isLoggedIn') {
+        logInStatus = state.register.get(key);
+      }
+    });
+  }
   if (state.uploadImages) {
     const ids = [];
     const files = [];
@@ -18,12 +30,16 @@ const mapStateToProps = (state) => {
       id: ids,
       file: files,
       imagePreviewUrl: imagePreviewUrls,
+      getImageSize: getImageNum,
+      isLoggedin: logInStatus,
     };
   }
   return {
     id: [],
     file: [],
     imagePreviewUrl: [],
+    getImageSize: 0,
+    isLoggedin: false,
   };
 };
 
