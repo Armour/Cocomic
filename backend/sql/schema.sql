@@ -41,6 +41,14 @@ CREATE TABLE likeinfo (
     UNIQUE (user_id, book_id, chapter_id)
 );
 
+CREATE TABLE bookmarkinfo (
+    id serial primary key,
+    user_id integer NOT NULL references userinfo(id),
+    book_id integer NOT NULL references book(id),
+    chapter_id integer NOT NULL references chapter(id),
+    UNIQUE (user_id, book_id, chapter_id)
+);
+
 CREATE FUNCTION update_likesum() RETURNS trigger AS $update_likesum$
     BEGIN
         IF (TG_OP = 'INSERT') THEN

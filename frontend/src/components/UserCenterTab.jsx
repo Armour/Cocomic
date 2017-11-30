@@ -28,11 +28,11 @@ export class UserCenterTab extends React.Component {
     let collectionBtn;
     let favorateBtn;
     if (this.props.isCollection) {
-      collectionBtn = <a className="active user-center-tab-text" onClick={this.onClickToCollection}>My Collections</a>;
-      favorateBtn = <a className="user-center-tab-text" onClick={this.onClickToFavorate}>Favorates</a>;
+      collectionBtn = <a className="active user-center-tab-text" onClick={this.onClickToCollection}>My Collection</a>;
+      favorateBtn = <a className="user-center-tab-text" onClick={this.onClickToFavorate}>Bookmark</a>;
     } else {
-      collectionBtn = <a className="user-center-tab-text" onClick={this.onClickToCollection}>My Collections</a>;
-      favorateBtn = <a className="active user-center-tab-text" onClick={this.onClickToFavorate}>Favorates</a>;
+      collectionBtn = <a className="user-center-tab-text" onClick={this.onClickToCollection}>My Collection</a>;
+      favorateBtn = <a className="active user-center-tab-text" onClick={this.onClickToFavorate}>Bookmark</a>;
     }
     return (
       <div className="container">

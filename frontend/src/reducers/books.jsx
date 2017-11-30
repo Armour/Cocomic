@@ -1,6 +1,6 @@
 import { Map, List, fromJS, getIn } from 'immutable';
 
-import { RECEIVE_BOOK, LIKE_CHAPTER } from 'constants/book';
+import { RECEIVE_BOOK, LIKE_CHAPTER, RECEIVE_BOOKMARK } from 'constants/book';
 import { UPLOAD_IMAGE } from 'constants/uploadImage';
 
 /*
@@ -40,12 +40,13 @@ export const books = (state = initialState, action) => {
     }
     return newState;
   case LIKE_CHAPTER:
-    if (action.data.chapterId && action.data.toggle) {
-      newState.keySeq().forEach((key) => {
-        if (getIn(newState, [key, 'chapters', action.data.chapterId, 'isliked']) !== 'undefined') {
-          newState = newState.setIn([key, 'chapters', action.data.chapterId, 'isliked'], action.data.toggle);
-        }
-      });
+    if (action.data && action.data.bookId && action.data.chapterId && action.data.toggle !== undefined) {
+      newState = newState.setIn([action.data.bookId, 'chapters', action.data.chapterId, 'isliked'], action.data.toggle);
+    }
+    return newState;
+  case RECEIVE_BOOKMARK:
+    if (action.data && action.data.bookId && action.data.chapterId && action.data.bookmark !== undefined) {
+      newState = newState.setIn([action.data.bookId, 'chapters', action.data.chapterId, 'isbookmarked'], action.data.bookmark);
     }
     return newState;
   case UPLOAD_IMAGE:

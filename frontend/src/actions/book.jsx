@@ -1,5 +1,5 @@
 import { METHOD_GET, METHOD_POST, fetchDataIfNeeded } from 'actions/fetchApi';
-import { RECEIVE_BOOK, CLEAR_GALLERY_BOOKS, RECEIVE_POPULAR_BOOKS, RECEIVE_NEWEST_BOOKS, LIKE_CHAPTER } from 'constants/book';
+import { RECEIVE_BOOK, CLEAR_GALLERY_BOOKS, RECEIVE_POPULAR_BOOKS, RECEIVE_NEWEST_BOOKS, LIKE_CHAPTER, RECEIVE_BOOKMARK } from 'constants/book';
 
 /*
 data:{
@@ -23,6 +23,11 @@ const receiveBook = data => ({
 
 const likeSuccess = data => ({
   type: LIKE_CHAPTER,
+  data,
+});
+
+const receiveBookmark = data => ({
+  type: RECEIVE_BOOKMARK,
   data,
 });
 
@@ -66,8 +71,12 @@ export const fetchChapterIfNeeded = (bookId, chapterId) =>
     }
   };
 
-// TODO: user should know whether they already like this chapter
 export const likeChapter = data =>
   (dispatch) => {
     dispatch(fetchDataIfNeeded('/book/like', METHOD_POST, data, likeSuccess));
+  };
+
+export const bookmarkChapter = data =>
+  (dispatch) => {
+    dispatch(fetchDataIfNeeded('/book/bookmark', METHOD_POST, data, receiveBookmark));
   };
