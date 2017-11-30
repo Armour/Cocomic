@@ -38,7 +38,7 @@ export class ImageLoader extends React.Component {
       );
     }
     return (
-      <img src={`data:image/jpeg;base64,${this.props.img_data}`} alt={this.props.alt} />
+      <img src={`data:image/jpeg;base64,${this.props.img_data}`} alt={this.props.alt} onClick={() => console.log("123")}/>
     );
   }
 }

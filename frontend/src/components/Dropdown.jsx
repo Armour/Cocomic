@@ -9,11 +9,11 @@ export class Dropdown extends React.Component {
 
   render() {
     return (
-      <li key="dropdown">
+      <li className="dropdown-li" key="dropdown">
         <a className="dropdown-button" data-beloworigin="true" data-activates="header-dropdown">{this.props.title}</a>
         <ul id={this.props.id} className="dropdown-content">
-          <li className="dropdown-nav"><NavLink activeClassName="active-link" to="userCenter">User Center</NavLink></li>
-          <li className="dropdown-nav"><Link to="/user/logout" onClick={this.props.logout}>Log out</Link></li>
+          <li className="dropdown-nav"><NavLink activeClassName="active-link" to="/userCenter"><span>My Center</span></NavLink></li>
+          <li className="dropdown-nav"><Link to="/user/logout" onClick={this.props.logout}><span>Log out</span></Link></li>
         </ul>
       </li>
     );

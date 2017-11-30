@@ -16,18 +16,20 @@ export class UserCenter extends React.Component {
         pageUrl={`/book/${el.get('id')}`}
       />));
     return (
-      <div className="usercenter-wrap">
-        <div className="row">
-          {childElements}
-          {this.props.isCollection &&
-            <a href="/newbook">
-              <div className="col s12 m6 l4">
-                <div className="valign-wrapper newbook-center">
-                  <a className="btn-floating btn-large waves-effect waves-light blue center-align"><i className="material-icons">add</i></a>
+      <div className="container">
+        <div className="usercenter-wrap">
+          <div className="row">
+            {childElements}
+            {this.props.isCollection &&
+              <a href="/newbook">
+                <div className="col s12 m6 l4">
+                  <div className="valign-wrapper newbook-center">
+                    <a className="btn-floating btn-large waves-effect waves-light blue center-align"><i className="material-icons">add</i></a>
+                  </div>
                 </div>
-              </div>
-            </a>
-          }
+              </a>
+            }
+          </div>
         </div>
       </div>
     );
