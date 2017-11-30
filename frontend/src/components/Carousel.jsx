@@ -10,12 +10,6 @@ export class Carousel extends React.Component {
   constructor(props) {
     super(props);
     const selectedChapterId = this.props.selectedChapterId ? this.props.selectedChapterId : this.props.childrenIds.get(0);
-    const chapter = getChapter(props.book, selectedChapterId);
-    this.state = {
-      branchTitle: chapter.get('title'),
-      branchDescription: chapter.get('description'),
-    };
-    this.selectItem = this.selectItem.bind(this);
     this.settings = {
       dots: false,
       infinite: false,
@@ -27,26 +21,12 @@ export class Carousel extends React.Component {
       focusOnSelect: true,
       useCSS: true,
       initialSlide: this.props.childrenIds.indexOf(selectedChapterId),
-      afterChange: index => this.selectItem(index),
+      afterChange: index => this.props.selectItem(index),
     };
   }
 
-  // componentWillMount() {
-  //   $(`#carousel-${this.props.chapterId}`).carousel('set', this.props.selectedChapterId);
-  // }
-
-  // componentDidMount() {
-  //   $(`#carousel-${this.props.chapterId}`).carousel({
-  //     noWrap: true,
-  //   });
-  // }
-
-
-  selectItem(index) {
-    const chapterId = this.props.childrenIds.get(index);
-    const chapter = getChapter(this.props.book, chapterId);
-    this.setState({ branchTitle: chapter.get('title'), branchDescription: chapter.get('description') });
-    this.props.selectBranch(chapterId);
+  shouldComponentUpdate() {
+    return false;
   }
 
   render() {
@@ -65,23 +45,18 @@ export class Carousel extends React.Component {
       );
     });
     return (
-      <div id={this.props.chapterId}>
-        <Slider {...this.settings}>
-          {branchComp}
-        </Slider>
-        <p id="next-chapter-title" className="next-chapter-info" >{this.state.branchTitle}</p>
-        <p id="next-chapter-description" className="next-chapter-info">{this.state.branchDescription}</p>
-      </div>
+      <Slider {...this.settings}>
+        {branchComp}
+      </Slider>
     );
   }
 }
 
 Carousel.propTypes = {
   book: PropTypes.object.isRequired,
-  chapterId: PropTypes.number.isRequired,
   selectedChapterId: PropTypes.number,
-  selectBranch: PropTypes.func.isRequired,
   childrenIds: PropTypes.object,
+  selectItem: PropTypes.func.isRequired,
 };
 
 Carousel.defaultProps = {
