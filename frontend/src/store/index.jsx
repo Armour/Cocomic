@@ -21,7 +21,7 @@ export const configureStore = (initialState, history) => {
     enhancer = applyMiddleware(historyMiddleware, thunk, promise, logger);
   } else {
     enhancer = compose(
-      applyMiddleware(historyMiddleware, thunk, promise, logger),
+      applyMiddleware(historyMiddleware, thunk, promise),
       DevTools.instrument(),
     );
   }
