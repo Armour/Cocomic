@@ -23,8 +23,13 @@
 
 .slick-slide {
   opacity: 0.5;
+  transform: scale3d(0.7, 0.7, 0.7);
+  transition: transform .5s;
 }
 
 .slick-center {
   opacity: 1 !important;
+  position: relative;
+  z-index: 3;
+  transform: scale3d(1, 1, 1) !important;
 }

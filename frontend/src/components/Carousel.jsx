@@ -38,7 +38,7 @@ export class Carousel extends React.Component {
           <ImageLoader
             img_url={imageUrl}
             alt={index.toString()}
-            height="200px"
+            height="150px"
             width="200px"
           />
         </div>
