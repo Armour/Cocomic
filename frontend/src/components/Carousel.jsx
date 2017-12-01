@@ -21,12 +21,19 @@ export class Carousel extends React.Component {
       focusOnSelect: true,
       useCSS: true,
       initialSlide: this.props.childrenIds.indexOf(selectedChapterId),
-      afterChange: index => this.props.selectItem(index),
+      afterChange: index => this.selectItem(index),
     };
+    this.selectItem = this.selectItem.bind(this);
   }
 
-  shouldComponentUpdate() {
+  shouldComponentUpdate(nextProps) {
+    if (this.props.childrenIds !== nextProps.childrenIds) return true;
     return false;
+  }
+
+  selectItem(index) {
+    const chapterId = this.props.childrenIds.get(index);
+    this.props.selectBranch(chapterId);
   }
 
   render() {
@@ -54,12 +61,11 @@ export class Carousel extends React.Component {
 
 Carousel.propTypes = {
   book: PropTypes.object.isRequired,
-  selectedChapterId: PropTypes.number,
+  selectedChapterId: PropTypes.number.isRequired,
   childrenIds: PropTypes.object,
-  selectItem: PropTypes.func.isRequired,
+  selectBranch: PropTypes.func.isRequired,
 };
 
 Carousel.defaultProps = {
-  selectedChapterId: undefined,
   childrenIds: undefined,
 };

@@ -51,9 +51,16 @@ export const books = (state = initialState, action) => {
     return newState;
   case UPLOAD_IMAGE:
     if (action.data.chapterId) {
-      const chapter = { id: action.data.chapterId, ...action.uploadedData, images: action.data.images };
+      const chapter = {
+        id: action.data.chapterId,
+        ...action.uploadedData,
+        images: action.data.images,
+        isliked: false,
+        isbookmarked: false,
+      };
       newState = newState.mergeIn([chapter.bookId, 'chapters', chapter.id], fromJS(chapter));
       newState = newState.setIn([chapter.bookId, 'uploadedChapterId'], chapter.id);
+      newState = newState.updateIn([chapter.bookId, 'chapters', chapter.parentId, 'childrenIds'], (list = List()) => list.unshift(chapter.id));
     }
     return newState;
   default:

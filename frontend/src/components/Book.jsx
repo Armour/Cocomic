@@ -42,15 +42,6 @@ export class Book extends React.Component {
     }
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (this.state !== nextState) return true;
-  //   return this.props.title !== nextProps.title ||
-  //   this.props.description !== nextProps.description ||
-  //   this.props.coverUrl !== nextProps.coverUrl ||
-  //   this.props.startingChapterId !== nextProps.startingChapterId ||
-  //   this.props.uploadedChapterId !== nextProps.uploadedChapterId;
-  // }
-
   selectBranch(chapterId, branchChapterId) {
     this.setState((prevState) => {
       const index = prevState.loadedChapters.indexOf(chapterId);

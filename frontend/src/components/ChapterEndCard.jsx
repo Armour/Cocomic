@@ -58,7 +58,7 @@ export class ChapterEndCard extends React.Component {
           <CarouselWrapper
             book={this.props.book}
             chapterId={this.props.chapterId}
-            selectedChapterId={this.props.selectedChapterId}
+            selectedChapterId={this.props.selectedChapterId ? this.props.selectedChapterId : childrenIds.get(0)}
             selectBranch={this.props.selectBranch}
             childrenIds={childrenIds}
           />
