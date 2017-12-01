@@ -216,7 +216,7 @@ export class FileUploadBox extends React.Component {
       return (
         <div id={this.props.modalId} className="modal modal-fixed-footer" ref={this.setModal} >
           <div className="modal-content">
-            <h4>New Chapter</h4>
+            <h4>After {this.props.prevChapterTitle}</h4>
             {inputComp}
             <button className="modal-action modal-close" id="modalBoxButton" ref={this.setModalBoxButton}> hidden button </button>
           </div>
@@ -263,6 +263,7 @@ FileUploadBox.propTypes = {
   getImageSize: PropTypes.number,
   isLoggedin: PropTypes.bool,
   modalId: PropTypes.string,
+  prevChapterTitle: PropTypes.string,
 };
 
 FileUploadBox.defaultProps = {
@@ -273,5 +274,6 @@ FileUploadBox.defaultProps = {
   getImageSize: 0,
   isLoggedin: false,
   modalId: undefined,
+  prevChapterTitle: '',
 };
 

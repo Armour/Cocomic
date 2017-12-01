@@ -49,7 +49,12 @@ export class ChapterEndCard extends React.Component {
     if (childrenIds === undefined || childrenIds.size === 0) {
       chapterEndComp = (<div className="card-content"><p className="chapter-end-text"> End of Book </p></div>);
     } else if (childrenIds.size === 1) {
-      chapterEndComp = (<div className="card-content"><p className="chapter-end-text"> End of Chapter </p></div>);
+      chapterEndComp = (
+        <div className="card-content">
+          <div className="card-content"><p className="chapter-end-text"> End of Chapter </p></div>
+          <p className="select-branch-text"> Continue reading</p>
+        </div>
+      );
     } else {
       chapterEndComp = (
         <div className="card-content">
@@ -97,6 +102,7 @@ export class ChapterEndCard extends React.Component {
           parentId={chapter.get('id')}
           bookId={chapter.get('bookId')}
           modalId={`add_chapter_modal-${chapter.get('id')}`}
+          prevChapterTitle={chapter.get('title')}
         />
       </div>
     );
