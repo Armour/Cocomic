@@ -8,10 +8,11 @@ export class CarouselWrapper extends React.Component {
   render() {
     const chapter = getChapter(this.props.book, this.props.selectedChapterId);
     return (
-      <div id={this.props.chapterId}>
+      <div>
         <Carousel {...this.props} />
-        <p id="next-chapter-title" className="next-chapter-info" >{chapter.get('title')}</p>
-        <p id="next-chapter-description" className="next-chapter-info">{chapter.get('description')}</p>
+        <p className="next-chapter-info next-chapter-title" >{chapter.get('title')}</p>
+        <p className="next-chapter-info" >{chapter.get('username')} | {chapter.get('likeSum')} likes</p>
+        <p className="next-chapter-info next-chapter-description">{chapter.get('description')}</p>
       </div>
     );
   }
