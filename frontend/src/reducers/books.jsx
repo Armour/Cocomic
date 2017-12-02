@@ -34,7 +34,11 @@ export const books = (state = initialState, action) => {
       });
       action.data.chapters.forEach((value) => {
         if (value.parentId !== 0 && value.parentId !== null) {
-          newState = newState.updateIn([value.bookId, 'chapters', value.parentId, 'childrenIds'], (list = List()) => list.push(value.id));
+          newState = newState.updateIn([value.bookId, 'chapters', value.parentId, 'childrenIds'], (list = List()) => {
+            let index = value.likeSum ? list.findIndex(chapterId => getIn(newState, [value.bookId, 'chapters', chapterId, 'likeSum']) < value.likeSum) : 0;
+            if (index === -1) index = list.size;
+            return list.insert(index, value.id);
+          });
         }
       });
     }
