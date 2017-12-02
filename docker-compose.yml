@@ -7,6 +7,8 @@ services:
       context: .
     ports:
       - "3003:3003"
+    volumes:
+      - ./backend/uploads:/usr/src/app/backend/uploads
     depends_on:
       - postgres
       - redis
