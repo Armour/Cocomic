@@ -3,12 +3,12 @@ echo '{"log-driver":"gcplogs"}' | sudo tee /etc/docker/daemon.json
 sudo systemctl restart docker
 
 # install docker-compose
-docker pull docker/compose:latest
+docker pull docker/compose:1.17.1
 echo alias docker-compose="'"'docker run \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v "$PWD:/rootfs/$PWD" \
     -w="/rootfs/$PWD" \
-    docker/compose:latest'"'" >> ~/.bashrc
+    docker/compose:1.17.1'"'" >> ~/.bashrc
 source ~/.bashrc
 
 # run nginx-proxy
