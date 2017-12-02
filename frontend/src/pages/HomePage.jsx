@@ -11,6 +11,7 @@ export class HomePage extends React.Component {
 
   componentDidMount() {
     $('#the-header').removeClass('navbar-fixed');
+    window.scrollTo(0, 0);
   }
 
   componentDidUpdate() {
