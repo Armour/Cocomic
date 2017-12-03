@@ -53,11 +53,11 @@ CREATE FUNCTION update_likesum() RETURNS trigger AS $update_likesum$
     BEGIN
         IF (TG_OP = 'INSERT') THEN
             UPDATE chapter SET like_sum = like_sum + 1 WHERE id = NEW.chapter_id;
-            UPDATE book SET like_sum = like_sum + 1 WHERE id = (SELECT book_id FROM chapter AS c WHERE c.id = NEW.id);
+            UPDATE book SET like_sum = like_sum + 1 WHERE id = NEW.book_id;
             RETURN NEW;
         ELSIF (TG_OP = 'DELETE') THEN
             UPDATE chapter SET like_sum = like_sum - 1 WHERE id = OLD.chapter_id;
-            UPDATE book SET like_sum = like_sum - 1 WHERE id = (SELECT book_id FROM chapter AS c WHERE c.id = OLD.id);
+            UPDATE book SET like_sum = like_sum - 1 WHERE id = OLD.book_id;
             RETURN OLD;
         END IF;
 
