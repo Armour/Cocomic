@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import { fetchBookIfNeeded, likeChapter, bookmarkChapter } from 'actions/book';
 import { getBook } from 'reducers/books';
+import { getIsLoggedIn } from 'reducers/user';
 import { Book } from 'components/Book';
 
 const mapStateToProps = (state, ownProps) => {
@@ -17,9 +18,10 @@ const mapStateToProps = (state, ownProps) => {
   }
   const startingChapterId = ownProps.chapterId ? ownProps.chapterId : book.get('rootChapterId');
   window.history.replaceState(undefined, undefined, `#${startingChapterId}`);
-
+  const isLoggedIn = getIsLoggedIn(state);
   return {
     book,
+    isLoggedIn,
     title: book.get('title'),
     description: book.get('description'),
     coverUrl: book.get('coverImage'),

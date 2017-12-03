@@ -70,6 +70,7 @@ export class ChapterEndCard extends React.Component {
         </div>
       );
     }
+
     const chapter = getChapter(this.props.book, this.props.chapterId);
 
     return (
@@ -78,21 +79,26 @@ export class ChapterEndCard extends React.Component {
           <div className="card">
             <div className="card-image">
               <ImageLoader img_url={this.props.img_url} alt="comic-cover" />
-              <a
-                className="btn-floating halfway-fab waves-circle waves-effect waves-light blue chapter-end-bookmark-btn modal-trigger"
-                onClick={this.onClickToggleBookmark}
-              >{bookmarkBtn}
-              </a>
-              <a
-                className="btn-floating halfway-fab waves-circle waves-effect waves-light chapter-end-btn chapter-end-like-btn"
-                onClick={this.onClickToggleLike}
-              >{likeBtn}
-              </a>
-              <a
-                className="btn-floating halfway-fab waves-circle waves-effect waves-light chapter-end-btn modal-trigger"
-                href={`#add_chapter_modal-${chapter.get('id')}`}
-              ><i className="material-icons">create</i>
-              </a>
+              {
+                this.props.isLoggedIn &&
+                <div>
+                  <a
+                    className="btn-floating halfway-fab waves-circle waves-effect waves-light blue chapter-end-bookmark-btn modal-trigger"
+                    onClick={this.onClickToggleBookmark}
+                  >{bookmarkBtn}
+                  </a>
+                  <a
+                    className="btn-floating halfway-fab waves-circle waves-effect waves-light chapter-end-btn chapter-end-like-btn"
+                    onClick={this.onClickToggleLike}
+                  >{likeBtn}
+                  </a>
+                  <a
+                    className="btn-floating halfway-fab waves-circle waves-effect waves-light chapter-end-btn modal-trigger"
+                    href={`#add_chapter_modal-${chapter.get('id')}`}
+                  ><i className="material-icons">create</i>
+                  </a>
+                </div>
+              }
             </div>
             {chapterEndComp}
           </div>
@@ -120,6 +126,7 @@ ChapterEndCard.propTypes = {
   isLiked: PropTypes.bool.isRequired,
   isBookmarked: PropTypes.bool.isRequired,
   selectBranch: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
 };
 
 ChapterEndCard.defaultProps = {
