@@ -14,6 +14,7 @@ export const getBook = async (req, res) => {
     const chapterQuery = `
     SELECT c.id, c.title, c.user_id as "userId", c.book_id as "bookId", c.parent_id as "parentId",
     c.like_sum as "likeSum", c.images, c.create_date as "createDate", c.title, c.description,
+    ( SELECT username FROM userinfo u WHERE c.user_id = u.id ) username,
     ( SELECT COUNT(*) = 1 FROM likeinfo l WHERE c.id = l.chapter_id AND l.user_id = $2 ) isLiked,
     ( SELECT COUNT(*) = 1 FROM bookmarkinfo l WHERE c.id = l.chapter_id AND l.user_id = $2 ) isBookmarked
     FROM chapter c WHERE book_id=($1)
