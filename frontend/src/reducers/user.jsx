@@ -1,5 +1,5 @@
 import { Map } from 'immutable';
-import { RECEIVE_REGISTER, RECEIVE_LOGOUT, RECEIVE_CUREENT_USER, RECEIVE_LOGIN } from 'constants/user';
+import { RECEIVE_REGISTER, RECEIVE_LOGOUT, RECEIVE_CUREENT_USER, RECEIVE_LOGIN, LOGIN_ERROR } from 'constants/user';
 
 
 const initialState = Map({ isLoggedIn: false });
@@ -10,6 +10,11 @@ export const register = (state = initialState, action) => {
   case RECEIVE_LOGOUT:
     newState = newState.set('isLoggedIn', false);
     newState = newState.set('username', '');
+    return newState;
+  case LOGIN_ERROR:
+    if (action.data !== undefined) {
+      newState = newState.set('errorMessage', `error: ${action.data.slice(4)}`);
+    }
     return newState;
   case RECEIVE_CUREENT_USER:
   case RECEIVE_LOGIN:

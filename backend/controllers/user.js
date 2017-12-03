@@ -2,13 +2,13 @@ import db from '../db';
 
 export const register = async (req, res) => {
   if (typeof req.body.username === 'undefined' || typeof req.body.username !== 'string') {
-    return res.status(500).json({ message: 'username undefined or wrong type' });
+    return res.status(500).json({ code: 1, message: 'username undefined or wrong type' });
   }
   if (typeof req.body.email === 'undefined' || typeof req.body.email !== 'string') {
-    return res.status(500).json({ message: 'email undefined or wrong type' });
+    return res.status(500).json({ code: 2, message: 'email undefined or wrong type' });
   }
   if (typeof req.body.password === 'undefined' || typeof req.body.password !== 'string') {
-    return res.status(500).json({ message: 'password undefined or wrong type' });
+    return res.status(500).json({ code: 3, message: 'password undefined or wrong type' });
   }
   try {
     await db.query('INSERT INTO userinfo(username, email, password, create_date) VALUES($1, $2, $3, to_timestamp($4/1000.0)) RETURNING *',
@@ -62,26 +62,35 @@ export const logout = async (req, res) => {
 
 export const login = async (req, res) => {
   if (typeof req.body.email === 'undefined' || typeof req.body.email !== 'string') {
-    return res.status(500).json({ message: 'email undefined or wrong type' });
+    return res.status(500).json({ code: 1, message: 'email undefined or wrong type' });
   }
   if (typeof req.body.password === 'undefined' || typeof req.body.password !== 'string') {
-    return res.status(500).json({ message: 'password undefined or wrong type' });
+    return res.status(500).json({ code: 2, message: 'password undefined or wrong type' });
   }
   try {
-    const { rows } = await db.query('SELECT * FROM userinfo WHERE email = $1', [req.body.email]);
+    const result = await db.query('SELECT * FROM userinfo WHERE email = $1', [req.body.email]);
+    if (result.rowCount === 0) {
+      return res.status(401).json({
+        code: 4,
+        message: 'no such email',
+      });
+    }
     if (typeof req.session === 'undefined') {
       return res.status(500).json({ message: 'session undefined' });
     }
-    if (rows[0].password !== req.body.password) {
-      return res.redirect('/user/login');
+    if (result.rows[0].password !== req.body.password) {
+      return res.status(401).json({
+        code: 4,
+        message: 'email or password wrong',
+      });
     }
-    req.session.uid = rows[0].id;
-    req.session.email = rows[0].email;
-    req.session.username = rows[0].username;
+    req.session.uid = result.rows[0].id;
+    req.session.email = result.rows[0].email;
+    req.session.username = result.rows[0].username;
     return res.json({
       code: 0,
       message: 'success',
-      username: rows[0].username,
+      username: result.rows[0].username,
     });
   } catch (e) {
     return res.status(500).json({ message: `user login error: ${e} ${e.stack}` });

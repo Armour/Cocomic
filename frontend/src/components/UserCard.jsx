@@ -66,6 +66,16 @@ export class UserCard extends React.Component {
             <div className="row">
               <form className="col s12">
                 <UserName isRegister={this.props.isRegister} />
+                {
+                  this.props.state.register.get('errorMessage') && $('#email').value !== '' &&
+                  <div className="row">
+                    <div className="col s12">
+                      <div className="user-error">
+                        {this.props.state.register.get('errorMessage')}
+                      </div>
+                    </div>
+                  </div>
+                }
                 <div className="row">
                   <div className="input-field col s12">
                     <input id="email" type="email" className="validate" />
@@ -95,4 +105,5 @@ UserCard.propTypes = {
   isRegister: PropTypes.bool.isRequired,
   createUser: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
+  state: PropTypes.object.isRequired,
 };

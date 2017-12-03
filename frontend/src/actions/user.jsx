@@ -1,4 +1,4 @@
-import { RECEIVE_REGISTER, RECEIVE_LOGOUT, RECEIVE_CUREENT_USER, RECEIVE_LOGIN } from 'constants/user';
+import { RECEIVE_REGISTER, RECEIVE_LOGOUT, RECEIVE_CUREENT_USER, RECEIVE_LOGIN, LOGIN_ERROR } from 'constants/user';
 import { fetchDataIfNeeded } from 'actions/fetchApi';
 import history from '../history';
 
@@ -33,6 +33,11 @@ const receiveLogin = data => ({
   data,
 });
 
+const loginError = (url, data) => ({
+  type: LOGIN_ERROR,
+  data,
+});
+
 export const createUser = data =>
   (dispatch) => {
     dispatch(fetchDataIfNeeded('/user/register', 'POST', data, receiveRegister));
@@ -51,6 +56,5 @@ export const getUser = () =>
 
 export const login = data =>
   (dispatch) => {
-    dispatch(fetchDataIfNeeded('/user/login', 'POST', data, receiveLogin));
-    history.push('/');
+    dispatch(fetchDataIfNeeded('/user/login', 'POST', data, receiveLogin, loginError));
   };
