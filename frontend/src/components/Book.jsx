@@ -141,7 +141,7 @@ Book.propTypes = {
   coverUrl: PropTypes.string,
   startingChapterId: PropTypes.number,
   uploadedChapterId: PropTypes.number,
-  isLoggedIn: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool,
 };
 
 Book.defaultProps = {
@@ -151,4 +151,5 @@ Book.defaultProps = {
   coverUrl: '',
   startingChapterId: undefined,
   uploadedChapterId: undefined,
+  isLoggedIn: false,
 };
