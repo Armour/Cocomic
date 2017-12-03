@@ -30,13 +30,15 @@ export class FileUploadBox extends React.Component {
     this.uploadTrigger = false;
     this.uploadNumber = 0;
     this.state = { editChapterImages: [] };
+    if (this.props.modalId) this.chapterNumber = this.props.modalId.split('-');
   }
 
   componentWillMount() {
-    const chapterNumber = this.props.modalId.split('-')[1];
-    this.setState({ editChapterImages: this.props.bookList[this.props.bookId].chapters[chapterNumber].images });
-    this.chapterTitle = this.props.bookList[this.props.bookId].chapters[chapterNumber].title;
-    this.chapterDesc = this.props.bookList[this.props.bookId].chapters[chapterNumber].description;
+    if (this.chapterNumber) {
+      this.setState({ editChapterImages: this.props.bookList[this.props.bookId].chapters[this.chapterNumber[1]].images });
+      this.chapterTitle = this.props.bookList[this.props.bookId].chapters[this.chapterNumber[1]].title;
+      this.chapterDesc = this.props.bookList[this.props.bookId].chapters[this.chapterNumber[1]].description;
+    }
   }
 
   componentDidMount() {
@@ -125,7 +127,6 @@ export class FileUploadBox extends React.Component {
 
   uploadButtonOnClick(e) {
     e.preventDefault();
-    const chapterNumber = this.props.modalId.split('-')[1];
     if (!this.props.isLoggedin) {
       Materialize.toast('Please log in before upload pictures :)', 3000, 'rounded');
       return;
@@ -140,14 +141,14 @@ export class FileUploadBox extends React.Component {
       position: 'relative',
       left: '-20px',
     };
-    if (this.props.modalId.startsWith('add')) {
+    if (this.props.modalId && this.props.modalId.startsWith('add')) {
       for (let i = 0; i < this.imagePreview.length; i += 1) {
         imageArray.push({
           imageURL: this.imagePreview[i].imageURL,
         });
       }
       this.props.imageUpload(this.titleInput.value, this.discriptionInput.value, imageArray);
-    } else if (this.props.modalId.startsWith('edit')) {
+    } else if (this.props.modalId && this.props.modalId.startsWith('edit')) {
       for (let i = 0; i < this.state.editChapterImages.length; i += 1) {
         imageArray.push({
           imageURL: this.props.getImageData[this.state.editChapterImages[i]],
@@ -159,7 +160,7 @@ export class FileUploadBox extends React.Component {
         });
       }
       const data = {
-        chapterId: chapterNumber,
+        chapterId: this.chapterNumber[1],
         title: this.titleInput.value,
         description: this.discriptionInput.value,
         images: imageArray,
@@ -183,9 +184,8 @@ export class FileUploadBox extends React.Component {
   }
 
   render() {
-    const chapterNumber = this.props.modalId.split('-')[1];
     let editComp = null;
-    if (this.props.modalId.startsWith('edit')) {
+    if (this.props.modalId && this.props.modalId.startsWith('edit')) {
       const editArray = [];
       for (let i = 0; i < this.state.editChapterImages.length; i += 1) {
         editArray.push({
@@ -295,7 +295,7 @@ export class FileUploadBox extends React.Component {
         </form>
       </div>
     );
-    if (this.props.modalId.startsWith('add_chapter_modal')) {
+    if (this.props.modalId && this.props.modalId.startsWith('add_chapter_modal')) {
       return (
         <div id={this.props.modalId} className="modal modal-fixed-footer" ref={this.setModal} >
           <div className="modal-content">
@@ -310,11 +310,11 @@ export class FileUploadBox extends React.Component {
         </div>
       );
     }
-    if (this.props.modalId.startsWith('edit_chapter_modal')) {
+    if (this.props.modalId && this.props.modalId.startsWith('edit_chapter_modal')) {
       return (
         <div id={this.props.modalId} className="modal modal-fixed-footer" ref={this.setModal} >
           <div className="modal-content">
-            <h4>Edit Chapter {chapterNumber}</h4>
+            <h4>Edit Chapter {this.chapterNumber[1]}</h4>
             {editComp}
             <button className="modal-action modal-close" id="modalBoxButton" ref={this.setModalBoxButton}> hidden button </button>
           </div>
