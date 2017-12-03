@@ -9,7 +9,7 @@ export const getBook = async (req, res) => {
     FROM book WHERE id=($1)
     `;
     const { rows: books } = await db.query(bookQuery, [bookId]);
-    if (books === undefined || books.length === 0) Error();
+    if (books === undefined || books.length === 0) throw Error();
 
     const chapterQuery = `
     SELECT c.id, c.title, c.user_id as "userId", c.book_id as "bookId", c.parent_id as "parentId",
@@ -31,7 +31,7 @@ const getBooks = async (req, res, query) => {
   try {
     const { offset, amount } = req.params;
     const { rows: books } = await db.query(query, [amount, offset]);
-    if (books === undefined || books.length === 0) Error();
+    if (books === undefined || books.length === 0) throw Error();
 
     res.json({ books });
   } catch (e) {
@@ -59,7 +59,7 @@ export const getNewestBooks = async (req, res) => {
   try {
     const { offset, amount } = req.params;
     const { rows: books } = await db.query(query, [amount, offset]);
-    if (books === undefined || books.length === 0) Error();
+    if (books === undefined || books.length === 0) throw Error();
 
     res.json({ books });
   } catch (e) {
@@ -75,7 +75,7 @@ export const getUserCollections = async (req, res) => {
   `;
   try {
     const { rows: books } = await db.query(query, [req.session.uid]);
-    if (books === undefined || books.length === 0) Error();
+    if (books === undefined || books.length === 0) throw Error();
     return res.status(200).json({ books });
   } catch (e) {
     return res.status(500).json({ message: `user collection errors: ${e.message} ` });
@@ -91,7 +91,7 @@ export const getUserFavorates = async (req, res) => {
   `;
   try {
     const { rows: books } = await db.query(query, [req.session.uid]);
-    if (books === undefined || books.length === 0) Error();
+    if (books === undefined || books.length === 0) throw Error();
 
     res.json({ books });
   } catch (e) {
