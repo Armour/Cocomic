@@ -9,16 +9,12 @@ const mapStateToProps = (state, ownProps) => {
   const book = getBook(state, ownProps.bookId);
 
   if (book === undefined) {
-    return {
-      title: 'Not found',
-      description: '',
-      coverUrl: 'sample-1',
-      likeNum: 0,
-    };
+    return {};
   }
 
   if (book.get('error')) {
     window.location.replace('/not/exist');
+    return {};
   }
 
   const startingChapterId = ownProps.chapterId ? ownProps.chapterId : book.get('rootChapterId');
