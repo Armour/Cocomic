@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Scroll from 'react-scroll';
-
 import InfiniteScroll from 'utils/libs/infiniteScroll';
+
 import { Chapter } from 'components/Chapter';
 import { BookCoverCard } from 'components/BookCoverCard';
 import { traverseToRoot, traverseToLeaf, getChapter } from 'reducers/books';
@@ -23,7 +23,16 @@ export class Book extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.loadedChapters.length === 0 && nextProps.startingChapterId) {
+    if (
+      nextProps.book && nextProps.startingChapterId
+      && (this.props.book !== nextProps.book || this.props.startingChapterId !== nextProps.startingChapterId)
+      && this.state.loadedChapters.indexOf(nextProps.startingChapterId) === -1
+    ) {
+      // chapter available but not loaded
+      if (getChapter(nextProps.book, nextProps.startingChapterId) === undefined) {
+        window.location.replace('/not/exist');
+        return;
+      }
       this.setState({
         loadedChapters: [nextProps.startingChapterId],
         toRoot: traverseToRoot(nextProps.book, nextProps.startingChapterId),
@@ -77,9 +86,7 @@ export class Book extends React.Component {
   }
 
   render() {
-    if (this.props.book === undefined) {
-      return null;
-    }
+    if (this.props.book === undefined) return null;
     const loadedChaptersComp = this.state.loadedChapters.map((chapterId, index) => {
       const chapter = getChapter(this.props.book, chapterId);
       const selectedChapterId = this.state.loadedChapters[index + 1];
@@ -103,6 +110,7 @@ export class Book extends React.Component {
               bookmarkChapter={this.props.bookmarkChapter}
               selectedChapterId={selectedChapterId}
               selectBranch={branchChapterId => this.selectBranch(chapterId, branchChapterId)}
+              isLoggedIn={this.props.isLoggedIn}
             />
           </div>
         </Scroll.Element>
@@ -131,18 +139,17 @@ Book.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   coverUrl: PropTypes.string,
-  // likeNum: PropTypes.number,
   startingChapterId: PropTypes.number,
   uploadedChapterId: PropTypes.number,
+  isLoggedIn: PropTypes.bool,
 };
 
 Book.defaultProps = {
   book: undefined,
-  // currentChapterId: 0,
   title: '',
   description: '',
   coverUrl: '',
-  // likeNum: 0,
   startingChapterId: undefined,
   uploadedChapterId: undefined,
+  isLoggedIn: false,
 };

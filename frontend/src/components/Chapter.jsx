@@ -23,6 +23,7 @@ export class Chapter extends React.Component {
           bookmarkChapter={this.props.bookmarkChapter}
           selectedChapterId={this.props.selectedChapterId}
           selectBranch={this.props.selectBranch}
+          isLoggedIn={this.props.isLoggedIn}
         />
       </div>
     );
@@ -41,6 +42,7 @@ Chapter.propTypes = {
   isLiked: PropTypes.bool.isRequired,
   isBookmarked: PropTypes.bool.isRequired,
   selectBranch: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
 };
 
 Chapter.defaultProps = {
