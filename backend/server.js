@@ -37,7 +37,7 @@ if (isProduction) {
   app.use(helmet());
   app.disable('x-powered-by');
   app.use(logger('combined'));
-  app.set('trust proxy', 1)
+  app.set('trust proxy', 1);
 } else {
   app.use(logger('dev'));
 }
