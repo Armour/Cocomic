@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  web:
+    image: cguo/cocomic
+    build:
+      context: .
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./backend/uploads:/usr/src/app/backend/uploads
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - reverse-proxy
+    environment:
+      - VIRTUAL_HOST=cocomic.azendless.com
+      - LETSENCRYPT_HOST=cocomic.azendless.com
+      - LETSENCRYPT_EMAIL=armourcy@gmail.com
+    restart: always
+
+  postgres:
+    image: postgres:10.0-alpine
+    volumes:
+      - ./backend/sql/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./backend/sql/data.sql:/docker-entrypoint-initdb.d/2-data.sql
+    environment:
+      - POSTGRES_DB=docker
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+    ports:
+      - "5432:5432"
+    restart: always
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    restart: always
+
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy

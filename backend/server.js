@@ -60,7 +60,7 @@ app.use(session({
   resave: true,
   cookie: {
     httpOnly: false,
-    secure: false,
+    secure: isProduction,
   },
   saveUninitialized: false,
 }));

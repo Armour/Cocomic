@@ -1,19 +1,6 @@
 version: '3'
 
 services:
-  web:
-    image: cguo/cocomic
-    build:
-      context: .
-    ports:
-      - "3003:3003"
-    volumes:
-      - ./backend/uploads:/usr/src/app/backend/uploads
-    depends_on:
-      - postgres
-      - redis
-    restart: always
-
   postgres:
     image: postgres:10.0-alpine
     volumes:
