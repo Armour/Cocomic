@@ -9,7 +9,7 @@ export const getBook = async (req, res) => {
     FROM book WHERE id=($1)
     `;
     const { rows: books } = await db.query(bookQuery, [bookId]);
-    if (books === undefined || books.length === 0) throw Error();
+    if (books === undefined || books.length === 0) throw Error('wrong bookId');
 
     const chapterQuery = `
     SELECT c.id, c.title, c.user_id as "userId", c.book_id as "bookId", c.parent_id as "parentId",
