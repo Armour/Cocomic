@@ -3,3 +3,4 @@ export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 export const UPLOAD_DESCRIPTION = 'UPLOAD_DESCRIPTION';
 export const UPLOAD_TITLE = 'UPLOAD_TITLE';
+export const EDIT_IMAGE = 'EDIT_IMAGE';

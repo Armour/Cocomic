@@ -1,5 +1,5 @@
 import { Map, fromJS } from 'immutable';
-import { RECEIVE_IMAGE, UPLOAD_IMAGE, REMOVE_IMAGE, UPLOAD_DESCRIPTION, UPLOAD_TITLE } from 'constants/uploadImage';
+import { RECEIVE_IMAGE, UPLOAD_IMAGE, REMOVE_IMAGE, UPLOAD_DESCRIPTION, UPLOAD_TITLE, EDIT_IMAGE } from 'constants/uploadImage';
 
 
 const initialState = Map();
@@ -26,6 +26,8 @@ export const uploadImages = (state = initialState, action) => {
     if (action.data.title) {
       newState = newState.set('title', action.data.title);
     }
+    return newState;
+  case EDIT_IMAGE:
     return newState;
   default:
     return state;

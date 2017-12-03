@@ -1,10 +1,18 @@
 import { connect } from 'react-redux';
-import { imageInsert, imageUpload, imageRemove, descriptionUpload, titleUpload } from 'actions/uploadImage';
+import { imageInsert, imageUpload, imageRemove, descriptionUpload, titleUpload, editUpload } from 'actions/uploadImage';
 import { FileUploadBox } from 'components/FileUploadBox';
 
 const mapStateToProps = (state) => {
-  let getImageNum;
-  let logInStatus;
+  let getImageNum = 0;
+  let getImageContent = {};
+  let logInStatus = false;
+  let getBookList = {};
+  const ids = [];
+  const files = [];
+  const imagePreviewUrls = [];
+  if (state.getImages) {
+    getImageContent = state.getImages.toJS();
+  }
   if (state.fetchingData) {
     getImageNum = state.fetchingData.valueSeq().size;
   }
@@ -15,10 +23,10 @@ const mapStateToProps = (state) => {
       }
     });
   }
+  if (state.books) {
+    getBookList = state.books.toJS();
+  }
   if (state.uploadImages) {
-    const ids = [];
-    const files = [];
-    const imagePreviewUrls = [];
     state.uploadImages.valueSeq().forEach((value) => {
       if (typeof value !== 'string') {
         ids.push(value.get('id'));
@@ -26,20 +34,15 @@ const mapStateToProps = (state) => {
         imagePreviewUrls.push(value.get('imagePreviewUrl'));
       }
     });
-    return {
-      id: ids,
-      file: files,
-      imagePreviewUrl: imagePreviewUrls,
-      getImageSize: getImageNum,
-      isLoggedin: logInStatus,
-    };
   }
   return {
-    id: [],
-    file: [],
-    imagePreviewUrl: [],
-    getImageSize: 0,
-    isLoggedin: false,
+    id: ids,
+    file: files,
+    imagePreviewUrl: imagePreviewUrls,
+    getImageSize: getImageNum,
+    isLoggedin: logInStatus,
+    bookList: getBookList,
+    getImageData: getImageContent,
   };
 };
 
@@ -70,6 +73,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         images,
       }));
     }
+  },
+  editUpload: (data) => {
+    dispatch(editUpload(data));
   },
   imageRemove: (imgId) => {
     dispatch(imageRemove(imgId));

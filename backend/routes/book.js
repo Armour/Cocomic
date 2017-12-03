@@ -9,7 +9,7 @@ router.post('/like', updateLike);
 router.post('/bookmark', updateBookmark);
 router.post('/addBook', addBook);
 router.post('/addChapter', addChapter);
-router.put('/editChapter', editChapter);
+router.post('/editChapter', editChapter);
 router.get('/popular/:offset/:amount', getPopularBooks);
 router.get('/newest/:offset/:amount', getNewestBooks);
 router.get('/userCollections', getUserCollections);

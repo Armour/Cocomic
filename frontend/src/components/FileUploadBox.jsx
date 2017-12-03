@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Materialize from 'materialize-css';
+import ImageLoader from 'containers/ImageLoader';
 
 export class FileUploadBox extends React.Component {
   constructor(props) {
@@ -28,6 +29,14 @@ export class FileUploadBox extends React.Component {
     this.displayCircle = { display: 'none' };
     this.uploadTrigger = false;
     this.uploadNumber = 0;
+    this.state = { editChapterImages: [] };
+  }
+
+  componentWillMount() {
+    const chapterNumber = this.props.modalId.split('-')[1];
+    this.setState({ editChapterImages: this.props.bookList[this.props.bookId].chapters[chapterNumber].images });
+    this.chapterTitle = this.props.bookList[this.props.bookId].chapters[chapterNumber].title;
+    this.chapterDesc = this.props.bookList[this.props.bookId].chapters[chapterNumber].description;
   }
 
   componentDidMount() {
@@ -116,34 +125,109 @@ export class FileUploadBox extends React.Component {
 
   uploadButtonOnClick(e) {
     e.preventDefault();
+    const chapterNumber = this.props.modalId.split('-')[1];
     if (!this.props.isLoggedin) {
       Materialize.toast('Please log in before upload pictures :)', 3000, 'rounded');
       return;
     }
+    const imageArray = [];
     this.uploadTrigger = true;
     this.uploadNumber = 0;
-    if (this.imagePreview.length === 0) return;
-    const imageArray = [];
+    if (this.imagePreview.length === 0 && this.state.editChapterImages.length === 0) return;
     this.displayUpload = { display: 'none' };
     this.displayCircle = {
       display: 'inline-block',
       position: 'relative',
       left: '-20px',
     };
-    for (let i = 0; i < this.imagePreview.length; i += 1) {
-      imageArray.push({
-        imageURL: this.imagePreview[i].imageURL,
-      });
+    if (this.props.modalId.startsWith('add')) {
+      for (let i = 0; i < this.imagePreview.length; i += 1) {
+        imageArray.push({
+          imageURL: this.imagePreview[i].imageURL,
+        });
+      }
+      this.props.imageUpload(this.titleInput.value, this.discriptionInput.value, imageArray);
+    } else if (this.props.modalId.startsWith('edit')) {
+      for (let i = 0; i < this.state.editChapterImages.length; i += 1) {
+        imageArray.push({
+          imageURL: this.props.getImageData[this.state.editChapterImages[i]],
+        });
+      }
+      for (let i = 0; i < this.imagePreview.length; i += 1) {
+        imageArray.push({
+          imageURL: this.imagePreview[i].imageURL,
+        });
+      }
+      const data = {
+        chapterId: chapterNumber,
+        title: this.titleInput.value,
+        description: this.discriptionInput.value,
+        images: imageArray,
+      };
+      this.props.editUpload(data);
     }
-    this.props.imageUpload(this.titleInput.value, this.discriptionInput.value, imageArray);
   }
 
   cancelButtonOnClick(e) {
     e.preventDefault();
-    this.props.imageRemove(e.target.id);
+    if (e.target.id.startsWith('img')) {
+      this.props.imageRemove(e.target.id);
+    } else {
+      const index = this.state.editChapterImages.indexOf(e.target.id);
+      if (index > -1) {
+        const newArray = this.state.editChapterImages;
+        newArray.splice(index, 1);
+        this.setState({ editChapterImages: newArray });
+      }
+    }
   }
 
   render() {
+    const chapterNumber = this.props.modalId.split('-')[1];
+    let editComp = null;
+    if (this.props.modalId.startsWith('edit')) {
+      const editArray = [];
+      for (let i = 0; i < this.state.editChapterImages.length; i += 1) {
+        editArray.push({
+          id: this.state.editChapterImages[i],
+          imageHash: this.state.editChapterImages[i],
+        });
+      }
+      editComp = (
+        <div>
+          <div className="row">
+            <div className="input-field col s12">
+              <input id="title" onBlur={this.handleTitleOnBlur} ref={this.setTitleInput} type="text" className="validate" defaultValue={this.chapterTitle} />
+              <label htmlFor="title">Title</label>
+            </div>
+          </div>
+          <div className="row">
+            <div className="input-field col s12">
+              <input id="description" onBlur={this.handleDescriptionOnBlur} ref={this.setDescriptionInput} type="text" className="validate" defaultValue={this.chapterDesc} />
+              <label htmlFor="description">Description</label>
+            </div>
+          </div>
+          {editArray.map((image, index) => (
+            <div key={image.id} className="col s3">
+              <ImageLoader id={index} img_url={image.imageHash} alt="placeholder" height="170px" width="170px" />
+              <a id="cancel_pic_button" role="button" tabIndex={-2} className="btn-floating btn-tiny waves-effect waves-light" onClick={this.cancelButtonOnClick} onKeyDown={this.cancelButtonOnClick}><i id={image.id} className="material-icons">cancel</i></a>
+            </div>
+          ))}
+          {this.imagePreview.map((image, index) => (
+            <div key={image.id} className="col s3">
+              <img id={index} src={image.imageURL} alt="placeholder" height="170px" width="170px" />
+              <a id="cancel_pic_button" role="button" tabIndex={-2} className="btn-floating btn-tiny waves-effect waves-light" onClick={this.cancelButtonOnClick} onKeyDown={this.cancelButtonOnClick}><i id={image.id} className="material-icons">cancel</i></a>
+            </div>
+          ))}
+          <div className="col s3"><a id="add_pic_button" role="button" tabIndex={0} className="btn-floating btn-large waves-effect waves-light" onClick={this.addButtonOnClick} onKeyDown={this.addButtonOnClick}><i className="material-icons">add</i></a></div>
+          {this.placeHolder}
+          <form ref={this.setFormInput}>
+            <input id="upload_input" type="file" multiple ref={this.setInput} onChange={(e) => { this.handlePicChange(e); }} />
+          </form>
+        </div>
+      );
+    }
+    this.imagePreview = [];
     let buttonStyle;
     if (this.props.fromNewBook) {
       buttonStyle = { display: 'none' };
@@ -157,7 +241,6 @@ export class FileUploadBox extends React.Component {
         top: '20px',
       };
     }
-    this.imagePreview = [];
     for (let i = 0; i < this.props.id.length; i += 1) {
       if (this.props.imagePreviewUrl[i]) {
         this.imagePreview.push({
@@ -212,12 +295,27 @@ export class FileUploadBox extends React.Component {
         </form>
       </div>
     );
-    if (this.props.modalId !== undefined) {
+    if (this.props.modalId.startsWith('add_chapter_modal')) {
       return (
         <div id={this.props.modalId} className="modal modal-fixed-footer" ref={this.setModal} >
           <div className="modal-content">
             <h4>After {this.props.prevChapterTitle}</h4>
             {inputComp}
+            <button className="modal-action modal-close" id="modalBoxButton" ref={this.setModalBoxButton}> hidden button </button>
+          </div>
+          <div className="modal-footer">
+            <a onClick={this.uploadButtonOnClick} style={this.displayUpload} className="waves-effect waves-green btn-flat ">upload</a>
+            {loadingCircle}
+          </div>
+        </div>
+      );
+    }
+    if (this.props.modalId.startsWith('edit_chapter_modal')) {
+      return (
+        <div id={this.props.modalId} className="modal modal-fixed-footer" ref={this.setModal} >
+          <div className="modal-content">
+            <h4>Edit Chapter {chapterNumber}</h4>
+            {editComp}
             <button className="modal-action modal-close" id="modalBoxButton" ref={this.setModalBoxButton}> hidden button </button>
           </div>
           <div className="modal-footer">
@@ -258,12 +356,16 @@ FileUploadBox.propTypes = {
   imageInsert: PropTypes.func.isRequired,
   imageUpload: PropTypes.func.isRequired,
   imageRemove: PropTypes.func.isRequired,
+  editUpload: PropTypes.func.isRequired,
   descriptionUpload: PropTypes.func.isRequired,
   titleUpload: PropTypes.func.isRequired,
   getImageSize: PropTypes.number,
   isLoggedin: PropTypes.bool,
   modalId: PropTypes.string,
   prevChapterTitle: PropTypes.string,
+  bookList: PropTypes.object,
+  bookId: PropTypes.number,
+  getImageData: PropTypes.object,
 };
 
 FileUploadBox.defaultProps = {
@@ -275,5 +377,8 @@ FileUploadBox.defaultProps = {
   isLoggedin: false,
   modalId: undefined,
   prevChapterTitle: '',
+  bookList: {},
+  bookId: 0,
+  getImageData: {},
 };
 
