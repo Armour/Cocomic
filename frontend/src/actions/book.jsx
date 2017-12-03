@@ -1,5 +1,5 @@
 import { METHOD_GET, METHOD_POST, fetchDataIfNeeded } from 'actions/fetchApi';
-import { RECEIVE_BOOK, CLEAR_GALLERY_BOOKS, RECEIVE_POPULAR_BOOKS, RECEIVE_NEWEST_BOOKS, LIKE_CHAPTER, RECEIVE_BOOKMARK } from 'constants/book';
+import { RECEIVE_BOOK, CLEAR_GALLERY_BOOKS, RECEIVE_POPULAR_BOOKS, RECEIVE_NEWEST_BOOKS, LIKE_CHAPTER, RECEIVE_BOOKMARK, FETCH_BOOK_ERROR } from 'constants/book';
 
 /*
 data:{
@@ -19,6 +19,12 @@ data:{
 const receiveBook = data => ({
   type: RECEIVE_BOOK,
   data,
+});
+
+const fetchBookError = bookId => (url, message) => ({
+  type: FETCH_BOOK_ERROR,
+  message,
+  bookId,
 });
 
 const likeSuccess = data => ({
@@ -60,7 +66,7 @@ export const fetchNewestBooks = (offset, amount) =>
 export const fetchBookIfNeeded = bookId =>
   (dispatch) => {
     const url = `/book/${bookId}`;
-    dispatch(fetchDataIfNeeded(url, METHOD_GET, {}, receiveBook));
+    dispatch(fetchDataIfNeeded(url, METHOD_GET, {}, receiveBook, fetchBookError(bookId)));
   };
 
 export const fetchChapterIfNeeded = (bookId, chapterId) =>

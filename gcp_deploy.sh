@@ -1,15 +1,31 @@
-# Setting the default logging driver to use the Google Cloud logging driver
-echo '{"log-driver":"gcplogs"}' | sudo tee /etc/docker/daemon.json
-sudo systemctl restart docker
+sudo apt update && sudo apt upgrade -y
 
-# install docker-compose
-docker pull docker/compose:1.17.1
-echo alias docker-compose="'"'docker run \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v "$PWD:/rootfs/$PWD" \
-    -w="/rootfs/$PWD" \
-    docker/compose:1.17.1'"'" >> ~/.bashrc
-source ~/.bashrc
+# Install node and npm
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt update && sudo apt install -y nodejs
+
+# Install yarn
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update && sudo apt install -y yarn
+
+# Install docker & docker-compose
+sudo apt-get remove docker docker-engine docker.io
+sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce
+docker version
+
+sudo curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+
+# Give docker sudo permission
+sudo usermod -aG docker ${USER}
+exit
 
 # run nginx-proxy
 cd
@@ -37,4 +53,5 @@ docker run -d \
     jrcs/letsencrypt-nginx-proxy-companion
 
 # run docker-compose
+cd Cocomic
 docker-compose -f docker-compose.prod.yml up
