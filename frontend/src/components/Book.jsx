@@ -138,18 +138,15 @@ Book.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   coverUrl: PropTypes.string,
-  // likeNum: PropTypes.number,
   startingChapterId: PropTypes.number,
   uploadedChapterId: PropTypes.number,
 };
 
 Book.defaultProps = {
   book: undefined,
-  // currentChapterId: 0,
   title: '',
   description: '',
   coverUrl: '',
-  // likeNum: 0,
   startingChapterId: undefined,
   uploadedChapterId: undefined,
 };

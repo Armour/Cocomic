@@ -15,6 +15,11 @@ const mapStateToProps = (state, ownProps) => {
       likeNum: 0,
     };
   }
+
+  if (book.get('error')) {
+    window.location.replace('/not/exist');
+  }
+
   const startingChapterId = ownProps.chapterId ? ownProps.chapterId : book.get('rootChapterId');
   window.history.replaceState(undefined, undefined, `#${startingChapterId}`);
 

@@ -1,6 +1,6 @@
 import { Map, List, fromJS, getIn } from 'immutable';
 
-import { RECEIVE_BOOK, LIKE_CHAPTER, RECEIVE_BOOKMARK } from 'constants/book';
+import { RECEIVE_BOOK, FETCH_BOOK_ERROR, LIKE_CHAPTER, RECEIVE_BOOKMARK } from 'constants/book';
 import { UPLOAD_IMAGE } from 'constants/uploadImage';
 
 /*
@@ -43,6 +43,8 @@ export const books = (state = initialState, action) => {
       });
     }
     return newState;
+  case FETCH_BOOK_ERROR:
+    return newState.mergeIn([action.bookId], fromJS({ error: action.message }));
   case LIKE_CHAPTER:
     if (action.data && action.data.bookId && action.data.chapterId && action.data.toggle !== undefined) {
       newState = newState.setIn([action.data.bookId, 'chapters', action.data.chapterId, 'isliked'], action.data.toggle);
