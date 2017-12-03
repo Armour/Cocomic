@@ -4,17 +4,12 @@ An open-source platform for comic/manga collaboration
 
 ## Example
 
-Placeholder here
-
-## Dump sql file
-
-```sql
-pg_dump -U docker -d docker -h localhost --data-only > backend/sql/data.sql
-```
+Please go to [https://cocomic.azendless.com/](https://cocomic.azendless.com/)
 
 ## Stack
 
 * [x] [express](http://expressjs.com/) - backend
+* [x] [nginx](https://www.nginx.com/) - reverse proxy
 * [x] [yarn](https://github.com/yarnpkg/yarn) - dependency manager
 * [x] [gulp](https://github.com/gulpjs/gulp) - task runner
 * [x] [materialize](http://materializecss.com/) - a modern responsive front-end framework based on Material Design
@@ -36,6 +31,8 @@ pg_dump -U docker -d docker -h localhost --data-only > backend/sql/data.sql
 * [x] [stylelint](https://stylelint.io/) - lint style files (.css, .scss)
 * [x] [postgresql](https://www.postgresql.org/) - advanced open source database
 * [x] [docker](https://github.com/docker/docker) - the open-source application container engine
+* [x] [Google Cloud Platform](https://cloud.google.com/) - build and host applications and websites, store data, and analyze data on Google's scalable infrastructure
+* [x] [let's encrypt](https://letsencrypt.org/) - free SSL/TLS certificates
 
 ## How to run the example code
 
@@ -46,18 +43,6 @@ pg_dump -U docker -d docker -h localhost --data-only > backend/sql/data.sql
 * `docker` (optional)
 
 Install [yarn](https://yarnpkg.com/en/docs/install#linux-tab) follows official documentation.
-
-### Use docker
-
-The easiest way to run the example project is to use `docker-compose`
-
-```bash
-docker-compose up
-```
-
-that's it :)
-
-you can also manually install and run it by following below
 
 ### Install project dependencies
 
@@ -70,9 +55,21 @@ yarn global add gulp
 
 If you meet permission problem when try to install yarn globally, check [this](https://github.com/yarnpkg/yarn/issues/1060#issuecomment-268160528) out.
 
+### Use docker
+
+The easiest way to run the postgres and redis without any configuration is to use `docker-compose`
+
+```bash
+docker-compose up -d
+```
+
+that's it :)
+
+you can also manually install and run it too
+
 ### Database setup
 
-Make sure you have `postgresql` installed, and set the right configs in `backend/config.json`.
+Make sure you have `postgresql` and `redis` installed, and set the right configs in `backend/config.json`.
 
 ### Build & Run
 

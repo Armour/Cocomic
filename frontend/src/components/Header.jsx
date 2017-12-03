@@ -27,7 +27,6 @@ export class Header extends React.Component {
           <li key="home"><NavLink activeClassName="active-link" exact to="/">Home</NavLink></li>
           <li key="popular"><NavLink activeClassName="active-link" to="/popular">Popular</NavLink></li>
           <li key="newest"><NavLink activeClassName="active-link" to="/newest">New</NavLink></li>
-          <li key="about"><NavLink activeClassName="active-link" to="/about">About us</NavLink></li>
           <li key="login"><NavLink activeClassName="active-link" to="/login">Log in</NavLink></li>
           <li key="register"><NavLink activeClassName="active-link" to="/register">Register</NavLink></li>
         </ul>
@@ -36,10 +35,8 @@ export class Header extends React.Component {
       header = (
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li key="home"><NavLink activeClassName="active-link" exact to="/">Home</NavLink></li>
-          <li key="newbook"><NavLink activeClassName="active-link" to="/newbook">Newbook</NavLink></li>
           <li key="popular"><NavLink activeClassName="active-link" to="/popular">Popular</NavLink></li>
           <li key="newest"><NavLink activeClassName="active-link" to="/newest">New</NavLink></li>
-          <li key="about"><NavLink activeClassName="active-link" to="/about">About us</NavLink></li>
           <Dropdown id="header-dropdown" title={`Hello ${this.props.username}`} logout={this.onClickLogout} />
         </ul>
       );
