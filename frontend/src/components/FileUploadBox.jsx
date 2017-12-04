@@ -165,7 +165,7 @@ export class FileUploadBox extends React.Component {
         description: this.discriptionInput.value,
         images: imageArray,
       };
-      this.props.editUpload(data);
+      this.props.editUpload(data, this.props.bookId);
     }
   }
 
