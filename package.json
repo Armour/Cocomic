@@ -12,7 +12,7 @@
     "build-prod": "webpack --color --config webpack.config.prod.babel.js",
     "profile": "webpack --color --config webpack.config.profile.babel.js",
     "server": "nodemon --exec babel-node backend/server.js",
-    "prepush": "gulp eslint",
+    "prepush": "gulp eslint stylelint",
     "prepare": "patch-package"
   },
   "dependencies": {
