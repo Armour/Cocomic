@@ -169,21 +169,21 @@ export class NewBook extends React.Component {
                 <div className="card-content">
                   <span className="card-title center-align"> New Book </span>
                   <div id="content-row" className="row">
-                    <div className="col s4" id="coverPreview">
+                    <div className="col s12 m4" id="coverPreview">
                       <a onClick={this.imageOnClick} onKeyDown={this.imageOnClick}>
                         <img src={this.previewSrc} alt="placeholder" width="300px" height="300px" />
                         <p id="uploadBookText" className="flow-text" style={this.displayText}>Upload <br /> &nbsp;&nbsp;Book <br /> &nbsp;Cover</p>
                       </a>
                     </div>
-                    <div className="col s8">
+                    <div className="col s12 m8">
                       <div className="row">
-                        <div id="book_input_field" className="input-field col s8">
+                        <div id="book_input_field" className="input-field col s12">
                           <input id="title" ref={this.setTitleInput} type="text" />
                           <label htmlFor="title">Book Title</label>
                         </div>
                       </div>
                       <div className="row">
-                        <div id="book_input_field" className="input-field col s8">
+                        <div id="book_input_field" className="input-field col s12">
                           <textarea id="descriptionArea" ref={this.setDescriptionInput} className="materialize-textarea" data-length="120" />
                           <label htmlFor="descriptionArea">Description</label>
                         </div>
