@@ -166,7 +166,7 @@ export class FileUploadBox extends React.Component {
         description: this.discriptionInput.value,
         images: imageArray,
       };
-      this.props.editUpload(data);
+      this.props.editUpload(data, this.props.bookId);
     }
   }
 
@@ -328,7 +328,7 @@ export class FileUploadBox extends React.Component {
       return (
         <div id={this.props.modalId} className="modal modal-fixed-footer" ref={this.setModal} >
           <div className="modal-content">
-            <h4>After {this.props.prevChapterTitle}</h4>
+            <h4>Add Chapter After {this.props.prevChapterTitle}</h4>
             {inputComp}
             <button className="modal-action modal-close" id="modalBoxButton" ref={this.setModalBoxButton}> hidden button </button>
           </div>

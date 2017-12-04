@@ -1,7 +1,7 @@
 import { Map, List, fromJS, getIn } from 'immutable';
 
 import { RECEIVE_BOOK, FETCH_BOOK_ERROR, LIKE_CHAPTER, RECEIVE_BOOKMARK } from 'constants/book';
-import { UPLOAD_IMAGE } from 'constants/uploadImage';
+import { UPLOAD_IMAGE, EDIT_IMAGE } from 'constants/uploadImage';
 
 /*
 state.books:{
@@ -67,6 +67,12 @@ export const books = (state = initialState, action) => {
       newState = newState.mergeIn([chapter.bookId, 'chapters', chapter.id], fromJS(chapter));
       newState = newState.setIn([chapter.bookId, 'uploadedChapterId'], chapter.id);
       newState = newState.updateIn([chapter.bookId, 'chapters', chapter.parentId, 'childrenIds'], (list = List()) => list.unshift(chapter.id));
+    }
+    return newState;
+  case EDIT_IMAGE:
+    if (action.data && action.data.chapterId) {
+      const chapter = fromJS(action.data).delete('chapterId');
+      newState = newState.mergeIn([action.bookId, 'chapters', parseInt(action.data.chapterId, 10)], chapter);
     }
     return newState;
   default:

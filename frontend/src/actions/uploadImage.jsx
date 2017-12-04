@@ -17,9 +17,10 @@ const uploadImage = uploadedData => data => ({
   uploadedData,
 });
 
-const editImage = data => ({
+const editImage = bookId => data => ({
   type: EDIT_IMAGE,
   data,
+  bookId,
 });
 
 const description = data => ({
@@ -47,9 +48,9 @@ export const imageUpload = data =>
     dispatch(fetchDataIfNeeded('/book/addChapter', METHOD_POST, data, uploadImage(data)));
   };
 
-export const editUpload = data =>
+export const editUpload = (data, bookId) =>
   (dispatch) => {
-    dispatch(fetchDataIfNeeded('/book/editChapter', METHOD_POST, data, editImage));
+    dispatch(fetchDataIfNeeded('/book/editChapter', METHOD_POST, data, editImage(bookId)));
   };
 
 export const descriptionUpload = data =>

@@ -74,8 +74,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       }));
     }
   },
-  editUpload: (data) => {
-    dispatch(editUpload(data));
+  editUpload: (data, bookId) => {
+    dispatch(editUpload(data, bookId));
   },
   imageRemove: (imgId) => {
     dispatch(imageRemove(imgId));

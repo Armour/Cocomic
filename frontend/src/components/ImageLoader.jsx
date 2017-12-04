@@ -11,6 +11,14 @@ export class ImageLoader extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.img_data !== nextProps.img_data) {
+      nextProps.fetchImageIfNeeded({
+        images: [nextProps.img_url],
+      });
+    }
+  }
+
   render() {
     const frameStyle = {
       height: '200px',
