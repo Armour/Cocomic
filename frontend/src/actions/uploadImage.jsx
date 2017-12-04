@@ -1,4 +1,4 @@
-import { RECEIVE_IMAGE, UPLOAD_IMAGE, REMOVE_IMAGE, UPLOAD_DESCRIPTION, UPLOAD_TITLE } from 'constants/uploadImage';
+import { RECEIVE_IMAGE, UPLOAD_IMAGE, REMOVE_IMAGE, UPLOAD_DESCRIPTION, UPLOAD_TITLE, EDIT_IMAGE } from 'constants/uploadImage';
 import { METHOD_POST, fetchDataIfNeeded } from 'actions/fetchApi';
 
 const newImage = data => ({
@@ -15,6 +15,11 @@ const uploadImage = uploadedData => data => ({
   type: UPLOAD_IMAGE,
   data,
   uploadedData,
+});
+
+const editImage = data => ({
+  type: EDIT_IMAGE,
+  data,
 });
 
 const description = data => ({
@@ -40,6 +45,11 @@ export const imageRemove = imgId =>
 export const imageUpload = data =>
   (dispatch) => {
     dispatch(fetchDataIfNeeded('/book/addChapter', METHOD_POST, data, uploadImage(data)));
+  };
+
+export const editUpload = data =>
+  (dispatch) => {
+    dispatch(fetchDataIfNeeded('/book/editChapter', METHOD_POST, data, editImage));
   };
 
 export const descriptionUpload = data =>

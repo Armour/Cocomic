@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fromJS } from 'immutable';
 import UploadImage from 'containers/UploadImage';
+import Materialize from 'materialize-css';
 
 let fileInput;
 let bookCover = {};
@@ -37,9 +37,37 @@ export class NewBook extends React.Component {
     this.previewSrc = require('../image/dash-rectangle.png');
     this.displayText = { display: 'inline' };
     this.newChapterBox = UploadImage;
+    this.uploadTrigger = false;
+    this.displayButton = {
+      display: 'block',
+      backgroundColor: '$primary-color',
+      height: '52px',
+      paddingTop: '10px',
+      paddingBottom: '10px',
+      top: '5px',
+    };
+    this.displayCircle = { display: 'none' };
+    this.startRequest = false;
   }
+
+  componentWillUpdate() {
+    if (this.props.fetchedData['POST /book/addBook']) this.startRequest = true;
+    if (this.startRequest && this.props.fetchedData['POST /book/addBook'] === undefined) window.location = '../userCenter';
+  }
+
   uploadButtonOnClick(e) {
     e.preventDefault();
+    if (!this.props.logOrNot.isLoggedIn) {
+      Materialize.toast('Please log in before upload pictures :)', 3000, 'rounded');
+      return;
+    }
+    if (bookCover.chapterImages.length === 0 || !bookCover.coverPreviewUrl) {
+      Materialize.toast('The Book Cover and Chapter Images cannot be empty', 3000, 'rounded');
+      return;
+    }
+    this.uploadTrigger = true;
+    this.displayCircle = { display: 'inline-block' };
+    this.displayButton = { display: 'none' };
     const imageArray = [];
     for (let i = 0; i < bookCover.chapterImages.length; i += 1) {
       imageArray.push({
@@ -73,6 +101,54 @@ export class NewBook extends React.Component {
   }
 
   render() {
+    const loadingCircle = (
+      <div className="preloader-wrapper big active" id="newBookCircle" style={this.displayCircle}>
+        <div className="spinner-layer spinner-blue">
+          <div className="circle-clipper left">
+            <div className="circle" />
+          </div>
+          <div className="gap-patch">
+            <div className="circle" />
+          </div>
+          <div className="circle-clipper right">
+            <div className="circle" />
+          </div>
+        </div>
+        <div className="spinner-layer spinner-red">
+          <div className="circle-clipper left">
+            <div className="circle" />
+          </div>
+          <div className="gap-patch">
+            <div className="circle" />
+          </div>
+          <div className="circle-clipper right">
+            <div className="circle" />
+          </div>
+        </div>
+        <div className="spinner-layer spinner-yellow">
+          <div className="circle-clipper left">
+            <div className="circle" />
+          </div>
+          <div className="gap-patch">
+            <div className="circle" />
+          </div>
+          <div className="circle-clipper right">
+            <div className="circle" />
+          </div>
+        </div>
+        <div className="spinner-layer spinner-green">
+          <div className="circle-clipper left">
+            <div className="circle" />
+          </div>
+          <div className="gap-patch">
+            <div className="circle" />
+          </div>
+          <div className="circle-clipper right">
+            <div className="circle" />
+          </div>
+        </div>
+      </div>
+    );
     bookCover = {
       file: this.props.file,
       coverPreviewUrl: this.props.coverPreviewUrl,
@@ -123,9 +199,10 @@ export class NewBook extends React.Component {
         <this.newChapterBox fromNewBook />
         <div className="row">
           <div className="col s8">
-            <a id="add_chapter_btn" className="waves-effect waves-light btn" onClick={this.uploadButtonOnClick} onKeyDown={this.uploadButtonOnClick} role="button" tabIndex={-1}>Upload</a>
+            <a id="add_chapter_btn" className="waves-effect waves-light btn" style={this.displayButton} onClick={this.uploadButtonOnClick} onKeyDown={this.uploadButtonOnClick} role="button" tabIndex={-1}>Upload</a>
           </div>
         </div>
+        {loadingCircle}
       </div>
     );
   }
@@ -137,14 +214,18 @@ NewBook.propTypes = {
   chapterDescription: PropTypes.string,
   chapterTitle: PropTypes.string,
   chapterImages: PropTypes.array,
+  fetchedData: PropTypes.object,
+  logOrNot: PropTypes.object,
   newBookCover: PropTypes.func.isRequired,
   bookUpload: PropTypes.func.isRequired,
 };
 
 NewBook.defaultProps = {
-  file: fromJS([]),
+  file: {},
   coverPreviewUrl: '',
   chapterDescription: '',
   chapterTitle: '',
+  logOrNot: {},
+  fetchedData: {},
   chapterImages: [],
 };

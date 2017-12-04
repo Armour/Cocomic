@@ -11,10 +11,10 @@ export class Carousel extends React.Component {
     super(props);
     const selectedChapterId = this.props.selectedChapterId ? this.props.selectedChapterId : this.props.childrenIds.get(0);
     this.settings = {
+      arrows: false,
       dots: false,
       infinite: false,
       speed: 500,
-      slidesToShow: 3,
       slidesToScroll: 1,
       autoplay: false,
       centerMode: true,
@@ -22,6 +22,10 @@ export class Carousel extends React.Component {
       useCSS: true,
       initialSlide: this.props.childrenIds.indexOf(selectedChapterId),
       afterChange: index => this.selectItem(index),
+      responsive: [
+        { breakpoint: 600, settings: { slidesToShow: 1 } },
+        { breakpoint: 100000, settings: { slidesToShow: 3 } },
+      ],
     };
     this.selectItem = this.selectItem.bind(this);
   }

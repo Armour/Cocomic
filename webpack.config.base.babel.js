@@ -4,6 +4,7 @@ import webpack from 'webpack';
 import AddAssetHtmlPlugin from 'add-asset-html-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ProgressBarWebpackPlugin from 'progress-bar-webpack-plugin';
+import WebpackPwaManifest from 'webpack-pwa-manifest';
 
 import * as ReactManifest from './frontend/dist/dll/react_manifest.json'; // eslint-disable-line import/no-unresolved
 import * as ImmutableManifest from './frontend/dist/dll/immutable_manifest.json'; // eslint-disable-line import/no-unresolved
@@ -60,6 +61,33 @@ export default {
     // Better building progress display
     new ProgressBarWebpackPlugin({
       clear: false,
+    }),
+    // Add Progressive Web Application manifest
+    new WebpackPwaManifest({
+      name: 'Cocomic',
+      short_name: 'Cocomic',
+      description: 'An open-source platform for comic/manga collaboration',
+      background_color: '#2196f3',
+      theme_color: '#2196f3',
+      orientation: 'portrait',
+      display: 'standalone',
+      icons: [
+        {
+          src: path.resolve('frontend/src/image/logo.png'),
+          sizes: [16, 32, 96, 128, 192, 256, 384, 512],
+        },
+        {
+          src: path.resolve('frontend/src/image/apple-touch-icon.png'),
+          sizes: [120, 152, 167, 180],
+          destination: path.join('icons', 'ios'),
+          ios: true,
+        },
+        {
+          src: path.resolve('frontend/src/image/android-icon.png'),
+          sizes: [192, 256],
+          destination: path.join('icons', 'android'),
+        },
+      ],
     }),
     // Generate html file to dist folder
     new HtmlWebpackPlugin({

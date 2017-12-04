@@ -93,9 +93,14 @@ export class ChapterEndCard extends React.Component {
                   >{likeBtn}
                   </a>
                   <a
-                    className="btn-floating halfway-fab waves-circle waves-effect waves-light chapter-end-btn modal-trigger"
+                    className="btn-floating halfway-fab waves-circle waves-effect waves-light chapter-end-btn modal-trigger chapter-end-add-btn"
                     href={`#add_chapter_modal-${chapter.get('id')}`}
-                  ><i className="material-icons">create</i>
+                  ><i className="material-icons">add</i>
+                  </a>
+                  <a
+                    className="btn-floating halfway-fab waves-circle waves-effect waves-light chapter-end-btn modal-trigger"
+                    href={`#edit_chapter_modal-${chapter.get('id')}`}
+                  ><i className="material-icons">edit</i>
                   </a>
                 </div>
               }
@@ -108,6 +113,13 @@ export class ChapterEndCard extends React.Component {
           parentId={chapter.get('id')}
           bookId={chapter.get('bookId')}
           modalId={`add_chapter_modal-${chapter.get('id')}`}
+          prevChapterTitle={chapter.get('title')}
+        />
+        <UploadImage
+          fromNewBook={false}
+          parentId={chapter.get('id')}
+          bookId={chapter.get('bookId')}
+          modalId={`edit_chapter_modal-${chapter.get('id')}`}
           prevChapterTitle={chapter.get('title')}
         />
       </div>
