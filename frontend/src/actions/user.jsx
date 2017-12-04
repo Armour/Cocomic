@@ -1,7 +1,6 @@
 import { RECEIVE_REGISTER, RECEIVE_LOGOUT, RECEIVE_CUREENT_USER, RECEIVE_LOGIN, LOGIN_ERROR } from 'constants/user';
 import { fetchDataIfNeeded } from 'actions/fetchApi';
 import history from '../history';
-
 /*
 data : {
   receiveRegister: {
@@ -55,6 +54,13 @@ export const getUser = () =>
   };
 
 export const login = data =>
-  (dispatch) => {
-    dispatch(fetchDataIfNeeded('/user/login', 'POST', data, receiveLogin, loginError));
+  async (dispatch, getState) => {
+    try {
+      await dispatch(fetchDataIfNeeded('/user/login', 'POST', data, receiveLogin, loginError));
+      if (getState().register.get('isLoggedIn') === true) {
+        history.push('/');
+      }
+    } catch (e) {
+      history.push('/login');
+    }
   };

@@ -1,11 +1,10 @@
 import { connect } from 'react-redux';
 import { newBookCover, bookUpload } from 'actions/uploadBook';
 import { NewBook } from 'components/UploadBook';
-import { fromJS } from 'immutable';
 
 const mapStateToProps = (state) => {
   let returnState = {
-    file: fromJS([]),
+    file: {},
     chapterDescription: '',
     coverPreviewUrl: '',
   };
@@ -20,6 +19,12 @@ const mapStateToProps = (state) => {
       file: fileObj,
       coverPreviewUrl: coverUrl,
     };
+  }
+  if (state.fetchingData) {
+    returnState.fetchedData = state.fetchingData.toJS();
+  }
+  if (state.register) {
+    returnState.logOrNot = state.register.toJS();
   }
   if (state.uploadImages) {
     let des;
