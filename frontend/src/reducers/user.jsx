@@ -10,6 +10,7 @@ export const register = (state = initialState, action) => {
   case RECEIVE_LOGOUT:
     newState = newState.set('isLoggedIn', false);
     newState = newState.set('username', '');
+    newState = newState.delete('errorMessage');
     return newState;
   case LOGIN_ERROR:
     if (action.data !== undefined) {

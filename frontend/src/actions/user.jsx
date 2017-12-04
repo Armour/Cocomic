@@ -58,7 +58,7 @@ export const login = data =>
     try {
       await dispatch(fetchDataIfNeeded('/user/login', 'POST', data, receiveLogin, loginError));
       if (getState().register.get('isLoggedIn') === true) {
-        history.push('/');
+        history.push('/userCenter');
       }
     } catch (e) {
       history.push('/login');

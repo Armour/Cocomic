@@ -78,7 +78,7 @@ export const getUserCollections = async (req, res) => {
     if (books === undefined || books.length === 0) throw Error();
     return res.status(200).json({ books });
   } catch (e) {
-    return res.status(500).json({ message: `user collection errors: ${e.message} ` });
+    return res.status(204).json({ message: `user collection errors: ${e} ` });
   }
 };
 
@@ -95,7 +95,7 @@ export const getUserFavorates = async (req, res) => {
 
     res.json({ books });
   } catch (e) {
-    res.status(500).json({ message: `user collection errors: ${e.message} ` });
+    res.status(204).json({ message: `user collection errors: ${e} ` });
   }
 };
 

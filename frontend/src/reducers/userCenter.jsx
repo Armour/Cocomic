@@ -1,6 +1,6 @@
 import { Map, List, fromJS } from 'immutable';
 
-import { RECEIVE_USER_COLLECTIONS, TOGGLE_USER_CENTER_TAB, RECEIVE_FAVORATES, TO_FAVORATES, TO_COLLECTIONS } from 'constants/userCenter';
+import { RECEIVE_USER_COLLECTIONS, TOGGLE_USER_CENTER_TAB, RECEIVE_FAVORATES, TO_FAVORATES, TO_COLLECTIONS, USER_COLLECTION_ERROR, USER_FAVORATE_ERROR } from 'constants/userCenter';
 
 /*
 state.popular_books:{
@@ -22,7 +22,13 @@ export const userCenter = (state = initialState, action) => {
   case RECEIVE_FAVORATES:
     if (action.data !== undefined && action.data.books !== undefined) {
       newState = newState.set('books', List(fromJS(action.data.books)));
+    } else {
+      newState = newState.set('books', List());
     }
+    return newState;
+  case USER_COLLECTION_ERROR:
+  case USER_FAVORATE_ERROR:
+    newState = newState.set('books', List());
     return newState;
   case TO_COLLECTIONS:
     newState = newState.set('isCollection', true);
