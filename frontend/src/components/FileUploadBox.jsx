@@ -17,7 +17,8 @@ export class FileUploadBox extends React.Component {
     this.cancelButtonOnClick = this.cancelButtonOnClick.bind(this);
     this.handleDescriptionOnBlur = this.handleDescriptionOnBlur.bind(this);
     this.handleTitleOnBlur = this.handleTitleOnBlur.bind(this);
-    this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="170" width="170" /></div>);
+    if (!this.props.fromNewBook) this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="170" width="170" /></div>);
+    else this.placeHolder = (<div className="col s3"><img src={require('../image/blank2.png')} alt="placeholder" height="170" width="170" /></div>);
     this.fileInput = null;
     this.formInput = null;
     this.modalBoxButton = null;
@@ -251,7 +252,8 @@ export class FileUploadBox extends React.Component {
       }
     }
     if (this.imagePreview.length % 4 === 0) {
-      this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="175" width="175" /></div>);
+      if (!this.props.fromNewBook) this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="175" width="175" /></div>);
+      else this.placeHolder = (<div className="col s3"><img src={require('../image/blank2.png')} alt="placeholder" height="175" width="175" /></div>);
     }
     const loadingCircle = (
       <div className="preloader-wrapper active" style={this.displayCircle}>
@@ -295,6 +297,33 @@ export class FileUploadBox extends React.Component {
         </form>
       </div>
     );
+    const newbookComp = (
+      <div>
+        <div className="row">
+          <div className="input-field col s12">
+            <input id="title" onBlur={this.handleTitleOnBlur} ref={this.setTitleInput} type="text" className="validate" />
+            <label htmlFor="title">Title</label>
+          </div>
+        </div>
+        <div className="row">
+          <div className="input-field col s12">
+            <input id="description" onBlur={this.handleDescriptionOnBlur} ref={this.setDescriptionInput} type="text" className="validate" />
+            <label htmlFor="description">Description</label>
+          </div>
+        </div>
+        {this.imagePreview.map((image, index) => (
+          <div key={image.id} className="col s3">
+            <img id={index} src={image.imageURL} alt="placeholder" height="200px" width="200px" />
+            <a id="cancel_pic_button_newbook" role="button" tabIndex={-2} className="btn-floating btn-tiny waves-effect waves-light" onClick={this.cancelButtonOnClick} onKeyDown={this.cancelButtonOnClick}><i id={image.id} className="material-icons">cancel</i></a>
+          </div>
+        ))}
+        <div className="col s3"><a id="add_pic_button" role="button" tabIndex={0} className="btn-floating btn-large waves-effect waves-light" onClick={this.addButtonOnClick} onKeyDown={this.addButtonOnClick}><i className="material-icons">add</i></a></div>
+        {this.placeHolder}
+        <form ref={this.setFormInput}>
+          <input id="upload_input" type="file" multiple ref={this.setInput} onChange={(e) => { this.handlePicChange(e); }} />
+        </form>
+      </div>
+    );
     if (this.props.modalId && this.props.modalId.startsWith('add_chapter_modal')) {
       return (
         <div id={this.props.modalId} className="modal modal-fixed-footer" ref={this.setModal} >
@@ -314,7 +343,7 @@ export class FileUploadBox extends React.Component {
       return (
         <div id={this.props.modalId} className="modal modal-fixed-footer" ref={this.setModal} >
           <div className="modal-content">
-            <h4>Edit Chapter {this.chapterNumber[1]}</h4>
+            <h4>Edit Chapter</h4>
             {editComp}
             <button className="modal-action modal-close" id="modalBoxButton" ref={this.setModalBoxButton}> hidden button </button>
           </div>
@@ -325,26 +354,28 @@ export class FileUploadBox extends React.Component {
         </div>
       );
     }
-    return (
-      <div className="upload-box-wrapper">
-        <div className="row">
-          <div className="col s12">
-            <div className="card">
-              <div className="card-content">
-                <span className="card-title center-align"> New Chapter </span>
-                {inputComp}
-                <div className="row">
-                  <div className="col s12">
-                    <a id="upload_btn" className="waves-effect waves-light btn" style={buttonStyle} onClick={this.uploadButtonOnClick} onKeyDown={this.uploadButtonOnClick} role="button" tabIndex={-1}>upload</a>
-                    {loadingCircle}
+    if (this.props.fromNewBook) {
+      return (
+        <div className="upload-box-wrapper">
+          <div className="row">
+            <div className="col s12">
+              <div className="card">
+                <div className="card-content">
+                  <span className="card-title center-align"> New Chapter </span>
+                  {newbookComp}
+                  <div className="row">
+                    <div className="col s12">
+                      <a id="upload_btn" className="waves-effect waves-light btn" style={buttonStyle} onClick={this.uploadButtonOnClick} onKeyDown={this.uploadButtonOnClick} role="button" tabIndex={-1}>upload</a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
+    return null;
   }
 }
 
