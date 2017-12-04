@@ -32,6 +32,7 @@ export const getUser = async (req, res) => {
         code: 0,
         message: 'success',
         isLoggedIn: false,
+        userId: undefined,
       });
     }
     return res.json({
@@ -39,6 +40,7 @@ export const getUser = async (req, res) => {
       message: 'success',
       isLoggedIn: true,
       username: req.session.username,
+      userId: req.session.uid,
     });
   } catch (e) {
     return res.status(500).json({ message: 'get user error' });
@@ -91,6 +93,7 @@ export const login = async (req, res) => {
       code: 0,
       message: 'success',
       username: result.rows[0].username,
+      userId: result.rows[0].id,
     });
   } catch (e) {
     return res.status(500).json({ message: `user login error: ${e} ${e.stack}` });

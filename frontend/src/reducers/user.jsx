@@ -22,6 +22,7 @@ export const register = (state = initialState, action) => {
     if (typeof action.data.username !== 'undefined') {
       newState = newState.set('username', action.data.username);
       newState = newState.set('isLoggedIn', true);
+      newState = newState.set('userId', action.data.userId);
     }
     return newState;
   case RECEIVE_REGISTER:
