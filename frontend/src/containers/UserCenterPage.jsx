@@ -6,6 +6,7 @@ import { UserCenterPage } from 'pages/UserCenterPage';
 const mapStateToProps = state => ({
   books: state.userCenter.get('books'),
   isCollection: state.userCenter.get('isCollection'),
+  userName: state.register.get('username'),
 });
 
 const mapDispatchToProps = dispatch => ({
