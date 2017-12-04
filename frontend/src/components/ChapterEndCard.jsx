@@ -72,6 +72,15 @@ export class ChapterEndCard extends React.Component {
     }
 
     const chapter = getChapter(this.props.book, this.props.chapterId);
+    const chapterUserId = this.props.book.get('chapters').get(this.props.chapterId).toJS().userId;
+    if (this.props.currentUser === chapterUserId) {
+      this.editDisplay = {
+        display: 'inline',
+        backgroundColor: '$primary-color !important',
+      };
+    } else {
+      this.editDisplay = { display: 'none' };
+    }
 
     return (
       <div className="row book-row">
@@ -99,6 +108,7 @@ export class ChapterEndCard extends React.Component {
                   </a>
                   <a
                     className="btn-floating halfway-fab waves-circle waves-effect waves-light chapter-end-btn modal-trigger"
+                    style={this.editDisplay}
                     href={`#edit_chapter_modal-${chapter.get('id')}`}
                   ><i className="material-icons">edit</i>
                   </a>
@@ -139,8 +149,10 @@ ChapterEndCard.propTypes = {
   isBookmarked: PropTypes.bool.isRequired,
   selectBranch: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
+  currentUser: PropTypes.number,
 };
 
 ChapterEndCard.defaultProps = {
   selectedChapterId: undefined,
+  currentUser: undefined,
 };

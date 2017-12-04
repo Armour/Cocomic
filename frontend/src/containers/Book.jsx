@@ -20,6 +20,10 @@ const mapStateToProps = (state, ownProps) => {
   const startingChapterId = ownProps.chapterId ? ownProps.chapterId : book.get('rootChapterId');
   window.history.replaceState(undefined, undefined, `#${startingChapterId}`);
   const isLoggedIn = getIsLoggedIn(state);
+  let currentUserName;
+  if (state.register) {
+    currentUserName = state.register.get('userId');
+  }
   return {
     book,
     isLoggedIn,
@@ -29,6 +33,7 @@ const mapStateToProps = (state, ownProps) => {
     likeNum: book.get('likeNum'),
     startingChapterId,
     uploadedChapterId: book.get('uploadedChapterId'),
+    currentUser: currentUserName,
   };
 };
 
