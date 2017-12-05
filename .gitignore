@@ -5,3 +5,4 @@ frontend/dist/
 *.swp
 *.log
 .DS_Store
+.vagrant/

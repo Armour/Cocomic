@@ -26,6 +26,7 @@ export class Header extends React.Component {
           <li key="home"><NavLink activeClassName="active-link" exact to="/">Home</NavLink></li>
           <li key="popular"><NavLink activeClassName="active-link" to="/popular">Popular</NavLink></li>
           <li key="newest"><NavLink activeClassName="active-link" to="/newest">New</NavLink></li>
+          <li key="aboutus"><NavLink activeClassName="active-link" to="/aboutus">About Us</NavLink></li>
           <li key="login"><NavLink activeClassName="active-link" to="/login">Log in</NavLink></li>
           <li key="register"><NavLink activeClassName="active-link" to="/register">Register</NavLink></li>
         </ul>
@@ -36,6 +37,7 @@ export class Header extends React.Component {
           <li key="home"><NavLink activeClassName="active-link" exact to="/">Home</NavLink></li>
           <li key="popular"><NavLink activeClassName="active-link" to="/popular">Popular</NavLink></li>
           <li key="newest"><NavLink activeClassName="active-link" to="/newest">New</NavLink></li>
+          <li key="aboutus"><NavLink activeClassName="active-link" to="/aboutus">About Us</NavLink></li>
           <li key="mycenter"><NavLink activeClassName="active-link" to="/userCenter"><span>My Center</span></NavLink></li>
           <li key="logout"><Link to="/user/logout" onClick={this.onClickLogout}><span>Log out</span></Link></li>
         </ul>

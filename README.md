@@ -2,9 +2,16 @@
 
 An open-source platform for comic/manga collaboration
 
-## Example
+## How to run the example code
+### develop version
+* run `vagrant up` in console
+* visit `localhost:3003`
 
-Please go to [https://cocomic.azendless.com/](https://cocomic.azendless.com/)
+### production version
+* visit [https://cocomic.azendless.com/](https://cocomic.azendless.com/)
+
+## Features Might be Easily Missed
+* responsiveness
 
 ## Functions
 * Register
@@ -24,11 +31,8 @@ Please go to [https://cocomic.azendless.com/](https://cocomic.azendless.com/)
     * at the end of chapter, click to place a bookmark, to like the chapter or to create a new chapter (new branch), or to edit the chapter
     * at the end of chapter, drag the carousel to select the next chapter to read
 
-## Features Might be Easily Missed
-* responsiveness
-
 ## Known bugs
-* Branch switch doesn't on ios chrome
+* Branch switch results in blank page on ios chrome. This is because we used `history`, and the `history` support on ios chrome is buggy.
 
 ## Tech Stack
 
@@ -58,62 +62,6 @@ Please go to [https://cocomic.azendless.com/](https://cocomic.azendless.com/)
 * [x] [Google Cloud Platform](https://cloud.google.com/) - build and host applications and websites, store data, and analyze data on Google's scalable infrastructure
 * [x] [let's encrypt](https://letsencrypt.org/) - free SSL/TLS certificates
 
-## How to run the example code
-
-### Prerequisite
-
-* `node`
-* `yarn` (recommended) or `npm`
-* `docker` (optional)
-
-Install [yarn](https://yarnpkg.com/en/docs/install#linux-tab) follows official documentation.
-
-### Install project dependencies
-
-Go to project root directory:
-
-```bash
-yarn
-yarn global add gulp
-```
-
-If you meet permission problem when try to install yarn globally, check [this](https://github.com/yarnpkg/yarn/issues/1060#issuecomment-268160528) out.
-
-### Use docker
-
-The easiest way to run the postgres and redis without any configuration is to use `docker-compose`
-
-```bash
-docker-compose up -d
-```
-
-that's it :)
-
-you can also manually install and run it too
-
-### Database setup
-
-Make sure you have `postgresql` and `redis` installed, and set the right configs in `backend/config.json`.
-
-### Build & Run
-
-On development (with react-hot-reload):
-
-```bash
-gulp
-```
-
-On production (with uglify-js and other optimazitions):
-
-```bash
-NODE_ENV=production gulp
-```
-
-### Profile assets bundle
-
-```bash
-gulp profile
-```
 
 ## Contributing
 

@@ -55,4 +55,4 @@ docker run -d \
 
 # run docker-compose
 cd Cocomic
-docker-compose -f docker-compose.prod.yml up
+docker-compose -f docker-compose.prod.yml up --build
