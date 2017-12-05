@@ -252,6 +252,15 @@ export class FileUploadBox extends React.Component {
         });
       }
     }
+    for (let i = 0; i < this.imagePreview.length; i += 1) {
+      for (let j = i + 1; j < this.imagePreview.length; j += 1) {
+        if (this.imagePreview[i].id > this.imagePreview[j].id || this.imagePreview[i].id.length > this.imagePreview[j].id.length) {
+          const temp = this.imagePreview[i];
+          this.imagePreview[i] = this.imagePreview[j];
+          this.imagePreview[j] = temp;
+        }
+      }
+    }
     if (this.imagePreview.length % 4 === 0) {
       if (!this.props.fromNewBook) this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="175" width="175" /></div>);
       else this.placeHolder = (<div className="col s3"><img src={require('../image/blank2.png')} alt="placeholder" height="175" width="175" /></div>);
