@@ -46,6 +46,7 @@ export const createUser = data =>
 export const logout = () =>
   (dispatch) => {
     dispatch(fetchDataIfNeeded('/user/logout', 'GET', {}, receiveLogout));
+    history.push('/login');
   };
 
 export const getUser = () =>
