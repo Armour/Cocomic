@@ -28,7 +28,7 @@ export class AboutUsPage extends React.Component {
                 <img src={require('../image/zip.jpg')} alt="Zip" />
               </div>
               <div className="card-content">
-                <span className="card-title">Zip</span>
+                <span className="card-title">Zepeng Li</span>
               </div>
             </div>
           </div>
