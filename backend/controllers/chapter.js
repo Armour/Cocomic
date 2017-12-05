@@ -89,7 +89,12 @@ export const addChapter = async (req, res) => {
     const chapterQueryValues = [userId, bookId, title, description, parentId, chapterImages];
     const { rows } = await db.query(chapterQuery, chapterQueryValues);
     if (rows !== undefined && rows.length !== 0) {
-      return res.json({ chapterId: rows[0].id, images: chapterImages });
+      return res.json({
+        chapterId: rows[0].id,
+        images: chapterImages,
+        userId,
+        username: req.session.username,
+      });
     }
     throw Error('insert failed');
   } catch (e) {
@@ -123,8 +128,8 @@ export const editChapter = async (req, res) => {
       const newDescription = rows[0].new_description;
       const newImages = rows[0].new_images;
       if (title === newTitle &&
-          description === newDescription &&
-          JSON.stringify(chapterImages) === JSON.stringify(newImages)) {
+        description === newDescription &&
+        JSON.stringify(chapterImages) === JSON.stringify(newImages)) {
         return res.json({
           chapterId,
           title: newTitle,
