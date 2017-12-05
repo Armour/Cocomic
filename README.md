@@ -32,7 +32,7 @@ An open-source platform for comic/manga collaboration
     * at the end of chapter, drag the carousel to select the next chapter to read
 
 ## Known bugs
-* Branch switch doesn't on ios chrome
+* Branch switch results in blank page on ios chrome. This is because we used `history`, and the `history` support on ios chrome is buggy.
 
 ## Tech Stack
 
