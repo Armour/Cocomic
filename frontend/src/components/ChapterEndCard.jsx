@@ -76,7 +76,8 @@ export class ChapterEndCard extends React.Component {
     if (this.props.currentUser === chapterUserId) {
       this.editDisplay = {
         display: 'inline',
-        backgroundColor: '$primary-color !important',
+        backgroundColor: '#2196f3',
+        right: '170px',
       };
     } else {
       this.editDisplay = { display: 'none' };

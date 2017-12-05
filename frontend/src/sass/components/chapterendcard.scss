@@ -1,17 +1,19 @@
 .chapter-end-btn {
-  background-color: $primary-color !important;
-}
-
-.chapter-end-like-btn {
-  right: 120px !important;
-}
-
-.chapter-end-bookmark-btn {
   right: 170px !important;
 }
 
-.chapter-end-add-btn {
+.chapter-end-like-btn {
+  background-color: $primary-color !important;
+  right: 25px !important;
+}
+
+.chapter-end-bookmark-btn {
   right: 72px !important;
+}
+
+.chapter-end-add-btn {
+  background-color: $primary-color !important;
+  right: 120px !important;
 }
 
 .chapter-end-text {
