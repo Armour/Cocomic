@@ -186,49 +186,6 @@ export class FileUploadBox extends React.Component {
   }
 
   render() {
-    let editComp = null;
-    if (this.props.modalId && this.props.modalId.startsWith('edit')) {
-      const editArray = [];
-      for (let i = 0; i < this.state.editChapterImages.length; i += 1) {
-        editArray.push({
-          id: this.state.editChapterImages[i],
-          imageHash: this.state.editChapterImages[i],
-        });
-      }
-      editComp = (
-        <div>
-          <div className="row">
-            <div className="input-field col s12">
-              <input id="title" onBlur={this.handleTitleOnBlur} ref={this.setTitleInput} type="text" className="validate" defaultValue={this.chapterTitle} />
-              <label htmlFor="title">Title</label>
-            </div>
-          </div>
-          <div className="row">
-            <div className="input-field col s12">
-              <input id="description" onBlur={this.handleDescriptionOnBlur} ref={this.setDescriptionInput} type="text" className="validate" defaultValue={this.chapterDesc} />
-              <label htmlFor="description">Description</label>
-            </div>
-          </div>
-          {editArray.map((image, index) => (
-            <div key={image.id} className="col s3">
-              <ImageLoader id={index} img_url={image.imageHash} alt="placeholder" height="170px" width="170px" />
-              <a id="cancel_pic_button" role="button" tabIndex={-2} className="btn-floating btn-tiny waves-effect waves-light" onClick={this.cancelButtonOnClick} onKeyDown={this.cancelButtonOnClick}><i id={image.id} className="material-icons">cancel</i></a>
-            </div>
-          ))}
-          {this.imagePreview.map((image, index) => (
-            <div key={image.id} className="col s3">
-              <img id={index} src={image.imageURL} alt="placeholder" height="170px" width="170px" />
-              <a id="cancel_pic_button" role="button" tabIndex={-2} className="btn-floating btn-tiny waves-effect waves-light" onClick={this.cancelButtonOnClick} onKeyDown={this.cancelButtonOnClick}><i id={image.id} className="material-icons">cancel</i></a>
-            </div>
-          ))}
-          <div className="col s3"><a id="add_pic_button" role="button" tabIndex={0} className="btn-floating btn-large waves-effect waves-light" onClick={this.addButtonOnClick} onKeyDown={this.addButtonOnClick}><i className="material-icons">add</i></a></div>
-          {this.placeHolder}
-          <form ref={this.setFormInput}>
-            <input id="upload_input" type="file" multiple ref={this.setInput} onChange={(e) => { this.handlePicChange(e); }} />
-          </form>
-        </div>
-      );
-    }
     this.imagePreview = [];
     let buttonStyle;
     if (this.props.fromNewBook) {
@@ -280,6 +237,49 @@ export class FileUploadBox extends React.Component {
         </div>
       </div>
     );
+    let editComp = null;
+    if (this.props.modalId && this.props.modalId.startsWith('edit')) {
+      const editArray = [];
+      for (let i = 0; i < this.state.editChapterImages.length; i += 1) {
+        editArray.push({
+          id: this.state.editChapterImages[i],
+          imageHash: this.state.editChapterImages[i],
+        });
+      }
+      editComp = (
+        <div>
+          <div className="row">
+            <div className="input-field col s12">
+              <input id="title" onBlur={this.handleTitleOnBlur} ref={this.setTitleInput} type="text" className="validate" defaultValue={this.chapterTitle} />
+              <label htmlFor="title">Title</label>
+            </div>
+          </div>
+          <div className="row">
+            <div className="input-field col s12">
+              <input id="description" onBlur={this.handleDescriptionOnBlur} ref={this.setDescriptionInput} type="text" className="validate" defaultValue={this.chapterDesc} />
+              <label htmlFor="description">Description</label>
+            </div>
+          </div>
+          {editArray.map((image, index) => (
+            <div key={image.id} className="col s3">
+              <ImageLoader id={index} img_url={image.imageHash} alt="placeholder" height="170px" width="170px" />
+              <a id="cancel_pic_button" role="button" tabIndex={-2} className="btn-floating btn-tiny waves-effect waves-light" onClick={this.cancelButtonOnClick} onKeyDown={this.cancelButtonOnClick}><i id={image.id} className="material-icons">cancel</i></a>
+            </div>
+          ))}
+          {this.imagePreview.map((image, index) => (
+            <div key={image.id} className="col s3">
+              <img id={index} src={image.imageURL} alt="placeholder" height="170px" width="170px" />
+              <a id="cancel_pic_button" role="button" tabIndex={-2} className="btn-floating btn-tiny waves-effect waves-light" onClick={this.cancelButtonOnClick} onKeyDown={this.cancelButtonOnClick}><i id={image.id} className="material-icons">cancel</i></a>
+            </div>
+          ))}
+          <div className="col s3"><a id="add_pic_button" role="button" tabIndex={0} className="btn-floating btn-large waves-effect waves-light" onClick={this.addButtonOnClick} onKeyDown={this.addButtonOnClick}><i className="material-icons">add</i></a></div>
+          {this.placeHolder}
+          <form ref={this.setFormInput}>
+            <input id="upload_input" type="file" multiple ref={this.setInput} onChange={(e) => { this.handlePicChange(e); }} />
+          </form>
+        </div>
+      );
+    }
     const inputComp = (
       <div>
         <div className="row">
