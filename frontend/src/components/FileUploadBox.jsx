@@ -135,6 +135,7 @@ export class FileUploadBox extends React.Component {
     const imageArray = [];
     this.uploadTrigger = true;
     this.uploadNumber = 0;
+    if (this.props.modalId && this.props.modalId.startsWith('add_chapter_modal') && this.imagePreview.length === 0) return;
     if (this.imagePreview.length === 0 && this.state.editChapterImages.length === 0) return;
     this.displayUpload = { display: 'none' };
     this.displayCircle = {

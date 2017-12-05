@@ -9,14 +9,11 @@ export class CarouselWrapper extends React.Component {
     const chapter = getChapter(this.props.book, this.props.selectedChapterId);
     const username = chapter.get('username');
     const likeSum = chapter.get('likeSum');
-    const authorLike = username !== undefined && likeSum !== undefined ?
-      <p className="next-chapter-info" >{username} | {likeSum} likes</p> : null;
-
     return (
       <div>
         <Carousel {...this.props} />
         <p className="next-chapter-info next-chapter-title" >{chapter.get('title')}</p>
-        {authorLike}
+        <p className="next-chapter-info" >{username} | {likeSum} likes</p>
         <p className="next-chapter-info next-chapter-description">{chapter.get('description')}</p>
       </div>
     );

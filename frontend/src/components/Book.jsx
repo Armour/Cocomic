@@ -111,6 +111,7 @@ export class Book extends React.Component {
               selectedChapterId={selectedChapterId}
               selectBranch={branchChapterId => this.selectBranch(chapterId, branchChapterId)}
               isLoggedIn={this.props.isLoggedIn}
+              currentUser={this.props.currentUser}
             />
           </div>
         </Scroll.Element>
@@ -142,6 +143,7 @@ Book.propTypes = {
   startingChapterId: PropTypes.number,
   uploadedChapterId: PropTypes.number,
   isLoggedIn: PropTypes.bool,
+  currentUser: PropTypes.number,
 };
 
 Book.defaultProps = {
@@ -152,4 +154,5 @@ Book.defaultProps = {
   startingChapterId: undefined,
   uploadedChapterId: undefined,
   isLoggedIn: false,
+  currentUser: undefined,
 };

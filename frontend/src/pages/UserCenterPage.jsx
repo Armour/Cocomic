@@ -13,6 +13,7 @@ export class UserCenterPage extends React.Component {
           fetchUserCenterBooks={() => this.props.fetchUserCenterBooks()}
           toFavorates={() => this.props.toFavorates()}
           toCollections={() => this.props.toCollections()}
+          userName={this.props.userName}
         />
         <UserCenter
           isCollection={this.props.isCollection}
@@ -24,6 +25,7 @@ export class UserCenterPage extends React.Component {
 }
 
 UserCenterPage.propTypes = {
+  userName: PropTypes.string.isRequired,
   books: PropTypes.object.isRequired,
   isCollection: PropTypes.bool.isRequired,
   fetchUserCenterBooks: PropTypes.func.isRequired,

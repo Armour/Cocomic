@@ -1,7 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Dropdown } from 'components/Dropdown';
 
 export class Header extends React.Component {
   async componentDidMount() {
@@ -37,7 +36,8 @@ export class Header extends React.Component {
           <li key="home"><NavLink activeClassName="active-link" exact to="/">Home</NavLink></li>
           <li key="popular"><NavLink activeClassName="active-link" to="/popular">Popular</NavLink></li>
           <li key="newest"><NavLink activeClassName="active-link" to="/newest">New</NavLink></li>
-          <Dropdown id="header-dropdown" title={`Hello ${this.props.username}`} logout={this.onClickLogout} />
+          <li key="mycenter"><NavLink activeClassName="active-link" to="/userCenter"><span>My Center</span></NavLink></li>
+          <li key="logout"><Link to="/user/logout" onClick={this.onClickLogout}><span>Log out</span></Link></li>
         </ul>
       );
     }
@@ -64,10 +64,8 @@ export class Header extends React.Component {
 }
 Header.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  username: PropTypes.string,
   logout: PropTypes.func.isRequired,
   getUser: PropTypes.func.isRequired,
 };
 Header.defaultProps = {
-  username: '',
 };

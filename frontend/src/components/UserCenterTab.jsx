@@ -36,7 +36,7 @@ export class UserCenterTab extends React.Component {
     }
     return (
       <div className="container">
-        <h2 className="page-title">My Center</h2>
+        <h2 className="page-title">Hello, {this.props.userName}!</h2>
         <div className="navbar-fixed">
           <nav className="user-center-nav nav-extended z-depth-0">
             <div id="user_center_tab" className="nav-content">
@@ -52,6 +52,7 @@ export class UserCenterTab extends React.Component {
   }
 }
 UserCenterTab.propTypes = {
+  userName: PropTypes.string.isRequired,
   isCollection: PropTypes.bool.isRequired,
   fetchUserCenterBooks: PropTypes.func.isRequired,
   toFavorates: PropTypes.func.isRequired,

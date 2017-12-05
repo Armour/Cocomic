@@ -63,6 +63,9 @@ export const books = (state = initialState, action) => {
         images: action.data.images,
         isliked: false,
         isbookmarked: false,
+        username: action.data.username,
+        userId: action.data.userId,
+        likeSum: 0,
       };
       newState = newState.mergeIn([chapter.bookId, 'chapters', chapter.id], fromJS(chapter));
       newState = newState.setIn([chapter.bookId, 'uploadedChapterId'], chapter.id);

@@ -1,5 +1,5 @@
 .upload-book-wrapper {
-  width: 1000px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -24,12 +24,6 @@
 
 #coverPreview {
   height: 300px;
-}
-
-#book_input_field {
-  position: relative;
-  top: 50px;
-  left: 100px;
 }
 
 #content-row {

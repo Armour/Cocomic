@@ -24,6 +24,7 @@ export class Chapter extends React.Component {
           selectedChapterId={this.props.selectedChapterId}
           selectBranch={this.props.selectBranch}
           isLoggedIn={this.props.isLoggedIn}
+          currentUser={this.props.currentUser}
         />
       </div>
     );
@@ -43,8 +44,10 @@ Chapter.propTypes = {
   isBookmarked: PropTypes.bool.isRequired,
   selectBranch: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
+  currentUser: PropTypes.number,
 };
 
 Chapter.defaultProps = {
   selectedChapterId: undefined,
+  currentUser: undefined,
 };
