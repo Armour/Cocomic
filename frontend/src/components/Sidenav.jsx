@@ -25,6 +25,7 @@ export class Sidenav extends React.Component {
           <li><NavLink exact to="/"><i className="material-icons">home</i>Home</NavLink></li>
           <li><NavLink to="/popular"><i className="material-icons">thumb_up</i>Popular</NavLink></li>
           <li><NavLink to="/newest"><i className="material-icons">fiber_new</i>New</NavLink></li>
+          <li><NavLink to="/aboutus"><i className="material-icons">info</i>About Us</NavLink></li>
           <li><NavLink to="/login"><i className="material-icons">person_outline</i>Log in</NavLink></li>
           <li><NavLink to="/register"><i className="material-icons">person_add</i>Register</NavLink></li>
         </ul>
@@ -35,6 +36,7 @@ export class Sidenav extends React.Component {
           <li><NavLink exact to="/"><i className="material-icons">home</i>Home</NavLink></li>
           <li><NavLink to="/popular"><i className="material-icons">thumb_up</i>Popular</NavLink></li>
           <li><NavLink to="/newest"><i className="material-icons">fiber_new</i>New</NavLink></li>
+          <li><NavLink to="/aboutus"><i className="material-icons">info</i>About Us</NavLink></li>
           <li><NavLink to="/userCenter"><i className="material-icons">account_circle</i>My Center</NavLink></li>
           <li><Link to="/user/logout" onClick={this.onClickLogout}><i className="material-icons">exit_to_app</i>Log out</Link></li>
         </ul>
