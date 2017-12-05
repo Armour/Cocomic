@@ -9,8 +9,8 @@ import { router } from 'router';
 import { isProduction } from 'utils';
 
 import 'image/favicon.ico';
-import 'materialize-css';
 import 'material-design-icons/iconfont/material-icons.css';
+import 'materialize-css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'sass/index.scss';

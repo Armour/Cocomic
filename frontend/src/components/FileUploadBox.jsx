@@ -186,6 +186,57 @@ export class FileUploadBox extends React.Component {
   }
 
   render() {
+    this.imagePreview = [];
+    let buttonStyle;
+    if (this.props.fromNewBook) {
+      buttonStyle = { display: 'none' };
+    } else {
+      buttonStyle = {
+        backgroundColor: '$primary-color',
+        display: 'block',
+        height: '52px',
+        paddingTop: '10px',
+        paddingBottom: '10px',
+        top: '20px',
+      };
+    }
+    for (let i = 0; i < this.props.id.length; i += 1) {
+      if (this.props.imagePreviewUrl[i]) {
+        this.imagePreview.push({
+          id: this.props.id[i],
+          file: this.props.file[i],
+          imageURL: this.props.imagePreviewUrl[i],
+        });
+      }
+    }
+    for (let i = 0; i < this.imagePreview.length; i += 1) {
+      for (let j = i + 1; j < this.imagePreview.length; j += 1) {
+        if (this.imagePreview[i].id > this.imagePreview[j].id || this.imagePreview[i].id.length > this.imagePreview[j].id.length) {
+          const temp = this.imagePreview[i];
+          this.imagePreview[i] = this.imagePreview[j];
+          this.imagePreview[j] = temp;
+        }
+      }
+    }
+    if (this.imagePreview.length % 4 === 0) {
+      if (!this.props.fromNewBook) this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="175" width="175" /></div>);
+      else this.placeHolder = (<div className="col s3"><img src={require('../image/blank2.png')} alt="placeholder" height="175" width="175" /></div>);
+    }
+    const loadingCircle = (
+      <div className="preloader-wrapper active" style={this.displayCircle}>
+        <div className="spinner-layer spinner-blue-only">
+          <div className="circle-clipper left">
+            <div className="circle" />
+          </div>
+          <div className="gap-patch">
+            <div className="circle" />
+          </div>
+          <div className="circle-clipper right">
+            <div className="circle" />
+          </div>
+        </div>
+      </div>
+    );
     let editComp = null;
     if (this.props.modalId && this.props.modalId.startsWith('edit')) {
       const editArray = [];
@@ -229,48 +280,6 @@ export class FileUploadBox extends React.Component {
         </div>
       );
     }
-    this.imagePreview = [];
-    let buttonStyle;
-    if (this.props.fromNewBook) {
-      buttonStyle = { display: 'none' };
-    } else {
-      buttonStyle = {
-        backgroundColor: '$primary-color',
-        display: 'block',
-        height: '52px',
-        paddingTop: '10px',
-        paddingBottom: '10px',
-        top: '20px',
-      };
-    }
-    for (let i = 0; i < this.props.id.length; i += 1) {
-      if (this.props.imagePreviewUrl[i]) {
-        this.imagePreview.push({
-          id: this.props.id[i],
-          file: this.props.file[i],
-          imageURL: this.props.imagePreviewUrl[i],
-        });
-      }
-    }
-    if (this.imagePreview.length % 4 === 0) {
-      if (!this.props.fromNewBook) this.placeHolder = (<div className="col s3"><img src={require('../image/blank.png')} alt="placeholder" height="175" width="175" /></div>);
-      else this.placeHolder = (<div className="col s3"><img src={require('../image/blank2.png')} alt="placeholder" height="175" width="175" /></div>);
-    }
-    const loadingCircle = (
-      <div className="preloader-wrapper active" style={this.displayCircle}>
-        <div className="spinner-layer spinner-blue-only">
-          <div className="circle-clipper left">
-            <div className="circle" />
-          </div>
-          <div className="gap-patch">
-            <div className="circle" />
-          </div>
-          <div className="circle-clipper right">
-            <div className="circle" />
-          </div>
-        </div>
-      </div>
-    );
     const inputComp = (
       <div>
         <div className="row">

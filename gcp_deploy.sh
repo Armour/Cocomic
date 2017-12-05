@@ -39,6 +39,7 @@ docker run -d -p 80:80 -p 443:443 \
     -v /etc/nginx/vhost.d \
     -v /usr/share/nginx/html \
     -v /var/run/docker.sock:/tmp/docker.sock:ro \
+    -v $HOME/Cocomic/backend/nginx/proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro \
     --label com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true \
     jwilder/nginx-proxy
 

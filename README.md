@@ -6,7 +6,31 @@ An open-source platform for comic/manga collaboration
 
 Please go to [https://cocomic.azendless.com/](https://cocomic.azendless.com/)
 
-## Stack
+## Functions
+* Register
+* Login
+* User Center
+  * My collection: books created by the user
+    * click + to upload a new book
+  * Bookmarks
+* Home
+  * 6 most popular books
+  * 6 newest books
+* Popular: comic books sorted by popularity
+* New: comic books sorted by create time
+* Click a book to open:
+  * book cover and author info
+  * chapters
+    * at the end of chapter, click to place a bookmark, to like the chapter or to create a new chapter (new branch), or to edit the chapter
+    * at the end of chapter, drag the carousel to select the next chapter to read
+
+## Features Might be Easily Missed
+* responsiveness
+
+## Known bugs
+* Branch switch doesn't on ios chrome
+
+## Tech Stack
 
 * [x] [express](http://expressjs.com/) - backend
 * [x] [nginx](https://www.nginx.com/) - reverse proxy
