@@ -23,7 +23,15 @@
 
 .slick-slide {
   opacity: 0.5;
+  -ms-transform: scale3d(0.7, 0.7, 0.7);
+  -webkit-transform: scale3d(0.7, 0.7, 0.7);
+  -moz-transform: scale3d(0.7, 0.7, 0.7);
+  -o-transform: scale3d(0.7, 0.7, 0.7);
   transform: scale3d(0.7, 0.7, 0.7);
+  -ms-transition: transform 0.5s;
+  -webkit-transition: transform 0.5s;
+  -moz-transition: transform 0.5s;
+  -o-transition: transform 0.5s;
   transition: transform 0.5s;
 }
 
@@ -31,5 +39,9 @@
   opacity: 1 !important;
   position: relative;
   z-index: 3;
+  -ms-transform: scale3d(1, 1, 1) !important;
+  -webkit-transform: scale3d(1, 1, 1) !important;
+  -moz-transform: scale3d(1, 1, 1) !important;
+  -o-transform: scale3d(1, 1, 1) !important;
   transform: scale3d(1, 1, 1) !important;
 }
