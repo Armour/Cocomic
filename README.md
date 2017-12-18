@@ -4,7 +4,7 @@ An open-source platform for comic/manga collaboration
 
 ## How to run the example code
 
-### develop version
+### development version
 
 ```bash
 docker-compose up -d
