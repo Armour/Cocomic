@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "add-asset-html-webpack-plugin": "2.1.2",
-    "autoprefixer": "7.2.0",
+    "autoprefixer": "7.2.3",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
@@ -27,7 +27,7 @@
     "babel-preset-stage-0": "6.24.1",
     "babel-register": "6.26.0",
     "body-parser": "1.18.2",
-    "caniuse-lite": "1.0.30000777",
+    "caniuse-lite": "1.0.30000783",
     "colors": "1.1.2",
     "compression": "1.7.1",
     "connect-redis": "3.3.2",
@@ -35,16 +35,16 @@
     "cookie-parser": "1.4.3",
     "css-loader": "0.28.7",
     "del": "3.0.0",
-    "eslint": "4.12.1",
+    "eslint": "4.13.1",
     "eslint-config-airbnb": "16.1.0",
     "eslint-import-resolver-node": "0.3.1",
     "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-jsx-a11y": "6.0.2",
+    "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.5.1",
     "express": "4.16.2",
     "express-session": "1.15.6",
     "extract-text-webpack-plugin": "3.0.2",
-    "file-loader": "1.1.5",
+    "file-loader": "1.1.6",
     "gulp": "3.9.1",
     "gulp-eslint": "4.0.0",
     "gulp-stylelint": "5.0.0",
@@ -64,8 +64,8 @@
     "mkdirp": "0.5.1",
     "morgan": "1.9.0",
     "node-sass": "4.7.2",
-    "nodemon": "1.12.1",
-    "offline-plugin": "4.8.4",
+    "nodemon": "1.13.3",
+    "offline-plugin": "4.8.5",
     "pg": "7.4.0",
     "postcss": "6.0.14",
     "postcss-cssnext": "3.0.2",
@@ -93,17 +93,17 @@
     "sass-loader": "6.0.6",
     "serve-favicon": "2.4.5",
     "slick-carousel": "1.8.1",
-    "style-loader": "0.19.0",
-    "stylelint": "8.3.1",
+    "style-loader": "0.19.1",
+    "stylelint": "8.4.0",
     "stylelint-config-standard": "18.0.0",
-    "uglify-js": "3.2.1",
+    "uglify-js": "3.2.2",
     "url-loader": "0.6.2",
-    "webpack": "3.9.1",
+    "webpack": "3.10.0",
     "webpack-bundle-analyzer": "2.9.1",
-    "webpack-dev-middleware": "1.12.2",
+    "webpack-dev-middleware": "2.0.1",
     "webpack-hot-middleware": "2.21.0",
     "webpack-merge": "4.1.1",
-    "webpack-pwa-manifest": "3.3.2"
+    "webpack-pwa-manifest": "3.3.4"
   },
   "browserslist": [
     "> 1%",
@@ -119,6 +119,6 @@
     ]
   },
   "devDependencies": {
-    "patch-package": "4.0.0"
+    "patch-package": "5.0.0"
   }
 }

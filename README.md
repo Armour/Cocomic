@@ -3,17 +3,26 @@
 An open-source platform for comic/manga collaboration
 
 ## How to run the example code
+
 ### develop version
-* run `vagrant up` in console
+
+```bash
+docker-compose up -d
+gulp
+```
+
 * visit `localhost:3003`
 
 ### production version
+
 * visit [https://cocomic.azendless.com/](https://cocomic.azendless.com/)
 
 ## Features Might be Easily Missed
+
 * responsiveness
 
 ## Functions
+
 * Register
 * Login
 * User Center
@@ -32,6 +41,7 @@ An open-source platform for comic/manga collaboration
     * at the end of chapter, drag the carousel to select the next chapter to read
 
 ## Known bugs
+
 * Branch switch results in blank page on ios chrome. This is because we used `history`, and the `history` support on ios chrome is buggy.
 
 ## Tech Stack
@@ -61,7 +71,6 @@ An open-source platform for comic/manga collaboration
 * [x] [docker](https://github.com/docker/docker) - the open-source application container engine
 * [x] [Google Cloud Platform](https://cloud.google.com/) - build and host applications and websites, store data, and analyze data on Google's scalable infrastructure
 * [x] [let's encrypt](https://letsencrypt.org/) - free SSL/TLS certificates
-
 
 ## Contributing
 
