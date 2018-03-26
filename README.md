@@ -1,6 +1,6 @@
 # Cocomic
 
-An open-source platform for comic/manga collaboration
+An open-source platform for comic/manga co-authoring
 
 ## How to run the example code
 
@@ -28,7 +28,7 @@ gulp
 * User Center
   * My collection: books created by the user
     * click + to upload a new book
-  * Bookmarks
+  * Bookmarks: books loved by the user
 * Home
   * 6 most popular books
   * 6 newest books
@@ -37,12 +37,12 @@ gulp
 * Click a book to open:
   * book cover and author info
   * chapters
-    * at the end of chapter, click to place a bookmark, to like the chapter or to create a new chapter (new branch), or to edit the chapter
-    * at the end of chapter, drag the carousel to select the next chapter to read
+    * at the end of chapter, one can click buttons to add a bookmark, to like the chapter, to create a new chapter (new branch), or to edit the chapter
+    * at the end of chapter, one can drag images in the carousel to select the next chapter to read
 
 ## Known bugs
 
-* Branch switch results in blank page on ios chrome. This is because we used `history`, and the `history` support on ios chrome is buggy.
+* Branch switch results in blank page on ios chrome, because `history`, one of package used in the project, have some bugs supporting ios chrome.
 
 ## Tech Stack
 
